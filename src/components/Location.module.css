@@ -1,0 +1,153 @@
+.section {
+  padding-block: var(--section);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    align-items: stretch;
+  }
+}
+
+.panel {
+  display: grid;
+  align-content: start;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: var(--step-3);
+  font-variation-settings: 'opsz' 120;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--terracotta-deep);
+}
+
+.address {
+  display: grid;
+  gap: 0.15rem;
+  margin-top: 0.5rem;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  font-style: normal;
+  font-size: var(--step-1);
+  line-height: 1.45;
+  background: var(--paper);
+  border-left: 6px solid var(--terracotta);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px -36px rgb(34 36 32 / 0.6);
+}
+
+.name {
+  margin-bottom: 0.35rem;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 450;
+}
+
+.phone {
+  justify-self: start;
+  margin-top: 0.6rem;
+  padding-block: 0.3rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hint {
+  color: var(--muted);
+  font-size: var(--step--1);
+}
+
+/* -------------------------------------------------------------------- map */
+.mapWrap {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.map,
+.mapPlaceholder {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 0;
+  border-radius: var(--radius);
+}
+
+@media (min-width: 900px) {
+  .map,
+  .mapPlaceholder {
+    aspect-ratio: auto;
+    min-height: 460px;
+    height: 100%;
+  }
+
+  .mapWrap {
+    grid-template-rows: 1fr auto;
+  }
+}
+
+.mapPlaceholder {
+  position: relative;
+  display: grid;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background:
+    repeating-linear-gradient(90deg, transparent 0 79px, rgb(245 241 233 / 0.07) 79px 80px),
+    repeating-linear-gradient(0deg, transparent 0 79px, rgb(245 241 233 / 0.07) 79px 80px),
+    #556051;
+  color: var(--ivory);
+}
+
+.street {
+  display: grid;
+  align-self: start;
+  font-family: var(--font-display);
+  line-height: 0.92;
+}
+
+.street span {
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-style: italic;
+  font-weight: 330;
+}
+
+.street b {
+  font-size: clamp(4.5rem, 13vw, 9rem);
+  font-weight: 330;
+  letter-spacing: -0.04em;
+  color: #e9c98d;
+}
+
+.mapCta {
+  display: grid;
+  gap: 0.75rem;
+  justify-items: start;
+  align-self: end;
+}
+
+.mapCta p {
+  max-width: 28rem;
+  font-size: var(--step--1);
+  color: #e6e1d6;
+}
+
+.openMaps {
+  justify-self: start;
+}
+
+.openMaps svg {
+  width: 1em;
+  height: 1em;
+}

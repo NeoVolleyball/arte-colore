@@ -1,0 +1,28 @@
+{
+  "$comment": "Colori ILLUSTRATIVI per l'esploratore del sito. Non sono codici colore ufficiali di alcun produttore né prodotti confermati in negozio. Modificabili liberamente: id unico, nome, hex (#RRGGBB), famiglia (neutri | caldi | freddi | accenti) e una breve nota.",
+  "initial": "lino-grezzo",
+  "families": [
+    { "id": "neutri", "label": "Neutri" },
+    { "id": "caldi", "label": "Caldi" },
+    { "id": "freddi", "label": "Freddi" },
+    { "id": "accenti", "label": "Accenti" }
+  ],
+  "colours": [
+    { "id": "calce-antica", "name": "Calce antica", "hex": "#EDE6D8", "family": "neutri", "note": "Un bianco morbido, mai freddo." },
+    { "id": "lino-grezzo", "name": "Lino grezzo", "hex": "#DCD0BC", "family": "neutri", "note": "Neutro caldo che accoglie la luce." },
+    { "id": "sabbia-del-lido", "name": "Sabbia del Lido", "hex": "#CDBB9C", "family": "neutri", "note": "Profondità leggera per zone giorno." },
+    { "id": "grigio-laguna", "name": "Grigio laguna", "hex": "#A9ABA3", "family": "neutri", "note": "Grigio verde, calmo e versatile." },
+    { "id": "rosa-intonaco", "name": "Rosa intonaco", "hex": "#D9A898", "family": "caldi", "note": "Il rosa polveroso delle facciate." },
+    { "id": "ocra-veneziana", "name": "Ocra veneziana", "hex": "#C7A35D", "family": "caldi", "note": "Luminosa come una pigmentazione naturale." },
+    { "id": "terracotta", "name": "Terracotta", "hex": "#BE7156", "family": "caldi", "note": "Calore materico per una parete d'accento." },
+    { "id": "mattone", "name": "Mattone", "hex": "#9E5440", "family": "caldi", "note": "Rosso bruno, avvolgente e deciso." },
+    { "id": "verde-lichene", "name": "Verde lichene", "hex": "#A3AE94", "family": "freddi", "note": "Verde tenue che rilassa lo sguardo." },
+    { "id": "salvia", "name": "Salvia", "hex": "#879480", "family": "freddi", "note": "Equilibrato, ideale per studio e camera." },
+    { "id": "azzurro-burano", "name": "Azzurro Burano", "hex": "#8AA7B6", "family": "freddi", "note": "Un azzurro leggero, ariosità immediata." },
+    { "id": "blu-laguna", "name": "Blu laguna", "hex": "#4F6E7E", "family": "freddi", "note": "Blu profondo con una nota di grigio." },
+    { "id": "giallo-zafferano", "name": "Giallo zafferano", "hex": "#D9A33B", "family": "accenti", "note": "Un tocco solare su una nicchia o un arco." },
+    { "id": "rosso-veneziano", "name": "Rosso veneziano", "hex": "#8E3B32", "family": "accenti", "note": "Intenso, da usare con misura." },
+    { "id": "verde-bottiglia", "name": "Verde bottiglia", "hex": "#2F4A3E", "family": "accenti", "note": "Elegante su boiserie e pareti piene." },
+    { "id": "antracite", "name": "Antracite", "hex": "#3A3C38", "family": "accenti", "note": "Scuro e grafico, esalta legno e ottone." }
+  ]
+}

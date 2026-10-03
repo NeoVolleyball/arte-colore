@@ -1,0 +1,42 @@
+.bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.6rem max(1rem, env(safe-area-inset-left)) calc(0.6rem + env(safe-area-inset-bottom));
+  background: rgb(245 241 233 / 0.96);
+  border-top: 1px solid var(--line);
+  box-shadow: 0 -14px 30px -26px rgb(34 36 32 / 0.6);
+  transform: translateY(110%);
+  visibility: hidden;
+  transition:
+    transform var(--dur) var(--ease-out),
+    visibility 0s linear var(--dur);
+}
+
+.bar :global(.btn) {
+  min-height: 48px;
+  padding-inline: 0.75rem;
+}
+
+.btn {
+  background: var(--ivory);
+}
+
+.shown {
+  transform: none;
+  visibility: visible;
+  transition:
+    transform var(--dur) var(--ease-out),
+    visibility 0s;
+}
+
+@media (min-width: 720px) {
+  .bar {
+    display: none;
+  }
+}
