@@ -1,31 +1,50 @@
+import { resolve } from 'node:path';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-import { seo } from './src/content/business';
+import { pages, seo, type PageId } from './src/content/business';
+
+const entries: Record<PageId, string> = {
+  home: 'index.html',
+  prodotti: 'prodotti/index.html',
+  negozio: 'negozio/index.html',
+};
+
+function pageFor(htmlPath: string): PageId {
+  const p = htmlPath.replace(/^\//, '');
+  return ((Object.keys(entries) as PageId[]).find((id) => entries[id] === p) ?? 'home') as PageId;
+}
 
 /**
- * Injects SEO metadata from src/content/business.ts. Canonical URL, og:url,
- * og:image, robots.txt and sitemap.xml are only produced when the real
- * production origin is known (VITE_SITE_URL).
+ * Injects per-page SEO metadata from src/content/business.ts. Canonical
+ * URLs, og:url, og:image, robots.txt and sitemap.xml are only produced when
+ * the real production origin is known (VITE_SITE_URL).
  */
 function seoPlugin(siteUrl: string): Plugin {
   const origin = siteUrl.replace(/\/$/, '');
   return {
     name: 'arte-colore-seo',
-    transformIndexHtml(html) {
+    transformIndexHtml(html, ctx) {
+      const id = pageFor(ctx.path);
+      const page = pages[id];
       const head = origin
         ? [
-            `<link rel="canonical" href="${origin}/" />`,
-            `<meta property="og:url" content="${origin}/" />`,
+            `<link rel="canonical" href="${origin}${page.path}" />`,
+            `<meta property="og:url" content="${origin}${page.path}" />`,
             `<meta property="og:image" content="${origin}${seo.ogImage}" />`,
             `<meta property="og:image:width" content="1200" />`,
             `<meta property="og:image:height" content="630" />`,
             `<meta name="twitter:card" content="summary_large_image" />`,
           ].join('\n    ')
         : '';
+      const pageHead =
+        id === 'home'
+          ? '<link rel="preload" as="image" href="/images/hero-still-720.webp" media="(max-width: 959px)" fetchpriority="high" />'
+          : '';
       return html
-        .replaceAll('%SEO_TITLE%', seo.title)
-        .replaceAll('%SEO_DESCRIPTION%', seo.description)
-        .replace('<!--seo-head-->', head);
+        .replaceAll('%SEO_TITLE%', page.title)
+        .replaceAll('%SEO_DESCRIPTION%', page.description)
+        .replace('<!--seo-head-->', head)
+        .replace('<!--page-head-->', pageHead);
     },
     generateBundle() {
       if (!origin) return;
@@ -34,10 +53,13 @@ function seoPlugin(siteUrl: string): Plugin {
         fileName: 'robots.txt',
         source: `User-agent: *\nAllow: /\n\nSitemap: ${origin}/sitemap.xml\n`,
       });
+      const urls = Object.values(pages)
+        .map((p) => `  <url><loc>${origin}${p.path}</loc></url>`)
+        .join('\n');
       this.emitFile({
         type: 'asset',
         fileName: 'sitemap.xml',
-        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${origin}/</loc></url>\n</urlset>\n`,
+        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
       });
     },
   };
@@ -52,6 +74,11 @@ export default defineConfig(({ mode }) => {
       assetsInlineLimit: 2048,
       // three.js lives in the lazily imported hero chunk, loaded only on desktop
       chunkSizeWarningLimit: 650,
+      rollupOptions: {
+        input: Object.fromEntries(
+          (Object.keys(entries) as PageId[]).map((id) => [id, resolve(__dirname, entries[id])]),
+        ),
+      },
     },
     test: {
       environment: 'jsdom',

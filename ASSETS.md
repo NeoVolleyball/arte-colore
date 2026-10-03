@@ -10,11 +10,12 @@ No third-party photos, models, textures or logos are used.
 | Colour explorer room + wall mask | `public/images/explorer-room-*.webp`, `explorer-mask-*.webp` | `blender/rooms.py explorer` (Cycles) | The wall is rendered neutral; the mask is a separate holdout render |
 | Ispirazioni cromatiche (3 interiors) | `public/images/insp-{living,studio,terracotta}-*.webp` | `blender/rooms.py <scene>` | Illustrative concepts, not real projects or customer work |
 | Product vignettes | `public/images/product-{pitture,smalti,decorazione}-*.webp` | `blender/products.py <scene>` | Blank-label tins: illustrate categories, not specific products |
-| Social sharing image | `public/images/og-arte-colore.jpg` | `blender/postprocess.py` (hero render + typeset wordmark) | 1200×630 |
-| Favicon | `public/favicon.svg` | Hand-written SVG | Three colour chips |
+| Social sharing image | `public/images/og-arte-colore.jpg` | `blender/postprocess.py` (terracotta card + hero render + typeset wordmark) | 1200×630 |
+| Favicon | `public/favicon.svg` | Hand-written SVG | Fan of three colour chips |
 | Typographic wordmark | `src/components/Wordmark.tsx` | CSS/HTML | New design, not an existing logo |
 | Paper / plaster textures | inline SVG `feTurbulence` in CSS | Code | |
-| Fonts | `@fontsource-variable/fraunces`, `@fontsource-variable/manrope` | SIL Open Font License 1.1, self-hosted by the build | `blender/fonts/*.ttf` are static instances of the same OFL fonts, used only by Blender for the tin label |
+| Fonts | `@fontsource/instrument-serif`, `@fontsource-variable/hanken-grotesk` | SIL Open Font License 1.1, self-hosted by the build | `blender/fonts/*.ttf` are TTF conversions of the same OFL fonts, used by Blender for the tin label and by `postprocess.py` for the OG image |
+| Decorative map placeholder | inline SVG in `src/pages/ShopPage.tsx` | Code | Abstract lines, not a real street map |
 
 The "Arte Colore" label on the hero tin is an invented, illustrative design.
 No San Marco or other manufacturer branding appears on any modelled object.

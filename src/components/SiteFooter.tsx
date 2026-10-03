@@ -1,22 +1,22 @@
 import { business, nav } from '../content/business';
 import { Wordmark } from './Wordmark';
-import styles from './Footer.module.css';
+import styles from './SiteFooter.module.css';
 
-export function Footer() {
+export function SiteFooter() {
   const { address, phone } = business;
   return (
     <footer className={styles.footer}>
-      <div className={`container ${styles.grid}`}>
-        <div className={styles.brand}>
-          <Wordmark size="lg" />
-          <p>Pitture, smalti e prodotti per la decorazione a {address.city}.</p>
-        </div>
+      <div className={styles.cols}>
+        <p className={styles.claim}>Pitture, smalti e prodotti per la decorazione a {address.city}.</p>
 
-        <nav aria-label="Sezioni del sito" className={styles.nav}>
+        <nav aria-label="Pagine del sito" className={styles.nav}>
           <ul role="list">
+            <li>
+              <a href="/">Home</a>
+            </li>
             {nav.map((item) => (
-              <li key={item.id}>
-                <a href={`#${item.id}`}>{item.label}</a>
+              <li key={item.href}>
+                <a href={item.href}>{item.label}</a>
               </li>
             ))}
           </ul>
@@ -35,7 +35,12 @@ export function Footer() {
           <p>P. IVA {business.vatNumber}</p>
         </div>
       </div>
-      <div className={`container ${styles.bottom}`}>
+
+      <div className={styles.giant} aria-hidden="true">
+        <Wordmark size="xl" />
+      </div>
+
+      <div className={styles.bottom}>
         <p>
           © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.legalName}
         </p>

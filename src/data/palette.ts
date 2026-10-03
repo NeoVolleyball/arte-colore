@@ -35,8 +35,21 @@ export function luminance(hex: string): number {
   return 0.2126 * ch[0] + 0.7152 * ch[1] + 0.0722 * ch[2];
 }
 
-export function isDark(hex: string): boolean {
-  return luminance(hex) < 0.2;
+export function contrast(a: string, b: string): number {
+  const [x, y] = [luminance(a), luminance(b)].sort((m, n) => n - m);
+  return (x + 0.05) / (y + 0.05);
+}
+
+/** Text ink for a colour background: whichever of near-black / ivory gives
+ *  the higher contrast (every palette colour reaches AA, see tests). */
+export const INK_DARK = '#161714';
+export const INK_LIGHT = '#F7F3EB';
+
+export function inkFor(hex: string) {
+  const dark = contrast(hex, INK_LIGHT) > contrast(hex, INK_DARK);
+  return dark
+    ? { dark, ink: INK_LIGHT, soft: INK_LIGHT }
+    : { dark, ink: INK_DARK, soft: INK_DARK };
 }
 
 export const COLOUR_EVENT = 'artecolore:colour';

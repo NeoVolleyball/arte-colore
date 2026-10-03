@@ -27,3 +27,11 @@ describe('business data', () => {
     expect(structuredData('https://example.it')).toHaveProperty('url', 'https://example.it/');
   });
 });
+
+describe('navigation', () => {
+  it('has the four required destinations', async () => {
+    const { nav } = await import('../content/business');
+    expect(nav.map((n) => n.label)).toEqual(['Il negozio', 'Prodotti', 'Esplora i colori', 'Dove siamo']);
+    expect(nav.find((n) => n.label === 'Esplora i colori')?.href).toBe('/#colori');
+  });
+});

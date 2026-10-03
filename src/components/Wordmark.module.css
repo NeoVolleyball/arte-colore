@@ -1,52 +1,60 @@
 .mark {
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.55rem;
   font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-size: 1.6rem;
   line-height: 1;
-  letter-spacing: -0.01em;
   white-space: nowrap;
-}
-
-.lg {
-  font-size: clamp(2rem, 1.4rem + 2.6vw, 3.4rem);
-  gap: 0.9rem;
-}
-
-.text {
-  font-weight: 420;
 }
 
 .text em {
   font-style: italic;
-  font-weight: 360;
 }
 
-.chips {
-  display: inline-flex;
-  gap: 2px;
+.fan {
+  position: relative;
+  width: 0.9em;
   height: 0.9em;
-  transform: translateY(-0.03em);
 }
 
-.chips i {
-  display: block;
-  width: 0.24em;
-  height: 100%;
+.fan i {
+  position: absolute;
+  left: 0.3em;
+  bottom: 0;
+  width: 0.28em;
+  height: 0.9em;
   border-radius: 1px;
+  transform-origin: 50% 92%;
+  transition: transform var(--dur) var(--ease-spring);
 }
 
-.chips i:nth-child(1) {
+.fan i:nth-child(1) {
   background: var(--ochre);
+  transform: rotate(-26deg);
 }
 
-.chips i:nth-child(2) {
+.fan i:nth-child(2) {
   background: var(--terracotta);
-  height: 80%;
-  align-self: flex-end;
+  transform: rotate(0deg);
 }
 
-.chips i:nth-child(3) {
+.fan i:nth-child(3) {
   background: var(--sage);
+  transform: rotate(26deg);
+}
+
+a:hover .fan i:nth-child(1) {
+  transform: rotate(-38deg);
+}
+
+a:hover .fan i:nth-child(3) {
+  transform: rotate(38deg);
+}
+
+.xl {
+  /* fills the footer width: wordmark ≈ 4.7em wide */
+  font-size: min(calc((100vw - 2 * var(--edge) - 2 * var(--gutter)) / 4.7), 23rem);
+  gap: 0.12em;
+  letter-spacing: -0.02em;
 }

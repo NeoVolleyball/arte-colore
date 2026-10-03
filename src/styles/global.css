@@ -1,50 +1,56 @@
-@import '@fontsource-variable/fraunces/opsz.css';
-@import '@fontsource-variable/fraunces/opsz-italic.css';
-@import '@fontsource-variable/manrope/wght.css';
+@import '@fontsource/instrument-serif/latin-400.css';
+@import '@fontsource/instrument-serif/latin-400-italic.css';
+@import '@fontsource-variable/hanken-grotesk/wght.css';
 
-/* ------------------------------------------------------------------ tokens
-   Proposed palette for the new website (not verified existing branding). */
+/* =====================================================================
+   ARTE COLORE — "Cartella colori"
+   The site behaves like a deck of paper colour cards: every section is a
+   full-colour card finished with a paper label strip (name + code).
+   Palette = proposed website palette, not verified brand colours.
+   ===================================================================== */
 :root {
   --ivory: #f5f1e9;
   --ivory-deep: #ebe4d6;
-  --paper: #fbf9f4;
+  --paper: #fbf8f2;
   --charcoal: #222420;
   --charcoal-soft: #4a4c45; /* 7.7:1 on ivory */
   --muted: #5d5f57; /* 5.7:1 on ivory */
   --sage: #879480;
-  --sage-deep: #56614f; /* text-safe sage, 5.8:1 on ivory */
+  --sage-deep: #56614f;
   --terracotta: #be7156;
-  --terracotta-deep: #93492f; /* text-safe terracotta, 5.8:1 on ivory */
+  --terra-deep: #8e4a31; /* card colour; ivory text 5.9:1 */
   --ochre: #c7a35d;
-  --ochre-deep: #7a5c1c;
+  --green-deep: #2f4a3e;
   --line: rgb(34 36 32 / 0.14);
 
-  --font-display: 'Fraunces Variable', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
-  --font-sans: 'Manrope Variable', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-display: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-sans: 'Hanken Grotesk Variable', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
 
+  --step--2: 0.75rem;
   --step--1: clamp(0.84rem, 0.8rem + 0.15vw, 0.92rem);
-  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
-  --step-1: clamp(1.18rem, 1.08rem + 0.45vw, 1.4rem);
-  --step-2: clamp(1.5rem, 1.25rem + 1.1vw, 2.15rem);
-  --step-3: clamp(2rem, 1.5rem + 2.3vw, 3.4rem);
-  --step-4: clamp(2.7rem, 1.7rem + 4.6vw, 6.2rem);
+  --step-0: clamp(1rem, 0.96rem + 0.2vw, 1.075rem);
+  --step-1: clamp(1.2rem, 1.08rem + 0.5vw, 1.5rem);
+  --step-2: clamp(1.7rem, 1.35rem + 1.5vw, 2.6rem);
+  --step-3: clamp(2.4rem, 1.7rem + 3.2vw, 4.6rem);
+  --step-4: clamp(3.3rem, 1.9rem + 6.6vw, 9.2rem);
 
+  --edge: clamp(8px, 1.2vw, 16px); /* card inset from the viewport */
   --gutter: clamp(1.25rem, 4vw, 3.5rem);
-  --section: clamp(5rem, 11vw, 10rem);
-  --maxw: 1320px;
-  --radius: 2px;
+  --section: clamp(4.5rem, 9vw, 8.5rem);
+  --maxw: 1360px;
+  --radius: clamp(10px, 1.4vw, 18px);
   --header-h: 72px;
 
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
   --ease-press: cubic-bezier(0.3, 0.7, 0.4, 1);
   --dur-fast: 160ms;
   --dur: 420ms;
-  --dur-slow: 700ms;
+  --dur-slow: 800ms;
 
   color-scheme: light;
 }
 
-/* ------------------------------------------------------------------- base */
 *,
 *::before,
 *::after {
@@ -69,23 +75,22 @@ body {
   color: var(--charcoal);
   font-family: var(--font-sans);
   font-size: var(--step-0);
-  line-height: 1.65;
-  font-optical-sizing: auto;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: clip;
 }
 
-/* subtle paper tooth over the whole page */
-body::before {
+/* paper tooth over everything */
+body::after {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 90;
   pointer-events: none;
-  opacity: 0.32;
+  opacity: 0.5;
   mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .4 0 0 0 0 .33 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .35 0 0 0 0 .3 0 0 0 .08 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 img,
@@ -109,7 +114,8 @@ ol,
 figure,
 blockquote,
 dl,
-dd {
+dd,
+address {
   margin: 0;
 }
 
@@ -123,10 +129,16 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  font-weight: 380;
-  line-height: 1.04;
-  letter-spacing: -0.018em;
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.012em;
   text-wrap: balance;
+}
+
+h1 em,
+h2 em,
+h3 em {
+  font-style: italic;
 }
 
 p {
@@ -145,9 +157,9 @@ button {
 }
 
 :focus-visible {
-  outline: 2px solid var(--charcoal);
+  outline: 2px solid currentColor;
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: 4px;
 }
 
 ::selection {
@@ -155,7 +167,7 @@ button {
   color: var(--charcoal);
 }
 
-/* ---------------------------------------------------------------- helpers */
+/* -------------------------------------------------------------- helpers */
 .visually-hidden {
   position: absolute !important;
   width: 1px;
@@ -177,51 +189,166 @@ button {
   background: var(--charcoal);
   color: var(--ivory);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 650;
+  border-radius: 8px;
 }
 
 .skip-link:focus {
   top: 12px;
 }
 
-.container {
+.wrap {
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
 
-.eyebrow {
+.kicker {
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
-  font-family: var(--font-sans);
+  gap: 0.65rem;
   font-size: var(--step--1);
   font-weight: 650;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--charcoal-soft);
 }
 
-.eyebrow::before {
+.kicker::before {
   content: '';
-  width: 1.75rem;
-  height: 1px;
+  width: 0.8em;
+  height: 0.8em;
+  border-radius: 2px;
   background: currentColor;
+  opacity: 0.85;
 }
 
-/* --------------------------------------------------------------- buttons */
+.lede {
+  font-size: var(--step-1);
+  line-height: 1.5;
+  max-width: 34rem;
+}
+
+/* ----------------------------------------------------------- colour cards
+   .card + one tone. Ink colours are chosen per tone for AA contrast. */
+.card {
+  --ink: var(--charcoal);
+  --ink-soft: rgb(34 36 32 / 0.78);
+  --card-bg: var(--paper);
+  position: relative;
+  margin-inline: var(--edge);
+  border-radius: var(--radius);
+  background: var(--card-bg);
+  color: var(--ink);
+  isolation: isolate;
+  overflow: clip;
+}
+
+/* soft pigment sheen + grain inside every card */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 70% at 12% 0%, rgb(255 255 255 / 0.16), transparent 55%),
+    radial-gradient(90% 60% at 100% 100%, rgb(0 0 0 / 0.1), transparent 60%);
+}
+
+.card + .card {
+  margin-top: var(--edge);
+}
+
+.tone-terra {
+  --card-bg: var(--terra-deep);
+  --ink: var(--ivory);
+  --ink-soft: rgb(245 241 233 / 0.86);
+}
+
+.tone-sage {
+  --card-bg: var(--sage);
+  --ink: #161714; /* 5.6:1 on sage */
+  --ink-soft: #161714;
+}
+
+.tone-ochre {
+  --card-bg: var(--ochre);
+  --ink: var(--charcoal);
+  --ink-soft: rgb(34 36 32 / 0.84);
+}
+
+.tone-paper {
+  --card-bg: var(--paper);
+}
+
+.tone-charcoal {
+  --card-bg: var(--charcoal);
+  --ink: var(--ivory);
+  --ink-soft: rgb(245 241 233 / 0.8);
+}
+
+.tone-green {
+  --card-bg: var(--green-deep);
+  --ink: var(--ivory);
+  --ink-soft: rgb(245 241 233 / 0.84);
+}
+
+/* paper label strip at the foot of a card, like a real colour chip */
+.chip-label {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 0.4rem 1.5rem;
+  padding: 1rem var(--gutter) 1.1rem;
+  background: var(--paper);
+  color: var(--charcoal);
+  border-top: 1px solid rgb(34 36 32 / 0.08);
+}
+
+.chip-label__name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.1;
+}
+
+.chip-label__meta {
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+.chip-label__code {
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 599px) {
+  .chip-label {
+    grid-template-columns: 1fr auto;
+  }
+
+  .chip-label__meta {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+/* -------------------------------------------------------------- buttons */
 .btn {
   --btn-bg: var(--charcoal);
   --btn-fg: var(--ivory);
+  --btn-line: var(--btn-bg);
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
   min-height: 52px;
-  padding: 0.85rem 1.5rem;
-  border: 1px solid var(--btn-bg);
+  padding: 0.85rem 1.55rem;
+  border: 1.5px solid var(--btn-line);
   border-radius: 999px;
   background: var(--btn-bg);
   color: var(--btn-fg);
@@ -230,41 +357,58 @@ button {
   letter-spacing: 0.01em;
   text-decoration: none;
   cursor: pointer;
+  overflow: hidden;
+  isolation: isolate;
   transition:
     transform var(--dur-fast) var(--ease-press),
-    background-color var(--dur) var(--ease-out),
     color var(--dur) var(--ease-out),
     box-shadow var(--dur) var(--ease-out);
 }
 
+/* paint swipe on hover */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  z-index: -1;
+  background: var(--btn-swipe, var(--terracotta));
+  border-radius: inherit;
+  transform: translateY(102%);
+  transition: transform 520ms var(--ease-out);
+}
+
+.btn:hover::before {
+  transform: translateY(0);
+}
+
 .btn:hover {
-  box-shadow: 0 10px 24px -14px rgb(34 36 32 / 0.6);
+  color: var(--btn-swipe-fg, var(--charcoal));
+  box-shadow: 0 14px 30px -18px rgb(0 0 0 / 0.55);
 }
 
 .btn:active {
-  transform: translateY(1px) scale(0.985);
-}
-
-.btn--ghost {
-  --btn-bg: transparent;
-  --btn-fg: var(--charcoal);
-  border-color: rgb(34 36 32 / 0.55);
-}
-
-.btn--ghost:hover {
-  background: var(--charcoal);
-  color: var(--ivory);
-}
-
-.btn--light {
-  --btn-bg: var(--ivory);
-  --btn-fg: var(--charcoal);
+  transform: translateY(1px) scale(0.98);
 }
 
 .btn svg {
   width: 1.1em;
   height: 1.1em;
   flex: none;
+}
+
+/* on dark cards */
+.btn--ivory {
+  --btn-bg: var(--ivory);
+  --btn-fg: var(--charcoal);
+  --btn-swipe: var(--ochre);
+}
+
+.btn--outline {
+  --btn-bg: transparent;
+  --btn-fg: var(--ink, var(--charcoal));
+  --btn-line: currentColor;
+  --btn-swipe: var(--ink, var(--charcoal));
+  --btn-swipe-fg: var(--card-bg, var(--ivory));
 }
 
 .text-link {
@@ -274,30 +418,48 @@ button {
   min-height: 44px;
   font-weight: 650;
   text-decoration: underline;
-  text-decoration-color: rgb(34 36 32 / 0.35);
-  transition: text-decoration-color var(--dur) var(--ease-out);
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  transition: text-decoration-color var(--dur) var(--ease-out), gap var(--dur) var(--ease-out);
 }
 
 .text-link:hover {
   text-decoration-color: currentColor;
+  gap: 0.7rem;
+}
+
+.text-link svg {
+  width: 1.05em;
+  height: 1.05em;
 }
 
 /* ---------------------------------------------------------- reveal motion
-   Progressive enhancement: native scroll-driven entry only. Content is
-   never hidden in browsers without support or with reduced motion. */
+   Native scroll-driven entry only: never hides content where unsupported. */
 @media (prefers-reduced-motion: no-preference) {
   @supports ((animation-timeline: view()) and (animation-range: entry)) {
     @keyframes reveal-in {
       from {
         opacity: 0;
-        transform: translateY(28px);
+        transform: translateY(36px) rotate(0.6deg);
+      }
+    }
+
+    @keyframes card-in {
+      from {
+        transform: translateY(60px) scale(0.97);
+        border-radius: calc(var(--radius) * 2.4);
       }
     }
 
     .reveal {
       animation: reveal-in linear both;
       animation-timeline: view();
-      animation-range: entry 0% entry 70%;
+      animation-range: entry 0% entry 75%;
+    }
+
+    .card-rise {
+      animation: card-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
     }
   }
 }
@@ -310,5 +472,36 @@ button {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ------------------------------------------------ cross-page transitions
+   Progressive enhancement: same-origin navigations crossfade while the
+   header pill stays in place. Ignored where unsupported. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-old(root) {
+    animation: 260ms var(--ease-out) both vt-out;
+  }
+
+  ::view-transition-new(root) {
+    animation: 520ms var(--ease-out) both vt-in;
+  }
+}
+
+@keyframes vt-out {
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes vt-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.99);
   }
 }

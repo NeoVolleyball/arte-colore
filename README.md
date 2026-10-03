@@ -1,9 +1,20 @@
 # Arte Colore: sito web
 
 Presentation website for **Arte Colore**, a paint and decorating supplies shop
-at Via Roma 175, Spinea (VE). Single page in Italian, built with React,
+at Via Roma 175, Spinea (VE). Italian, three pages, built with React,
 TypeScript, Vite and Three.js. All 3D models and images are generated
 procedurally with Blender.
+
+**Design concept: "Cartella colori".** The site behaves like a deck of
+paper colour cards. Every section is a full-colour card finished with a paper
+label strip carrying the colour's name and code. Type: Instrument Serif
+(display) and Hanken Grotesk (text), both OFL and self-hosted.
+
+| Page | File | Contents |
+| --- | --- | --- |
+| `/` | `src/pages/HomePage.tsx` | Hero (3D tin + opening fan of chips), colour explorer, product deck, Ispirazioni gallery, visit card with San Marco |
+| `/prodotti/` | `src/pages/ProductsPage.tsx` | Pitture, Smalti, Prodotti per la decorazione in depth, contact CTA |
+| `/negozio/` | `src/pages/ShopPage.tsx` | The shop, visit tips, San Marco, Dove siamo (address, directions, map on request) |
 
 ## Setup
 
@@ -17,7 +28,7 @@ Node 20+ is required.
 ## Build and checks
 
 ```bash
-npm run build        # typecheck → client build → SSR prerender into dist/index.html
+npm run build        # typecheck → client build → SSR prerender of all three pages
 npm run preview      # serve dist/ on http://localhost:4173
 npm run lint
 npm test             # Vitest unit tests (explorer, menu, business data)
@@ -25,8 +36,12 @@ npm run check:browser   # Playwright checks against the running preview
                         # (CHROMIUM=/path/to/chrome to use a local browser)
 ```
 
-The build prerenders the whole page, so content, phone links and structured
-data are in the HTML before any JavaScript runs. React then hydrates it.
+The build prerenders every page (`scripts/prerender.mjs`), so content, phone
+links and structured data are in the HTML before any JavaScript runs. React
+then hydrates it. To add a page: create `<name>/index.html` (copy an existing
+one, set `data-page`), add it to `pages` in `src/content/business.ts`, the
+registry in `src/pages/registry.tsx`, `entries` in `vite.config.ts` and
+`scripts/prerender.mjs`.
 
 ### Production domain / SEO
 
@@ -43,11 +58,12 @@ Deploy the contents of `dist/` to any static host.
 
 | What | Where |
 | --- | --- |
-| Name, address, phone, P. IVA, San Marco link, SEO title/description, structured data | `src/content/business.ts` |
-| Opening hours (currently `null`, so hidden) | `business.openingHours` in `src/content/business.ts`, then render them in `src/components/Location.tsx` |
+| Name, address, phone, P. IVA, San Marco link, navigation, per-page SEO titles/descriptions, structured data | `src/content/business.ts` |
+| Product categories and Ispirazioni copy | `src/content/catalogue.ts` |
+| Opening hours (currently `null`, so hidden) | `business.openingHours` in `src/content/business.ts`, then render them in `src/pages/ShopPage.tsx` (Dove siamo) and `src/components/VisitCard.tsx` |
 | Explorer colours (names, HEX, families, notes, initial colour) | `src/data/palette.json` |
 | Section copy | the matching component in `src/components/` |
-| Design tokens (colours, type scale, spacing, motion) | `src/styles/global.css` |
+| Design tokens (colours, card tones, type scale, spacing, motion) | `src/styles/global.css` |
 
 Before publishing anything new, check `CONTENT-CHECKLIST.md`. It lists what
 still needs confirmation (hours, logo, extra categories, services, legal
@@ -65,7 +81,8 @@ manufacturer codes or confirmed stock.
   - keeps the still image if WebGL fails or the context is lost.
   
   Under `prefers-reduced-motion` the scene is static and renders only on demand. Picking a colour in the explorer also tints the paint in the 3D tin.
-- **Colour explorer:** the room was rendered with a neutral back wall. The chosen colour is multiplied over it through a wall-only alpha mask (CSS `mask-image` + `mix-blend-mode: multiply`). This keeps the rendered light and shadow without needing WebGL. Swatches are an ARIA radio group with a roving tab stop: arrow keys, Home and End all work.
+- **Colour explorer:** the room was rendered with a neutral back wall. The chosen colour is multiplied over it through a wall-only alpha mask (CSS `mask-image` + `mix-blend-mode: multiply`). This keeps the rendered light and shadow without needing WebGL. Picking a sample also "pours" the colour over the whole card: a circular clip-path animation from the sample, with the text ink switched for contrast. A unit test guarantees every palette colour gets an AA-compliant ink. Swatches are an ARIA radio group with a roving tab stop: arrow keys, Home and End all work.
+- **Page transitions:** cross-document View Transitions crossfade between pages where supported. Under reduced motion, or in other browsers, navigation is normal.
 - **Motion:** reveals use native scroll-driven CSS animations as progressive enhancement. They are entry-only, so content is never hidden in browsers without support. Everything is disabled under reduced motion.
 - **Map:** the Google Maps iframe is created only after the visitor clicks "Mostra la mappa". There are no analytics, cookies or tracking.
 
@@ -81,9 +98,10 @@ blender/             procedural Blender scenes + post-processing (asset sources)
 public/models/       hero.glb
 public/images/       rendered WebP images, OG image
 scripts/             prerender + browser checks
-src/content/         verified business data, SEO
 src/data/            illustrative palette
-src/components/      page sections
+src/content/         verified business data, SEO, catalogue copy
+src/pages/           the three pages + registry
+src/components/      cards, header/footer, explorer, hero
 src/three/           Three.js hero scene (lazy chunk)
 src/styles/          global tokens and base styles
 ```

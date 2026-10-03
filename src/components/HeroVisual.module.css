@@ -1,0 +1,62 @@
+.visual {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 620px;
+  margin: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .visual {
+    animation: visual-in 1300ms var(--ease-out) 150ms both;
+  }
+}
+
+@keyframes visual-in {
+  from {
+    transform: translateY(40px);
+  }
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 4 / 5;
+}
+
+.still,
+.stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.still {
+  object-fit: contain;
+  filter: drop-shadow(0 40px 40px rgb(0 0 0 / 0.18));
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.stage {
+  opacity: 0;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.stage canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.live .stage {
+  opacity: 1;
+}
+
+.live .still {
+  opacity: 0;
+}
+
+@media (max-width: 959px) {
+  .visual {
+    max-width: 480px;
+  }
+}

@@ -1,13 +1,14 @@
 import styles from './Wordmark.module.css';
 
 /**
- * Restrained typographic wordmark created for the new website.
- * It is NOT an existing official logo of the shop (see CONTENT-CHECKLIST.md).
+ * Typographic wordmark created for the new website: NOT an existing official
+ * logo of the shop (see CONTENT-CHECKLIST.md). A tiny fanned colour deck +
+ * "Arte Colore" in Instrument Serif.
  */
-export function Wordmark({ size = 'md' }: { size?: 'md' | 'lg' }) {
+export function Wordmark({ size = 'md' }: { size?: 'md' | 'xl' }) {
   return (
-    <span className={`${styles.mark} ${size === 'lg' ? styles.lg : ''}`}>
-      <span className={styles.chips} aria-hidden="true">
+    <span className={`${styles.mark} ${size === 'xl' ? styles.xl : ''}`}>
+      <span className={styles.fan} aria-hidden="true">
         <i />
         <i />
         <i />

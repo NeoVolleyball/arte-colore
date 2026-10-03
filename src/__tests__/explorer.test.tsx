@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { ColourExplorer } from '../components/ColourExplorer';
-import { COLOUR_EVENT, colours, families, initialColour } from '../data/palette';
+import { COLOUR_EVENT, colours, contrast, families, initialColour, inkFor } from '../data/palette';
 
 const group = () => screen.getByRole('radiogroup', { name: 'Colori di esempio' });
 const radios = () => within(group()).getAllByRole('radio');
@@ -14,6 +14,12 @@ describe('palette data', () => {
     for (const c of colours) {
       expect(c.hex).toMatch(/^#[0-9A-F]{6}$/);
       expect(fam.has(c.family)).toBe(true);
+    }
+  });
+
+  it('every colour gets a text ink that meets WCAG AA (4.5:1)', () => {
+    for (const c of colours) {
+      expect(contrast(c.hex, inkFor(c.hex).ink)).toBeGreaterThanOrEqual(4.5);
     }
   });
 });
@@ -64,7 +70,7 @@ describe('ColourExplorer', () => {
     render(<ColourExplorer />);
     fireEvent.click(screen.getByRole('button', { name: 'Accenti' }));
     fireEvent.click(radios()[0]);
-    fireEvent.click(screen.getAllByRole('button', { name: /Ripristina il colore iniziale/ })[0]);
+    fireEvent.click(screen.getByRole('button', { name: /Ripristina il colore iniziale/ }));
     expect(radios()).toHaveLength(colours.length);
     const checked = radios().find((r) => r.getAttribute('aria-checked') === 'true');
     expect(checked?.textContent).toContain(initialColour.name);

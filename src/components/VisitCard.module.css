@@ -1,0 +1,93 @@
+.section {
+  padding-top: var(--section);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  padding: 0 var(--gutter) clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    align-items: end;
+  }
+}
+
+.street {
+  display: grid;
+  font-family: var(--font-display);
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+}
+
+.street span {
+  font-size: clamp(3.4rem, 10vw, 9.5rem);
+  font-style: italic;
+}
+
+.street b {
+  font-weight: 400;
+  font-size: clamp(9rem, 30vw, 26rem);
+  background: linear-gradient(100deg, var(--ochre) 0 30%, var(--terracotta) 30% 62%, var(--sage) 62%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.info {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+}
+
+.title {
+  font-size: var(--step-3);
+}
+
+.title em {
+  color: #e9c98d; /* ochre light, 11:1 on charcoal */
+}
+
+.address {
+  display: grid;
+  font-style: normal;
+  font-size: var(--step-1);
+  line-height: 1.4;
+}
+
+.address strong {
+  font-weight: 650;
+}
+
+.phone {
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  text-decoration-thickness: 1px;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.sanmarco {
+  display: grid;
+  gap: 0.5rem 2rem;
+  padding: 1.6rem var(--gutter);
+  border-top: 1px solid rgb(245 241 233 / 0.16);
+}
+
+@media (min-width: 900px) {
+  .sanmarco {
+    grid-template-columns: 1fr auto;
+    align-items: center;
+  }
+}
+
+.sanmarco p {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+}

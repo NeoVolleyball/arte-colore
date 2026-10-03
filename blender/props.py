@@ -74,9 +74,9 @@ def paint_tin(name="Tin", radius=0.0845, height=0.19, paint=TERRACOTTA, open_top
             ink = material("LabelInk", CHARCOAL, roughness=0.5)
             mid = (band_lo + 0.017 + band_hi) / 2 + 0.004
             parts = []
-            t1 = text_mesh(f"{name}Word1", "Arte", FONT_DISPLAY, 0.031)
+            t1 = text_mesh(f"{name}Word1", "Arte", FONT_DISPLAY, 0.036)
             t1.data.transform(__import__("mathutils").Matrix.Translation((0, mid + 0.016, 0)))
-            t2 = text_mesh(f"{name}Word2", "Colore", FONT_DISPLAY, 0.031)
+            t2 = text_mesh(f"{name}Word2", "Colore", FONT_DISPLAY, 0.036)
             t2.data.transform(__import__("mathutils").Matrix.Translation((0, mid - 0.011, 0)))
             t3 = text_mesh(f"{name}Word3", "S P I N E A", FONT_SANS, 0.0062)
             t3.data.transform(__import__("mathutils").Matrix.Translation((0, mid - 0.036, 0)))

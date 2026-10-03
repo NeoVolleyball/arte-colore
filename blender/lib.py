@@ -14,8 +14,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 OUT_RENDERS = os.path.join(HERE, "out")
 OUT_PUBLIC = os.path.join(ROOT, "public")
-FONT_DISPLAY = os.path.join(HERE, "fonts", "Fraunces-Display.ttf")
-FONT_SANS = os.path.join(HERE, "fonts", "Manrope-SemiBold.ttf")
+FONT_DISPLAY = os.path.join(HERE, "fonts", "InstrumentSerif-Regular.ttf")
+FONT_SANS = os.path.join(HERE, "fonts", "HankenGrotesk-SemiBold.ttf")
 
 os.makedirs(OUT_RENDERS, exist_ok=True)
 

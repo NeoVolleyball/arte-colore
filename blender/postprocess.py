@@ -62,18 +62,20 @@ for s in ("pitture", "smalti", "decorazione"):
     if im:
         save(denoise(im, 3), f"product-{s}", [900, 540], quality=82)
 
-# Social sharing image (1200x630): hero still on ivory + typographic wordmark
+# Social sharing image (1200x630): terracotta colour card + hero render
 if hero:
-    og = Image.new("RGB", (1200, 630), "#F5F1E9")
-    h = hero.resize((round(hero.width * 630 / hero.height * 1.0), 630), Image.LANCZOS)
-    og.paste(h, (1200 - h.width + 10, 0), h)
+    og = Image.new("RGB", (1200, 630), "#8E4A31")
     d = ImageDraw.Draw(og)
-    disp = ImageFont.truetype(os.path.join(HERE, "fonts", "Fraunces-Display.ttf"), 96)
-    sans = ImageFont.truetype(os.path.join(HERE, "fonts", "Manrope-SemiBold.ttf"), 26)
-    d.text((72, 170), "Arte Colore", font=disp, fill="#222420")
-    d.rectangle((76, 300, 196, 304), fill="#BE7156")
-    d.text((76, 330), "Pitture, smalti e decorazione", font=sans, fill="#222420")
-    d.text((76, 370), "Via Roma 175 · Spinea (VE)", font=sans, fill="#5A5C55")
+    d.rectangle((0, 548, 1200, 630), fill="#F7F3EB")
+    h = hero.resize((round(hero.width * 570 / hero.height), 570), Image.LANCZOS)
+    og.paste(h, (1200 - h.width - 40, -22), h)
+    disp = ImageFont.truetype(os.path.join(HERE, "fonts", "InstrumentSerif-Regular.ttf"), 124)
+    sans = ImageFont.truetype(os.path.join(HERE, "fonts", "HankenGrotesk-SemiBold.ttf"), 26)
+    small = ImageFont.truetype(os.path.join(HERE, "fonts", "HankenGrotesk-SemiBold.ttf"), 22)
+    d.text((70, 150), "Arte Colore", font=disp, fill="#F7F3EB")
+    d.text((74, 300), "Pitture, smalti e decorazione", font=sans, fill="#F7F3EB")
+    d.text((70, 575), "Via Roma 175 · 30038 Spinea (VE)", font=small, fill="#222420")
+    d.text((860, 575), "Tel. 041 990950", font=small, fill="#222420")
     path = os.path.join(DST, "og-arte-colore.jpg")
     og.save(path, "JPEG", quality=86, optimize=True, progressive=True)
     print(path)

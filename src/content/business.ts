@@ -45,22 +45,46 @@ export const maps = {
   embedUrl: `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&output=embed`,
 };
 
+export type PageId = 'home' | 'prodotti' | 'negozio';
+
+export const pages: Record<PageId, { path: string; title: string; description: string }> = {
+  home: {
+    path: '/',
+    title: 'Arte Colore Spinea | Pitture, Smalti e Decorazione',
+    description:
+      'Scopri Arte Colore a Spinea: pitture, smalti e prodotti per la decorazione. Ci trovi in Via Roma 175. Chiama il negozio al 041 990950.',
+  },
+  prodotti: {
+    path: '/prodotti/',
+    title: 'Prodotti | Arte Colore Spinea: pitture, smalti e decorazione',
+    description:
+      'Pitture per pareti e soffitti, smalti per superfici e dettagli, prodotti e accessori per la decorazione. Arte Colore, Via Roma 175, Spinea.',
+  },
+  negozio: {
+    path: '/negozio/',
+    title: 'Il negozio e dove siamo | Arte Colore, Via Roma 175 Spinea',
+    description:
+      'Arte Colore, negozio di colori a Spinea in Via Roma 175. Indicazioni stradali, telefono 041 990950 e consigli per preparare la tua visita.',
+  },
+};
+
 export const seo = {
   lang: 'it',
   locale: 'it_IT',
-  title: 'Arte Colore Spinea | Pitture, Smalti e Decorazione',
-  description:
-    'Scopri Arte Colore a Spinea: pitture, smalti e prodotti per la decorazione. Ci trovi in Via Roma 175. Chiama il negozio al 041 990950.',
+  title: pages.home.title,
+  description: pages.home.description,
   /** Production origin, e.g. "https://www.example.it". Set VITE_SITE_URL at build time. */
   siteUrl: (import.meta.env?.VITE_SITE_URL as string | undefined)?.replace(/\/$/, '') || '',
   ogImage: '/images/og-arte-colore.jpg',
 };
 
+/** Main navigation. "Esplora i colori" lives on the homepage, the full
+ *  location details (map included) on the shop page. */
 export const nav = [
-  { id: 'negozio', label: 'Il negozio' },
-  { id: 'prodotti', label: 'Prodotti' },
-  { id: 'colori', label: 'Esplora i colori' },
-  { id: 'dove-siamo', label: 'Dove siamo' },
+  { label: 'Il negozio', href: '/negozio/', page: 'negozio' },
+  { label: 'Prodotti', href: '/prodotti/', page: 'prodotti' },
+  { label: 'Esplora i colori', href: '/#colori', page: null },
+  { label: 'Dove siamo', href: '/negozio/#dove-siamo', page: null },
 ] as const;
 
 /** schema.org structured data — verified facts only (no hours, geo, ratings). */

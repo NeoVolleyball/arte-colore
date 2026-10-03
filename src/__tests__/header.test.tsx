@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Header } from '../components/Header';
+import { SiteHeader } from '../components/SiteHeader';
 
-describe('Header mobile menu', () => {
-  it('toggles aria-expanded, moves focus in, closes on Escape and restores focus', () => {
-    render(<Header />);
+describe('SiteHeader', () => {
+  it('toggles the mobile menu, moves focus in, closes on Escape and restores focus', () => {
+    render(<SiteHeader page="home" />);
     const toggle = screen.getByRole('button', { name: 'Apri il menu' });
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
     fireEvent.click(toggle);
@@ -17,9 +17,10 @@ describe('Header mobile menu', () => {
     expect(document.activeElement).toBe(toggle);
   });
 
-  it('exposes a real phone link', () => {
-    render(<Header />);
-    const call = screen.getAllByRole('link', { name: /Chiama/ })[0];
-    expect(call.getAttribute('href')).toBe('tel:+39041990950');
+  it('marks the current page and links the phone', () => {
+    render(<SiteHeader page="prodotti" />);
+    const current = screen.getAllByRole('link', { name: 'Prodotti' }).filter((a) => a.getAttribute('aria-current') === 'page');
+    expect(current.length).toBeGreaterThan(0);
+    expect(screen.getByRole('link', { name: /Chiamaci/ }).getAttribute('href')).toBe('tel:+39041990950');
   });
 });

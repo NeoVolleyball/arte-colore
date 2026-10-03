@@ -11,7 +11,7 @@ business confirms it. Once an item is confirmed, add it to
 | Brand | Arte Colore | `business.brand` |
 | Company | Arte Colore S.r.l. | footer, structured data |
 | Address | Via Roma 175, 30038 Spinea (VE), Italia | Dove siamo, footer, structured data |
-| Telephone | +39 041 990950 (`tel:+39041990950`) | header, hero area, Dove siamo, footer, mobile bar |
+| Telephone | +39 041 990950 (`tel:+39041990950`) | header, visit card, /prodotti/, /negozio/ Dove siamo, footer, mobile bar |
 | Partita IVA | 04463040271 | footer only (not in structured data) |
 | San Marco | Listed in San Marco's retailer directory | San Marco section, text reference + link |
 
@@ -29,7 +29,7 @@ ecoattivi.eu/doc/Spinea_Elenco_Negozi.pdf
 - Until then the site says "Per informazioni su orari e disponibilità, chiamaci."
 
 ### Identity, logo and imagery
-- [ ] **Logo.** No genuine logo was in the project. The site uses a new typographic wordmark ("Arte Colore" with three colour chips) created for the redesign. It is not an existing official logo. Replace `src/components/Wordmark.tsx` if a real logo exists.
+- [ ] **Logo.** No genuine logo was in the project. The site uses a new typographic wordmark ("Arte Colore" in Instrument Serif with a tiny fan of three colour chips) created for the redesign. It is not an existing official logo. Replace `src/components/Wordmark.tsx` if a real logo exists.
 - [ ] **Palette.** Ivory, charcoal, sage, terracotta and ochre are a proposed website palette, not verified brand colours.
 - [ ] **Business-approved photos** of the shop front, interior and staff, if the owner wants them. All current images are original digital illustrations (see `ASSETS.md`).
 - [ ] **San Marco logo.** Only use it with written permission or an official retailer asset kit. The current text-only reference is deliberate.

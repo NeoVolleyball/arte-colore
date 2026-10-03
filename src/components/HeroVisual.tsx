@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import styles from './Hero.module.css';
+import styles from './HeroVisual.module.css';
 
 type Mode = 'still' | 'live';
 
@@ -64,13 +64,12 @@ export function HeroVisual() {
 
   return (
     <figure className={`${styles.visual} ${mode === 'live' ? styles.live : ''}`}>
-      <div className={styles.backdrop} aria-hidden="true" />
       <div className={styles.frame}>
         <img
           className={styles.still}
           src="/images/hero-still-1200.webp"
           srcSet="/images/hero-still-720.webp 720w, /images/hero-still-1200.webp 1200w"
-          sizes="(min-width: 960px) 46vw, 92vw"
+          sizes="(min-width: 960px) 44vw, 90vw"
           width={1200}
           height={1500}
           alt="Composizione illustrativa: un barattolo di pittura aperto color terracotta con etichetta Arte Colore, il coperchio appoggiato e un ventaglio di cartelle colore davanti a un arco in intonaco verde salvia."

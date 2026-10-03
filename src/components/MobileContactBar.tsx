@@ -13,7 +13,7 @@ export function MobileContactBar() {
     const onScroll = () => setPastHero(window.scrollY > window.innerHeight * 0.8);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    const target = document.getElementById('dove-siamo');
+    const target = document.getElementById('visita') ?? document.getElementById('dove-siamo');
     const io = new IntersectionObserver(([e]) => setAtLocation(e.isIntersecting), {
       threshold: 0.15,
     });
@@ -32,14 +32,13 @@ export function MobileContactBar() {
       role="region"
       aria-label="Contatti rapidi"
       aria-hidden={!shown}
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      {...({ inert: shown ? undefined : '' } as any)}
+      {...({ inert: shown ? undefined : '' } as Record<string, string | undefined>)}
     >
-      <a className="btn" href={business.phone.href}>
+      <a className="btn btn--ivory" href={business.phone.href}>
         <Icon name="phone" />
         Chiama
       </a>
-      <a className="btn btn--ghost" href={maps.directionsUrl} target="_blank" rel="noopener noreferrer">
+      <a className="btn btn--outline" style={{ '--ink': 'var(--ivory)', '--card-bg': 'var(--charcoal)' } as React.CSSProperties} href={maps.directionsUrl} target="_blank" rel="noopener noreferrer">
         <Icon name="route" />
         Indicazioni
         <span className="visually-hidden">(si apre in una nuova scheda)</span>
