@@ -3,6 +3,7 @@ import {
   Box3,
   AgXToneMapping,
   Color,
+  DoubleSide,
   DirectionalLight,
   Mesh,
   MeshStandardMaterial,
@@ -19,6 +20,7 @@ import {
   type Material,
 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { COLOUR_EVENT } from '../data/palette';
 
@@ -51,7 +53,9 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
   scene.environment = envTex;
   scene.environmentIntensity = 0.95;
 
-  const gltf = await new GLTFLoader().loadAsync(opts.modelUrl ?? '/models/hero.glb');
+  const gltf = await new GLTFLoader()
+    .setMeshoptDecoder(MeshoptDecoder)
+    .loadAsync(opts.modelUrl ?? '/models/hero.glb');
   const root = gltf.scene;
   scene.add(root);
   root.updateMatrixWorld(true);
@@ -111,6 +115,7 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
       if (!mat || !('roughness' in mat)) continue;
       if (mat.name.startsWith('Paint_') && !paintMats.includes(mat)) paintMats.push(mat);
       if (mat.name.startsWith('Plaster')) mat.envMapIntensity = 0.75;
+      if (mat.name.startsWith('Patch_')) mat.side = DoubleSide;
       if (mat.metalness > 0.5) mat.envMapIntensity = 1.25;
     }
   });
@@ -145,6 +150,17 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
     requestFrame();
   };
   window.addEventListener(COLOUR_EVENT, onColour);
+
+  // ------------------------------------------------- scroll (cinematic, no hijack)
+  // As the hero scrolls away the camera orbits and dollies in on the tin.
+  const section = container.closest('section') ?? container;
+  const scroll = { p: 0, sp: 0 };
+  const onScroll = () => {
+    const r = section.getBoundingClientRect();
+    scroll.p = Math.max(0, Math.min(1, -r.top / Math.max(1, r.height * 0.85)));
+    requestFrame();
+  };
+  if (!opts.reducedMotion) window.addEventListener('scroll', onScroll, { passive: true });
 
   // ----------------------------------------------------------- interaction
   const pointer = { x: 0, y: 0, sx: 0, sy: 0 };
@@ -197,13 +213,17 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
       pointer.sy += (pointer.y - pointer.sy) * 0.06;
       if (Math.abs(pointer.x - pointer.sx) > 0.001 || Math.abs(pointer.y - pointer.sy) > 0.001) animating = true;
 
+      scroll.sp += (scroll.p - scroll.sp) * 0.1;
+      const sc = scroll.sp * scroll.sp * (3 - 2 * scroll.sp); // smoothstep
       const t = now / 1000;
-      const yaw = pointer.sx * 0.11 + Math.sin(t * 0.32) * 0.018;
-      const pitch = -pointer.sy * 0.05 + Math.sin(t * 0.21) * 0.008;
+      const yaw = pointer.sx * 0.11 + Math.sin(t * 0.32) * 0.018 - sc * 0.55;
+      const pitch = -pointer.sy * 0.05 + Math.sin(t * 0.21) * 0.008 - sc * 0.06;
       tmp.copy(offset).applyAxisAngle(new Vector3(0, 1, 0), -yaw);
       tmp.y += pitch * offset.length();
+      tmp.multiplyScalar(1 - sc * 0.28);
       camera.position.copy(target).add(tmp);
-      camera.lookAt(target);
+      camera.position.y += sc * 0.02;
+      camera.lookAt(target.x, target.y - sc * 0.05, target.z);
       animating = true; // slow idle drift
     }
 
@@ -246,6 +266,7 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
       io.disconnect();
       document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('pointermove', onPointer);
+      window.removeEventListener('scroll', onScroll);
       window.removeEventListener(COLOUR_EVENT, onColour);
       renderer.domElement.removeEventListener('webglcontextlost', onLost);
       scene.traverse((o) => {

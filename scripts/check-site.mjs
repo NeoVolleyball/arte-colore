@@ -254,6 +254,11 @@ await browser.close();
     return { canvas: !!document.querySelector('canvas'), still: img && getComputedStyle(img).opacity === '1' && img.naturalWidth > 0 };
   });
   ok('no WebGL: static hero render shown, no canvas', !state.canvas && state.still, JSON.stringify(state));
+  // explorer still pours (CSS clip-path fallback) without WebGL
+  await page.evaluate(() => document.getElementById('colori').scrollIntoView({ behavior: 'instant' }));
+  await page.getByRole('radio', { name: /Salvia/ }).click();
+  const fallback = await until(page, () => getComputedStyle(document.getElementById('colori')).backgroundColor === 'rgb(135, 148, 128)');
+  ok('no WebGL: explorer colour pour falls back and completes', fallback);
   ok('no WebGL: no console errors', errors.length === 0, errors.join(' | '));
   if (SHOTS) await page.screenshot({ path: `${SHOTS}/desktop-nowebgl.png` });
   await context.close();

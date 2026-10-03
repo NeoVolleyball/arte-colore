@@ -100,8 +100,17 @@
   min-height: 420px;
 }
 
-/* fan of real-size paint chips opening from a pivot behind the plinth */
+/* fan of real-size paint chips opening from a pivot behind the plinth;
+   it spreads wider as the hero scrolls away (registered property so the
+   angle can be animated on a scroll timeline) */
+@property --spread {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 15deg;
+}
+
 .fan {
+  --spread: 15deg;
   position: absolute;
   left: 50%;
   bottom: 14%;
@@ -111,7 +120,6 @@
 }
 
 .fan li {
-  --spread: 15deg;
   position: absolute;
   left: 0;
   bottom: 0;
@@ -132,8 +140,20 @@
   transition: transform 900ms var(--ease-spring);
 }
 
-.stage:hover .fan li {
-  --spread: 18deg;
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: exit)) {
+    @keyframes fan-spread {
+      to {
+        --spread: 27deg;
+      }
+    }
+
+    .fan {
+      animation: fan-spread linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 90%;
+    }
+  }
 }
 
 .fanName,
@@ -178,11 +198,11 @@
   }
 
   .fan {
+    --spread: 13deg;
     bottom: 18%;
   }
 
   .fan li {
-    --spread: 13deg;
     width: 22vw;
     height: 72vw;
     margin-left: -11vw;

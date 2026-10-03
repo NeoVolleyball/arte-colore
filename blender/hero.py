@@ -14,7 +14,9 @@ import bpy  # noqa: E402
 
 from lib import (OUT_PUBLIC, OUT_RENDERS, area_light, box, camera, material, plane,  # noqa: E402
                  render, reset, setup_render, world)
-from props import IVORY, SAGE, TERRACOTTA, arch_slab, brush, colour_fan, paint_lid, paint_tin  # noqa: E402
+from props import (IVORY, OCHRE, SAGE, TERRACOTTA, arch_slab, colour_fan, detailed_brush, paint_drip,
+                   paint_lid, paint_tin, painted_patch, puddle)
+from lib import parent  # noqa: E402
 
 args = sys.argv[sys.argv.index("--") + 1:] if "--" in sys.argv else []
 PREVIEW = "--preview" in args
@@ -30,8 +32,26 @@ arch = arch_slab("Arch", 0.44, 0.62, 0.035, plaster_sage, loc=(-0.08, 0.17, 0.0)
 step = box("Step", (0.15, 0.15, 0.085), loc=(0.205, 0.125, 0.0425), mat=plaster_ivory, bevel=0.004)
 
 # Objects -------------------------------------------------------------------
-tin = paint_tin("Tin", paint=TERRACOTTA, loc=(-0.025, 0.045, 0.0))
-tin.rotation_euler = (0, 0, math.radians(-4))
+TIN_LOC, TIN_ROT, TIN_R, TIN_H = (-0.025, 0.045, 0.0), math.radians(-4), 0.0845, 0.19
+tin = paint_tin("Tin", paint=TERRACOTTA, loc=TIN_LOC)
+tin.rotation_euler = (0, 0, TIN_ROT)
+
+# wet paint: drips over the rim (children of the tin) + a puddle at the base
+wet = material(f"Paint_{TERRACOTTA}", TERRACOTTA, roughness=0.16, coat=0.25)
+for k, (ang, ln, w) in enumerate([(-0.62, 0.168, 0.0038), (0.8, 0.058, 0.0029), (1.22, 0.026, 0.0024)]):
+    d = paint_drip(f"TinDrip{k}", TIN_R + 0.0028, TIN_H, ln, ang, wet, width=w)
+    parent(d, tin, keep=False)
+ang = -0.62 + TIN_ROT
+foot = (TIN_LOC[0] + (TIN_R + 0.012) * math.sin(ang), TIN_LOC[1] - (TIN_R + 0.012) * math.cos(ang), 0.0)
+puddle("Puddle", foot, size=0.019, mat=wet, seed=4)
+
+# test patches brushed onto the plaster arch, like trying colours on a wall
+painted_patch("PatchTerracotta", 0.12, 0.085, material("Patch_terracotta", TERRACOTTA, 0.9), seed=3,
+              loc=(-0.17, 0.1692, 0.46))
+painted_patch("PatchOchre", 0.095, 0.07, material("Patch_ochre", OCHRE, 0.9), seed=8,
+              loc=(-0.095, 0.1689, 0.395))
+painted_patch("PatchBottle", 0.07, 0.052, material("Patch_bottle", "#2F4A3E", 0.9), seed=12,
+              loc=(-0.205, 0.1690, 0.36))
 
 lid = paint_lid("Lid", paint=TERRACOTTA)
 lid.location = (-0.19, 0.11, 0.084)
@@ -39,7 +59,7 @@ lid.rotation_euler = (math.radians(-72), math.radians(0), math.radians(14))
 
 fan = colour_fan("Fan", loc=(0.015, -0.085, 0.0012), rot_z=math.radians(-92))
 
-brush("Brush", loc=(0.2, 0.105, 0.0935), rot=(math.radians(90), 0, math.radians(68)), paint=TERRACOTTA)
+detailed_brush("Brush", loc=(0.2, 0.105, 0.0935), rot=(math.radians(90), 0, math.radians(68)), paint=TERRACOTTA)
 
 # Camera & light ------------------------------------------------------------
 cam = camera((0.14, -1.95, 0.62), (0.01, 0.05, 0.205), lens=54)

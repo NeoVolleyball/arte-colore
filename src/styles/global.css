@@ -505,3 +505,59 @@ button {
     transform: translateY(28px) scale(0.99);
   }
 }
+
+/* ------------------------------------------------------------- paint drips
+   Colour of the card running over the top of its paper label. */
+.chip-label {
+  position: relative;
+  padding-top: 1.6rem;
+}
+
+.drips {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 100%;
+  height: 30px;
+  fill: var(--card-bg);
+  pointer-events: none;
+  transform-origin: 50% 0;
+  transition: fill 300ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes drip-grow {
+      from {
+        transform: scaleY(0.12);
+      }
+    }
+
+    .drips {
+      animation: drip-grow linear both;
+      animation-timeline: view();
+      animation-range: entry 20% cover 55%;
+    }
+  }
+}
+
+/* -------------------------------------------- scroll-linked image depth
+   Images drift inside their frames as they cross the viewport. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes depth {
+      from {
+        transform: translateY(-7%) scale(1.14);
+      }
+      to {
+        transform: translateY(7%) scale(1.14);
+      }
+    }
+
+    .parallax {
+      animation: depth linear both;
+      animation-timeline: view();
+      animation-range: cover;
+    }
+  }
+}

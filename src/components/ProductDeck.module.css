@@ -40,8 +40,16 @@
   box-shadow: 0 30px 60px -40px rgb(34 36 32 / 0.7);
 }
 
+/* 0 = cards stacked, 1 = dealt into a fanned hand (scroll-driven) */
+@property --deal {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 1;
+}
+
 @media (min-width: 900px) {
   .deck {
+    --deal: 1;
     grid-template-columns: repeat(3, 1fr);
     gap: 0;
     padding-inline: 1rem;
@@ -51,7 +59,8 @@
   .item {
     --lift: 18px;
     margin-inline: -0.6rem !important;
-    transform: rotate(calc((var(--i) - 1) * 3.5deg)) translateY(var(--lift));
+    transform: translateX(calc((1 - var(--i)) * (1 - var(--deal)) * 100%))
+      rotate(calc((var(--i) - 1) * (3.5deg + (1 - var(--deal)) * 4deg))) translateY(calc(var(--lift) * var(--deal)));
     transform-origin: 50% 120%;
     transition:
       transform 700ms var(--ease-spring),
@@ -86,9 +95,6 @@
   transition: transform 1.2s var(--ease-out);
 }
 
-.item:hover .media img {
-  transform: scale(1.05);
-}
 
 .body {
   display: grid;
@@ -142,4 +148,20 @@
   margin-top: 2.5rem;
   font-size: var(--step--1);
   color: var(--muted);
+}
+
+@media (min-width: 900px) and (prefers-reduced-motion: no-preference) {
+  @supports ((animation-timeline: view()) and (animation-range: entry)) {
+    @keyframes deal {
+      from {
+        --deal: 0;
+      }
+    }
+
+    .deck {
+      animation: deal linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+  }
 }

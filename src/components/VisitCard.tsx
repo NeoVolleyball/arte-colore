@@ -1,4 +1,5 @@
 import { business, maps } from '../content/business';
+import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './VisitCard.module.css';
 
@@ -55,6 +56,7 @@ export function VisitCard() {
       </div>
 
       <div className="chip-label">
+        <Drips seed={5} count={10} />
         <span className="chip-label__name">Antracite</span>
         <span className="chip-label__meta">Per informazioni su orari e disponibilità, chiamaci.</span>
         <span className="chip-label__code">#222420</span>

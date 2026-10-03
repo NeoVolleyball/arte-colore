@@ -1,4 +1,5 @@
 import { products } from '../content/catalogue';
+import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './ProductDeck.module.css';
 
@@ -30,6 +31,7 @@ export function ProductDeck() {
                   alt={p.alt}
                   loading="lazy"
                   decoding="async"
+                  className="parallax"
                 />
               </div>
               <div className={styles.body}>
@@ -42,6 +44,7 @@ export function ProductDeck() {
                 <p className={styles.short}>{p.short}</p>
               </div>
               <div className="chip-label">
+                <Drips seed={i * 13 + 2} count={5} />
                 <span className="chip-label__name">N° 0{i + 1}</span>
                 <span />
                 <span className="chip-label__code">{p.code}</span>

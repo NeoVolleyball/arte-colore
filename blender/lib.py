@@ -303,17 +303,25 @@ def smooth(obj, angle=35):
         obj.data.auto_smooth_angle = math.radians(angle)
 
 
-def tube_from_points(name, points, radius, mat=None, resolution=6):
-    """Bevelled curve converted to mesh: wire handles, lamp stems, frames."""
+def tube_from_points(name, points, radius, mat=None, resolution=6, radii=None, order=None):
+    """Bevelled curve converted to mesh: wire handles, lamp stems, frames.
+    `radii` (per point, multiplies `radius`) tapers drips and bristles;
+    `order` switches to a smooth NURBS path."""
     cu = bpy.data.curves.new(name, "CURVE")
     cu.dimensions = "3D"
     cu.bevel_depth = radius
     cu.bevel_resolution = resolution
     cu.use_fill_caps = True
-    sp = cu.splines.new("POLY")
+    sp = cu.splines.new("NURBS" if order else "POLY")
     sp.points.add(len(points) - 1)
-    for p, co in zip(sp.points, points):
+    for i, (p, co) in enumerate(zip(sp.points, points)):
         p.co = (*co, 1.0)
+        if radii:
+            p.radius = radii[i]
+    if order:
+        sp.order_u = order
+        sp.use_endpoint_u = True
+        sp.resolution_u = 8
     obj = _link(bpy.data.objects.new(name, cu))
     to_mesh(obj)
     smooth(obj, 60)

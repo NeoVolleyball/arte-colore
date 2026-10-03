@@ -496,3 +496,166 @@ def books(name, loc, count=8, palette=("#C7A35D", "#879480", "#BE7156", "#E9E2D2
                    bevel=0.002), root, keep=False)
         x += t + 0.002
     return root
+
+
+# ------------------------------------------------------------ wet paint details
+
+def paint_drip(name, radius, top_z, length, angle, mat, width=0.0034, bulb=1.45):
+    """A drip of paint over a tin rim, running down the side and ending in a
+    swollen bead. Flattened against the wall so it reads as liquid, not rope."""
+    pts, radii = [], []
+    # over the rolled rim, then down the wall
+    rim = [(radius + 0.0002, top_z + 0.0012), (radius + 0.0032, top_z - 0.001), (radius + 0.0024, top_z - 0.006)]
+    steps = 14
+    for i in range(steps + 1):
+        t = i / steps
+        z = top_z - 0.006 - length * t
+        wobble = 0.0006 * math.sin(t * 9.0)
+        rim.append((radius + 0.0012 + wobble * 0.2, z))
+    for i, (r, z) in enumerate(rim):
+        pts.append((r * math.sin(angle), -r * math.cos(angle), z))
+        t = i / (len(rim) - 1)
+        radii.append(1.0 - 0.35 * t + (bulb - 0.65) * max(0.0, (t - 0.85) / 0.15) ** 2)
+    obj = tube_from_points(name, pts, width, mat=mat, resolution=5, radii=radii, order=4)
+    # squash radially so the drip lies flat on the metal
+    for v in obj.data.vertices:
+        x, y, z = v.co
+        d = math.hypot(x, y)
+        if d > 1e-6:
+            k = (radius + 0.0009 + (d - radius - 0.0009) * 0.45) / d
+            v.co = (x * k, y * k, z)
+    smooth(obj, 80)
+    return obj
+
+
+def puddle(name, loc, size=0.05, mat=None, seed=2, height=0.0022):
+    """Irregular glossy paint puddle with a rounded meniscus edge."""
+    import random
+    rnd = random.Random(seed)
+    bm = bmesh.new()
+    n = 64
+    phase = [rnd.uniform(0, math.tau) for _ in range(4)]
+    verts = []
+    for i in range(n):
+        a = math.tau * i / n
+        r = size * (1 + 0.16 * math.sin(2 * a + phase[0]) + 0.09 * math.sin(3 * a + phase[1])
+                    + 0.05 * math.sin(5 * a + phase[2]) + 0.03 * math.sin(9 * a + phase[3]))
+        verts.append(bm.verts.new((r * math.cos(a) * 1.35, r * math.sin(a), 0)))
+    face = bm.faces.new(verts)
+    ext = bmesh.ops.extrude_face_region(bm, geom=[face])
+    for v in [e for e in ext["geom"] if isinstance(e, bmesh.types.BMVert)]:
+        v.co.z += height
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    obj = mesh_from_bmesh(name, bm)
+    obj.location = loc
+    m = obj.modifiers.new("Bevel", "BEVEL")
+    m.width = height * 0.9
+    m.segments = 4
+    m.limit_method = "ANGLE"
+    smooth(obj, 70)
+    if mat:
+        assign(obj, mat)
+    return obj
+
+
+def bristles(name, width=0.044, depth=0.010, length=0.048, count=150, tip=None, seed=5):
+    """Individual tapered bristles, splayed slightly at the tip, optional
+    paint-dipped ends (second material slot)."""
+    import random
+    rnd = random.Random(seed)
+    raw = material("BristleRaw", "#E3D2AE", 0.75)
+    strands = []
+    for i in range(count):
+        x = rnd.uniform(-width / 2, width / 2)
+        y = rnd.uniform(-depth / 2, depth / 2)
+        splay = x / (width / 2)
+        ln = length * rnd.uniform(0.92, 1.0)
+        pts = [(x, y, 0.0),
+               (x * 1.02 + splay * 0.0008, y, -ln * 0.5),
+               (x * 1.05 + splay * 0.002 + rnd.uniform(-0.0006, 0.0006), y * 1.15, -ln)]
+        s = tube_from_points(f"{name}_{i}", pts, 0.00085, resolution=1, radii=[1.0, 0.85, 0.35])
+        strands.append(s)
+    bpy.ops.object.select_all(action="DESELECT")
+    for s in strands:
+        s.select_set(True)
+    bpy.context.view_layer.objects.active = strands[0]
+    bpy.ops.object.join()
+    obj = strands[0]
+    obj.name = name
+    obj.data.materials.clear()
+    obj.data.materials.append(raw)
+    if tip:
+        obj.data.materials.append(material(f"Paint_{tip}", tip, roughness=0.16, coat=0.25))
+        for poly in obj.data.polygons:
+            if poly.center.z < -length * 0.62:
+                poly.material_index = 1
+    return obj
+
+
+def detailed_brush(name="Brush", loc=(0, 0, 0), rot=(0, 0, 0), paint=None):
+    """Flat brush: turned wooden handle with a hang hole, crimped ferrule
+    and individual bristles with paint-loaded tips."""
+    root = empty(name, loc)
+    root.rotation_euler = rot
+    handle = lathe(f"{name}Handle", [(0.0, 0.0), (0.0062, 0.002), (0.0092, 0.028), (0.0078, 0.098),
+                                     (0.0108, 0.132), (0.0084, 0.142), (0.0, 0.145)],
+                   mat=material("BrushWood", "#C49A6C", 0.42), segments=40)
+    handle.scale = (1.0, 0.55, 1.0)
+    parent(handle, root, keep=False)
+    hole = cylinder(f"{name}Hole", 0.0028, 0.012, loc=(0, 0, 0.128), rot=(math.pi / 2, 0, 0),
+                    mat=material("HoleShadow", "#3B2A1C", 0.8), segments=16)
+    parent(hole, root, keep=False)
+    chrome = material("Chrome", "#BFBDB8", 0.22, 1.0)
+    ferrule = box(f"{name}Ferrule", (0.05, 0.013, 0.03), loc=(0, 0, -0.012), mat=chrome, bevel=0.004)
+    parent(ferrule, root, keep=False)
+    for k in (-1, 1):
+        crimp = box(f"{name}Crimp{k}", (0.051, 0.0135, 0.0018), loc=(0, 0, -0.012 + k * 0.007), mat=chrome, bevel=0.0007)
+        parent(crimp, root, keep=False)
+    b = bristles(f"{name}Bristles", tip=paint)
+    b.location = (0, 0, -0.026)
+    parent(b, root, keep=False)
+    return root
+
+
+def painted_patch(name, w, h, mat, seed=1, loc=(0, 0, 0), rot=(0, 0, 0)):
+    """A test patch of paint brushed on a wall: clean-ish top and bottom
+    edges, dry-brush streaks where each horizontal stroke starts and ends."""
+    import random
+    rnd = random.Random(seed)
+    bm = bmesh.new()
+    nx, nz = 48, 22
+    grid = {}
+    for i in range(nx + 1):
+        for j in range(nz + 1):
+            u, v = i / nx, j / nz
+            z = (v - 0.5) * h
+            if j in (0, nz):
+                z += rnd.uniform(-1, 1) * h * 0.012
+            grid[i, j] = bm.verts.new(((u - 0.5) * w, 0, z))
+    faces = {}
+    for i in range(nx):
+        for j in range(nz):
+            faces[i, j] = bm.faces.new((grid[i, j], grid[i + 1, j], grid[i + 1, j + 1], grid[i, j + 1]))
+    # each row is a brush stroke: it starts and ends at slightly different x
+    kill = []
+    band = 0
+    for j in range(nz):
+        if j % 2 == 0:
+            band = (rnd.uniform(0.0, 0.16), rnd.uniform(0.84, 1.0))
+        lo, hi = band
+        for i in range(nx):
+            u = (i + 0.5) / nx
+            if u < lo or u > hi:
+                kill.append(faces[i, j])
+            elif (u < lo + 0.06 or u > hi - 0.06) and rnd.random() < 0.45:
+                kill.append(faces[i, j])
+    bmesh.ops.delete(bm, geom=kill, context="FACES")
+    bmesh.ops.delete(bm, geom=[v for v in bm.verts if not v.link_faces], context="VERTS")
+    bmesh.ops.recalc_face_normals(bm, faces=bm.faces)
+    obj = mesh_from_bmesh(name, bm)
+    for p in obj.data.polygons:
+        p.use_smooth = True
+    obj.location = loc
+    obj.rotation_euler = rot
+    assign(obj, mat)
+    return obj

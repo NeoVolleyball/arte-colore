@@ -1,5 +1,6 @@
 import { business } from '../content/business';
 import { colourById, colours } from '../data/palette';
+import { Drips } from './Drips';
 import { HeroVisual } from './HeroVisual';
 import { Icon } from './Icon';
 import styles from './HeroCard.module.css';
@@ -53,6 +54,7 @@ export function HeroCard() {
       </div>
 
       <div className={`chip-label ${styles.label}`}>
+        <Drips seed={3} count={11} />
         <span className="chip-label__name">Terracotta</span>
         <div className={styles.ticker} aria-hidden="true">
           <div className={styles.tickerTrack}>

@@ -9,6 +9,8 @@ import {
   type Colour,
   type FamilyId,
 } from '../data/palette';
+import { createLiquidPour, type LiquidPour } from '../effects/liquidPour';
+import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './ColourExplorer.module.css';
 
@@ -31,6 +33,9 @@ export function ColourExplorer() {
   const sectionRef = useRef<HTMLElement>(null);
   const floodRef = useRef<HTMLDivElement>(null);
   const floodAnim = useRef<Animation | null>(null);
+  const liquid = useRef<LiquidPour | null | undefined>(undefined);
+
+  useEffect(() => () => liquid.current?.dispose(), []);
   const swatchRefs = useRef(new Map<string, HTMLButtonElement>());
   const firstRender = useRef(true);
 
@@ -56,6 +61,7 @@ export function ColourExplorer() {
     const section = sectionRef.current;
     const flood = floodRef.current;
     floodAnim.current?.finish();
+    liquid.current?.finish();
     if (!section || !flood || !origin || reducedMotion() || typeof flood.animate !== 'function') {
       setCardColour(next);
       setInkColour(next);
@@ -65,6 +71,25 @@ export function ColourExplorer() {
     const o = origin.getBoundingClientRect();
     const x = o.left + o.width / 2 - s.left;
     const y = o.top + o.height / 2 - s.top;
+
+    // preferred: WebGL wet-paint pour (created on first use)
+    if (liquid.current === undefined) liquid.current = createLiquidPour(section);
+    if (liquid.current) {
+      liquid.current.pour({
+        x,
+        y,
+        hex: next.hex,
+        midAt: 0.62,
+        onMid: () => setInkColour(next),
+        onDone: () => {
+          setInkColour(next);
+          setCardColour(next);
+        },
+      });
+      return;
+    }
+
+    // fallback: circular clip-path pour
     const r = Math.hypot(Math.max(x, s.width - x), Math.max(y, s.height - y));
     flood.style.backgroundColor = next.hex;
     const anim = flood.animate(
@@ -233,6 +258,7 @@ export function ColourExplorer() {
       </div>
 
       <div className={`chip-label ${styles.label}`}>
+        <Drips seed={7} count={12} />
         <span className="chip-label__name">{selected.name}</span>
         <span className="chip-label__meta">
           Colori illustrativi: la resa sullo schermo può differire dal colore reale. Verifica la

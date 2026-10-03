@@ -61,6 +61,7 @@ export function ProductsPage() {
                 alt={p.alt}
                 loading={i === 0 ? 'eager' : 'lazy'}
                 decoding="async"
+                className="parallax"
               />
             </div>
             <div className={styles.copy}>
@@ -83,7 +84,7 @@ export function ProductsPage() {
               </a>
             </div>
           </div>
-          <ChipLabel name={p.name} meta="Immagine illustrativa creata digitalmente" code={p.code} />
+          <ChipLabel name={p.name} meta="Immagine illustrativa creata digitalmente" code={p.code} seed={i * 17 + 4} />
         </section>
       ))}
 

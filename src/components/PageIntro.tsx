@@ -1,3 +1,4 @@
+import { Drips } from './Drips';
 import styles from './PageIntro.module.css';
 
 /** Opening colour card for inner pages. */
@@ -29,6 +30,7 @@ export function PageIntro({
         {aside ? <div className={styles.aside}>{aside}</div> : null}
       </div>
       <div className="chip-label">
+        <Drips seed={label.code.length + label.name.length} count={10} />
         <span className="chip-label__name">{label.name}</span>
         <span className="chip-label__meta">{label.meta}</span>
         <span className="chip-label__code">{label.code}</span>

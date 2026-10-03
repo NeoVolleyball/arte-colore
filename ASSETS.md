@@ -5,7 +5,7 @@ No third-party photos, models, textures or logos are used.
 
 | Asset | Path | Source | Notes |
 | --- | --- | --- | --- |
-| Hero 3D model (tin, lid, colour fan, brush, plaster arch, plinth, camera) | `public/models/hero.glb` | `blender/hero.py` + `blender/props.py` (Blender 4.0, procedural geometry) | Loaded by `src/three/heroScene.ts` on desktop |
+| Hero 3D model (tin with drips and puddle, lid, colour fan, brush with individual bristles, plaster arch with brushed test patches, plinth, camera) | `public/models/hero.glb` | `blender/hero.py` + `blender/props.py` (Blender 4.0, procedural geometry) | Compressed with `gltfpack` (meshopt + quantisation, ~190 KB); loaded by `src/three/heroScene.ts` on desktop |
 | Hero still (mobile / no-WebGL / loading state) | `public/images/hero-still-{720,1200}.webp` | Same scene, Cycles render | Transparent background |
 | Colour explorer room + wall mask | `public/images/explorer-room-*.webp`, `explorer-mask-*.webp` | `blender/rooms.py explorer` (Cycles) | The wall is rendered neutral; the mask is a separate holdout render |
 | Ispirazioni cromatiche (3 interiors) | `public/images/insp-{living,studio,terracotta}-*.webp` | `blender/rooms.py <scene>` | Illustrative concepts, not real projects or customer work |

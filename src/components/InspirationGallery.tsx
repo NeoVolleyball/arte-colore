@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { inspirations } from '../content/catalogue';
 import { colourById } from '../data/palette';
+import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './InspirationGallery.module.css';
 
@@ -86,6 +87,7 @@ export function InspirationGallery() {
                   alt={c.alt}
                   loading="lazy"
                   decoding="async"
+                  className="parallax"
                 />
               </div>
               <figcaption className={styles.caption}>
@@ -114,6 +116,7 @@ export function InspirationGallery() {
       </ul>
 
       <div className="chip-label">
+        <Drips seed={11} />
         <span className="chip-label__name">Verde bottiglia</span>
         <span className="chip-label__meta">
           Ambienti illustrativi creati digitalmente per suggerire abbinamenti di colore.

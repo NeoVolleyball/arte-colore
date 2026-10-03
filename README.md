@@ -81,9 +81,21 @@ manufacturer codes or confirmed stock.
   - keeps the still image if WebGL fails or the context is lost.
   
   Under `prefers-reduced-motion` the scene is static and renders only on demand. Picking a colour in the explorer also tints the paint in the 3D tin.
-- **Colour explorer:** the room was rendered with a neutral back wall. The chosen colour is multiplied over it through a wall-only alpha mask (CSS `mask-image` + `mix-blend-mode: multiply`). This keeps the rendered light and shadow without needing WebGL. Picking a sample also "pours" the colour over the whole card: a circular clip-path animation from the sample, with the text ink switched for contrast. A unit test guarantees every palette colour gets an AA-compliant ink. Swatches are an ARIA radio group with a roving tab stop: arrow keys, Home and End all work.
+- **Colour explorer:** the room was rendered with a neutral back wall. The chosen colour is multiplied over it through a wall-only alpha mask (CSS `mask-image` + `mix-blend-mode: multiply`). This keeps the rendered light and shadow without needing WebGL. Picking a sample also pours the colour over the whole card. `src/effects/liquidPour.ts` is a small WebGL2 shader with:
+  - a noise-warped liquid edge;
+  - drips hanging from the blob;
+  - a glossy wet rim that dries to a flat colour, so the hand-off to the CSS background is seamless.
+  
+  It is created on the first pick and renders only while pouring. Without WebGL2 it falls back to a circular CSS clip-path pour. The text ink switches part-way through for contrast. A unit test guarantees every palette colour gets an AA-compliant ink. Swatches are an ARIA radio group with a roving tab stop: arrow keys, Home and End all work.
 - **Page transitions:** cross-document View Transitions crossfade between pages where supported. Under reduced motion, or in other browsers, navigation is normal.
-- **Motion:** reveals use native scroll-driven CSS animations as progressive enhancement. They are entry-only, so content is never hidden in browsers without support. Everything is disabled under reduced motion.
+- **Motion (cinematic, never hijacks scrolling):**
+  - As the hero scrolls away, the 3D camera orbits and dollies in on the tin, and the chip fan spreads wider (a registered `@property` on a scroll timeline).
+  - The product deck "deals" itself from a stack into a fanned hand.
+  - Paint drips grow from each card's colour over its paper label strip.
+  - Large images drift in depth inside their frames.
+  - Reveals are entry-only, so content is never hidden in browsers without scroll-driven animation support.
+  
+  Everything is disabled under `prefers-reduced-motion`.
 - **Map:** the Google Maps iframe is created only after the visitor clicks "Mostra la mappa". There are no analytics, cookies or tracking.
 
 ## 3D and image assets
