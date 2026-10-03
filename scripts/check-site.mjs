@@ -94,8 +94,9 @@ for (const [label, viewport] of [
   ok('map iframe loads only on request', iframeBefore === 0 && iframeAfter === 1);
   // nav anchor
   await page.click('header nav >> text=Dove siamo');
-  await page.waitForTimeout(900);
-  const inView = await page.$eval('#dove-siamo', (el) => el.getBoundingClientRect().top < 200);
+  const inView = await page
+    .waitForFunction(() => Math.abs(document.getElementById('dove-siamo').getBoundingClientRect().top) < 200, null, { timeout: 6000 })
+    .then(() => true, () => false);
   ok('desktop nav anchor scrolls to section', inView);
   const scrolledHeader = await page.$eval('header', (h) => h.className);
   ok('sticky header changes after scroll', /scrolled/.test(scrolledHeader));
@@ -121,9 +122,10 @@ for (const [label, viewport] of [
   ok('focus returns to toggle', back === 'menu-mobile');
   await toggle.click();
   await page.click('#menu-mobile >> text=Esplora i colori');
-  await page.waitForTimeout(900);
-  ok('menu link closes menu and navigates', (await toggle.getAttribute('aria-expanded')) === 'false' &&
-    (await page.$eval('#colori', (el) => el.getBoundingClientRect().top < 300)));
+  const arrived = await page
+    .waitForFunction(() => Math.abs(document.getElementById('colori').getBoundingClientRect().top) < 300, null, { timeout: 6000 })
+    .then(() => true, () => false);
+  ok('menu link closes menu and navigates', (await toggle.getAttribute('aria-expanded')) === 'false' && arrived);
   if (SHOTS) {
     await toggle.click();
     await page.screenshot({ path: `${SHOTS}/mobile-menu.png` });

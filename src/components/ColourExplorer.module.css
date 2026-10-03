@@ -331,18 +331,18 @@
   height: 1.1em;
 }
 
-.resetMobile {
+.previewCol .resetMobile {
   display: none;
 }
 
 @media (max-width: 899px) {
-  .resetMobile {
+  .previewCol .resetMobile {
     display: inline-flex;
     min-height: 40px;
     font-size: 0.9rem;
   }
 
-  .resetDesktop {
+  .controls .resetDesktop {
     display: none;
   }
 }

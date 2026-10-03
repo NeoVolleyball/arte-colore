@@ -143,8 +143,8 @@
   }
 
   .chips {
-    left: 0;
-    right: 0;
+    left: 6px;
+    right: 6px;
     justify-content: center;
     gap: 2%;
   }
