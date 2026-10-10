@@ -1,6 +1,7 @@
 import { resolve } from 'node:path';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 import { pages, seo, type PageId } from './src/content/business';
 
 const entries: Record<PageId, string> = {
@@ -68,7 +69,8 @@ function seoPlugin(siteUrl: string): Plugin {
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
   return {
-    plugins: [react(), seoPlugin(env.VITE_SITE_URL ?? '')],
+    plugins: [tailwindcss(), react(), seoPlugin(env.VITE_SITE_URL ?? '')],
+    resolve: { alias: { '@': resolve(__dirname, 'src') } },
     build: {
       target: 'es2020',
       assetsInlineLimit: 2048,

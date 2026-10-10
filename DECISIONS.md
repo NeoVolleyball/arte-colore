@@ -15,3 +15,8 @@
 
 ## Decisions
 
+- Tailwind v4 with `@tailwindcss/vite` (Vite 5.4 is supported); its CSS is imported only by the new home entry, so the legacy pages keep their own `global.css` untouched.
+- `index.html` now loads `src/site/main.tsx`; `src/main.tsx` + `src/pages/registry.tsx` serve only the legacy `/prodotti/` and `/negozio/` pages, which still build and prerender but are no longer linked from the new home. The old `HomePage.tsx` and its sections are kept on disk unused, for reference; delete them once the client approves the redesign.
+- `npx shadcn init` and `npx shadcn add @magicui/<name>` cannot reach `ui.shadcn.com` / `magicui.design` from this sandbox (egress policy 403). `components.json` was written by hand with the `@magicui` registry exactly as requested. Components were installed with the same shadcn CLI from the identical official registry JSON published in Magic UI's GitHub repo (`raw.githubusercontent.com/magicuidesign/magicui/main/apps/www/public/r/<name>.json`). A local stub answered the CLI's `colors/stone.json` request. On a normal connection, `npx shadcn@latest add @magicui/<name>` works as-is.
+- Magic UI items install to `src/components/ui/` (the registry's own target). Small edits are marked `arte-colore:` in the files: `magic-card` drops `next-themes` (light-only site), `bento-grid` replaces the unavailable shadcn `button` and `@radix-ui/react-icons` with a plain link and an inline SVG, and `number-ticker` gains a `locale` prop for Italian price formatting.
+- Prerender now awaits `getActiveOffers()` and embeds the result as JSON (`#app-data`), so the client hydrates from exactly the same offers (no mismatch, no layout shift) and then re-checks expiry in the browser.
