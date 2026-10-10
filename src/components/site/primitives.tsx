@@ -14,17 +14,14 @@ const toneClass: Record<Tone, string> = {
 
 export interface SectionProps extends ComponentPropsWithoutRef<'section'> {
   tone?: Tone;
-  /** Skip rendering work until near the viewport (below-the-fold sections). */
-  deferred?: boolean;
 }
 
-export function Section({ tone = 'light', deferred, className, ...props }: SectionProps) {
+export function Section({ tone = 'light', className, ...props }: SectionProps) {
   return (
     <section
       className={cn(
         'relative py-20 md:py-28 lg:py-32',
         toneClass[tone],
-        deferred && 'cv-auto',
         className,
       )}
       {...props}

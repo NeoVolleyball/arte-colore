@@ -2,7 +2,9 @@ import { resolve } from 'node:path';
 import { defineConfig, loadEnv, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import QRCode from 'qrcode';
 import { pages, seo, type PageId } from './src/content/business';
+import { site } from './src/data/site';
 
 const entries: Record<PageId, string> = {
   home: 'index.html',
@@ -37,10 +39,7 @@ function seoPlugin(siteUrl: string): Plugin {
             `<meta name="twitter:card" content="summary_large_image" />`,
           ].join('\n    ')
         : '';
-      const pageHead =
-        id === 'home'
-          ? '<link rel="preload" as="image" href="/images/hero-still-720.webp" media="(max-width: 959px)" fetchpriority="high" />'
-          : '';
+      const pageHead = '';
       return html
         .replaceAll('%SEO_TITLE%', page.title)
         .replaceAll('%SEO_DESCRIPTION%', page.description)
@@ -66,10 +65,35 @@ function seoPlugin(siteUrl: string): Plugin {
   };
 }
 
+/** `virtual:site-qr`: QR code for the site URL, rendered at build time (no runtime library). */
+function qrPlugin(url: string): Plugin {
+  const id = 'virtual:site-qr';
+  return {
+    name: 'arte-colore-qr',
+    resolveId: (source) => (source === id ? `\0${id}` : undefined),
+    async load(source) {
+      if (source !== `\0${id}`) return;
+      const svg = await QRCode.toString(url, {
+        type: 'svg',
+        margin: 0,
+        errorCorrectionLevel: 'M',
+        color: { dark: '#1f1a17', light: '#ffffff' },
+      });
+      const uri = `data:image/svg+xml,${encodeURIComponent(svg)}`;
+      return `export const qrSvgDataUri = ${JSON.stringify(uri)};\nexport const qrUrl = ${JSON.stringify(url)};`;
+    },
+  };
+}
+
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
   return {
-    plugins: [tailwindcss(), react(), seoPlugin(env.VITE_SITE_URL ?? '')],
+    plugins: [
+      tailwindcss(),
+      react(),
+      seoPlugin(env.VITE_SITE_URL ?? ''),
+      qrPlugin((env.VITE_SITE_URL || site.url).replace(/\/$/, '') + '/'),
+    ],
     resolve: { alias: { '@': resolve(__dirname, 'src') } },
     build: {
       target: 'es2020',

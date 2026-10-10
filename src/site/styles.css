@@ -185,12 +185,6 @@
   }
 }
 
-/* Below-the-fold sections skip rendering work until they approach the viewport. */
-@utility cv-auto {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 900px;
-}
-
 /* --------------------------------------------------------- motion rules */
 @media (prefers-reduced-motion: reduce) {
   html {
@@ -203,4 +197,9 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Used by the legacy HeroVisual figcaption. */
+@utility visually-hidden {
+  @apply sr-only;
 }
