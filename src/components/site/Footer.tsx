@@ -11,7 +11,7 @@ export function Footer({ showOffers }: { showOffers: boolean }) {
       <Container>
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr]">
           <div>
-            <Logo className="h-10 w-auto" />
+            <Logo className="h-10 w-auto" alt="Arte Colore" />
             <p className="mt-4 max-w-sm text-ink-muted">Pavimenti in laminato SPC, carta da parati e decorazioni per rinnovare la casa.</p>
             <a
               href={site.links.facebook}

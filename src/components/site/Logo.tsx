@@ -1,11 +1,8 @@
-import { site } from '@/data/site';
+import logoUrl from '@/assets/logo.svg';
 import { cn } from '@/lib/utils';
 
-/** Temporary text wordmark; replaced by the SVG logo in step 5. */
-export function Logo({ className }: { className?: string; mono?: boolean }) {
-  return (
-    <span className={cn('flex items-center font-display text-2xl font-semibold', className)}>
-      {site.brand}
-    </span>
-  );
+/** Colour logo (mark + "arte-colore" wordmark). A monochrome version for
+ *  print or dark backgrounds is in src/assets/logo-mono.svg (uses currentColor). */
+export function Logo({ className, alt = '' }: { className?: string; alt?: string }) {
+  return <img src={logoUrl} width={277} height={48} alt={alt} className={cn('h-10 w-auto', className)} />;
 }

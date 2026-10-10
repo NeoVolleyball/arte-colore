@@ -47,7 +47,7 @@ export const site = {
     title: 'Arte Colore | Pavimenti SPC, pitture e carta da parati',
     description:
       'Rinnoviamo pavimenti e pareti: pavimenti in laminato SPC posati senza demolizioni, carta da parati e decorazioni. Richiedi un preventivo.',
-    ogImage: '/og-image.png',
+    ogImage: '/og-image.jpg',
     themeColor: '#a3432a',
   },
 
