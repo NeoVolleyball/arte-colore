@@ -44,7 +44,7 @@ export const site = {
   },
 
   seo: {
-    title: 'Arte Colore | Pavimenti SPC, pitture e carta da parati',
+    title: 'Arte Colore | Pavimenti SPC, carta da parati e decorazioni',
     description:
       'Rinnoviamo pavimenti e pareti: pavimenti in laminato SPC posati senza demolizioni, carta da parati e decorazioni. Richiedi un preventivo.',
     ogImage: '/og-image.jpg',

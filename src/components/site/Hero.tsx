@@ -8,6 +8,7 @@ import { Button, Container } from './primitives';
 // Heavy visuals are code-split and only mounted in the browser when useful.
 const Particles = lazy(() => import('@/components/ui/particles').then((m) => ({ default: m.Particles })));
 const HeroVisual = lazy(() => import('@/components/HeroVisual').then((m) => ({ default: m.HeroVisual })));
+const probe3D = () => import('@/components/HeroVisual').then((m) => m.canUse3D());
 
 const swatches = [
   { label: 'Pavimenti', src: '/images/portfolio/lavoro-1-640.webp' },
@@ -22,6 +23,17 @@ export function Hero() {
   const saveData = useSaveData();
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef);
+  // Either the Three.js scene (capable desktops) or the particles, never both:
+  // together they are too heavy on machines without a fast GPU.
+  const [use3D, setUse3D] = useState<boolean | null>(null);
+  useEffect(() => {
+    if (!desktop) return;
+    let alive = true;
+    probe3D().then((ok) => alive && setUse3D(ok), () => alive && setUse3D(false));
+    return () => {
+      alive = false;
+    };
+  }, [desktop]);
   // Start on the most general word ("spazi"), cycle once through all, then rest.
   const words = [...rotatingWords.slice(-1), ...rotatingWords.slice(0, -1)];
 
@@ -36,7 +48,7 @@ export function Hero() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-40 -right-40 size-[38rem] rounded-full bg-accent-soft/70 blur-3xl" />
         <div className="absolute -bottom-48 -left-32 size-[30rem] rounded-full bg-stone blur-3xl" />
-        {desktop && !reduced && !saveData && inView && (
+        {desktop && use3D === false && !reduced && !saveData && inView && (
           <Suspense fallback={null}>
             <Particles className="absolute inset-0" quantity={70} ease={70} size={0.6} color="#a3432a" staticity={60} />
           </Suspense>
@@ -92,9 +104,10 @@ export function Hero() {
           </ul>
         </div>
 
-        {/* Desktop: the existing Three.js scene (lazy, static under reduced motion). */}
-        <div className="relative hidden aspect-[4/5] w-full max-w-[30rem] justify-self-end opacity-95 lg:block">
-          {desktop && !saveData && (
+        {/* Desktop: the existing Three.js scene, or its still image when 3D is not
+            used (lazy, static under reduced motion). */}
+        <div className="relative hidden aspect-[4/5] w-full max-w-[30rem] justify-self-end lg:block [&_img]:mix-blend-multiply [mask-image:radial-gradient(ellipse_60%_60%_at_50%_45%,#000_58%,transparent_82%)]">
+          {desktop && use3D !== null && (
             <Suspense fallback={null}>
               <HeroVisual />
             </Suspense>

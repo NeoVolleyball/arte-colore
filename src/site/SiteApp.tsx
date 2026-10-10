@@ -34,6 +34,11 @@ export function SiteApp({ initialOffers }: SiteAppProps) {
       <main id="contenuto" tabIndex={-1} className="outline-none">
         <Hero />
         <SpcHighlight />
+        {/*
+          TODO "Servizi" section: add it once the client confirms which services
+          they provide (manodopera, pittura, posa carta da parati). See README.
+          <Servizi />
+        */}
         <Portfolio />
         <Decorativi />
         <Offers offers={offers} onExpire={refreshOffers} />
