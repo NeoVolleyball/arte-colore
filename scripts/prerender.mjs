@@ -12,13 +12,7 @@ for (const [id, rel] of Object.entries(pages)) {
   const file = path.join(root, 'dist', rel);
   const html = await readFile(file, 'utf8');
   if (!html.includes('<!--app-html-->')) throw new Error(`Missing <!--app-html--> in ${rel}`);
-  const { html: appHtml, data } = await render(id);
-  let out = html.replace('<!--app-html-->', appHtml);
-  if (data) {
-    if (!out.includes('<!--app-data-->')) throw new Error(`Missing <!--app-data--> in ${rel}`);
-    out = out.replace('<!--app-data-->', `<script id="app-data" type="application/json">${data}</script>`);
-  }
-  await writeFile(file, out);
+  await writeFile(file, html.replace('<!--app-html-->', render(id)));
   console.log(`Prerendered dist/${rel}`);
 }
 await rm(path.join(root, 'dist-ssr'), { recursive: true, force: true });
