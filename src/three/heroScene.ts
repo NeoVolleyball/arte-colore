@@ -23,6 +23,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js';
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js';
 import { COLOUR_EVENT } from '../data/palette';
+import { withBase } from '../content/paths';
 
 export interface HeroSceneOptions {
   reducedMotion: boolean;
@@ -55,7 +56,7 @@ export async function createHeroScene(container: HTMLElement, opts: HeroSceneOpt
 
   const gltf = await new GLTFLoader()
     .setMeshoptDecoder(MeshoptDecoder)
-    .loadAsync(opts.modelUrl ?? '/models/hero.glb');
+    .loadAsync(opts.modelUrl ?? withBase('/models/hero.glb'));
   const root = gltf.scene;
   scene.add(root);
   root.updateMatrixWorld(true);

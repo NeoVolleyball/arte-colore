@@ -3,6 +3,7 @@ import { BorderBeam } from '@/components/ui/border-beam';
 import { site } from '@/data/site';
 import { Icon, type IconName } from './icons';
 import { Button, Container, Section } from './primitives';
+import { withBase } from '@/content/paths';
 
 const benefitIcons: IconName[] = ['zap', 'drop', 'layers'];
 
@@ -53,8 +54,8 @@ export function SpcHighlight() {
 
             <div className="relative min-h-72 lg:min-h-full">
               <img
-                src="/images/portfolio/lavoro-1-1200.webp"
-                srcSet="/images/portfolio/lavoro-1-640.webp 640w, /images/portfolio/lavoro-1-1200.webp 1200w"
+                src={withBase('/images/portfolio/lavoro-1-1200.webp')}
+                srcSet={withBase('/images/portfolio/lavoro-1-640.webp 640w, /images/portfolio/lavoro-1-1200.webp 1200w')}
                 sizes="(min-width: 1024px) 45vw, 100vw"
                 width={1200}
                 height={900}

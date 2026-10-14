@@ -25,7 +25,7 @@ const escapeAttr = (v: string) => v.replace(/&/g, '&amp;').replace(/"/g, '&quot;
  * The home page always gets canonical/OG/Twitter tags, JSON-LD, robots.txt
  * and sitemap.xml, using VITE_SITE_URL or the placeholder `site.url`.
  */
-function seoPlugin(siteUrl: string): Plugin {
+function seoPlugin(siteUrl: string, base: string): Plugin {
   const origin = (siteUrl || site.url).replace(/\/$/, '');
   const legacyOrigin = siteUrl.replace(/\/$/, '');
   return {
@@ -58,7 +58,7 @@ function seoPlugin(siteUrl: string): Plugin {
         // Preload the two Latin variable fonts so text never reflows on swap (CLS).
         const fonts = Object.keys(ctx.bundle ?? {})
           .filter((f) => /(fraunces|dm-sans)-latin-wght-normal-.*\.woff2$/.test(f))
-          .map((f) => `<link rel="preload" href="/${f}" as="font" type="font/woff2" crossorigin />`);
+          .map((f) => `<link rel="preload" href="${base}${f}" as="font" type="font/woff2" crossorigin />`);
         return html
           .replace('<!--font-preload-->', fonts.join('\n    '))
           .replaceAll('%SITE_TITLE%', t)
@@ -121,11 +121,14 @@ function qrPlugin(url: string): Plugin {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
+  // "/" by default; "/arte-colore/" for GitHub Pages project sites (set in CI)
+  const base = env.VITE_BASE || '/';
   return {
+    base,
     plugins: [
       tailwindcss(),
       react(),
-      seoPlugin(env.VITE_SITE_URL ?? ''),
+      seoPlugin(env.VITE_SITE_URL ?? '', base),
       qrPlugin((env.VITE_SITE_URL || site.url).replace(/\/$/, '') + '/'),
     ],
     resolve: { alias: { '@': resolve(__dirname, 'src') } },

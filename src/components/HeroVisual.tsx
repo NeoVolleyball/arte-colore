@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './HeroVisual.module.css';
+import { withBase } from '../content/paths';
 
 type Mode = 'still' | 'live';
 
@@ -75,8 +76,8 @@ export function HeroVisual() {
       <div className={styles.frame}>
         <img
           className={styles.still}
-          src="/images/hero-still-1200.webp"
-          srcSet="/images/hero-still-720.webp 720w, /images/hero-still-1200.webp 1200w"
+          src={withBase('/images/hero-still-1200.webp')}
+          srcSet={withBase('/images/hero-still-720.webp 720w, /images/hero-still-1200.webp 1200w')}
           sizes="(min-width: 960px) 44vw, 90vw"
           width={1200}
           height={1500}

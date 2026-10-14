@@ -3,6 +3,7 @@ import { business, nav, type PageId } from '../content/business';
 import { Icon } from './Icon';
 import { Wordmark } from './Wordmark';
 import styles from './SiteHeader.module.css';
+import { withBase } from '../content/paths';
 
 const chipColours = ['var(--terracotta)', 'var(--sage)', 'var(--ochre)', 'var(--ivory)'];
 
@@ -64,7 +65,7 @@ export function SiteHeader({ page }: { page: PageId }) {
       onKeyDown={onKeyDown}
     >
       <div className={styles.bar}>
-        <a href="/" className={styles.brand} aria-label="Arte Colore, pagina iniziale">
+        <a href={withBase('/')} className={styles.brand} aria-label="Arte Colore, pagina iniziale">
           <Wordmark />
         </a>
 
@@ -72,7 +73,7 @@ export function SiteHeader({ page }: { page: PageId }) {
           <ul role="list">
             {nav.map((item) => (
               <li key={item.href}>
-                <a href={item.href} aria-current={item.page === page ? 'page' : undefined}>
+                <a href={withBase(item.href)} aria-current={item.page === page ? 'page' : undefined}>
                   {item.label}
                 </a>
               </li>
@@ -113,7 +114,7 @@ export function SiteHeader({ page }: { page: PageId }) {
             {nav.map((item, i) => (
               <li key={item.href} style={{ '--i': i, '--chip': chipColours[i] } as React.CSSProperties}>
                 <a
-                  href={item.href}
+                  href={withBase(item.href)}
                   aria-current={item.page === page ? 'page' : undefined}
                   onClick={() => close(false)}
                 >

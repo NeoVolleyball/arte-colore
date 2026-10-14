@@ -2,6 +2,7 @@ import { MagicCard } from '@/components/ui/magic-card';
 import { wallpapers } from '@/data/wallpapers';
 import { Icon } from './icons';
 import { Button, Container, Heading, Section } from './primitives';
+import { withBase } from '@/content/paths';
 
 export function Decorativi() {
   return (
@@ -35,8 +36,8 @@ export function Decorativi() {
                 <article className="flex h-full flex-col p-3">
                   <div className="relative overflow-hidden rounded-xl">
                     <img
-                      src={`${w.image}-480.webp`}
-                      srcSet={`${w.image}-480.webp 480w, ${w.image}-800.webp 800w`}
+                      src={withBase(`${w.image}-480.webp`)}
+                      srcSet={withBase(`${w.image}-480.webp 480w, ${w.image}-800.webp 800w`)}
                       sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 92vw"
                       width={800}
                       height={1000}

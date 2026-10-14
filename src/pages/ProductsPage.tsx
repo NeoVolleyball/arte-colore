@@ -5,6 +5,7 @@ import { PageIntro } from '../components/PageIntro';
 import { business, maps } from '../content/business';
 import { products } from '../content/catalogue';
 import styles from './ProductsPage.module.css';
+import { withBase } from '../content/paths';
 
 export function ProductsPage() {
   return (
@@ -22,7 +23,7 @@ export function ProductsPage() {
           <ul role="list" className={styles.trio} aria-hidden="true">
             {products.map((p, i) => (
               <li key={p.id} style={{ '--i': i } as React.CSSProperties}>
-                <img src={`/images/product-${p.id}-540.webp`} width={540} height={675} alt="" decoding="async" />
+                <img src={withBase(`/images/product-${p.id}-540.webp`)} width={540} height={675} alt="" decoding="async" />
               </li>
             ))}
           </ul>
@@ -53,8 +54,8 @@ export function ProductsPage() {
           <div className={styles.grid}>
             <div className={styles.media}>
               <img
-                src={`/images/product-${p.id}-900.webp`}
-                srcSet={`/images/product-${p.id}-540.webp 540w, /images/product-${p.id}-900.webp 900w`}
+                src={withBase(`/images/product-${p.id}-900.webp`)}
+                srcSet={withBase(`/images/product-${p.id}-540.webp 540w, /images/product-${p.id}-900.webp 900w`)}
                 sizes="(min-width: 960px) 44vw, 92vw"
                 width={900}
                 height={1125}

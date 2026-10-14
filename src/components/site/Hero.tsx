@@ -4,6 +4,7 @@ import { useMediaQuery, useReducedMotion } from '@/hooks/useMediaQuery';
 import { site } from '@/data/site';
 import { Icon } from './icons';
 import { Button, Container } from './primitives';
+import { withBase } from '@/content/paths';
 
 // Heavy visuals are code-split and only mounted in the browser when useful.
 const Particles = lazy(() => import('@/components/ui/particles').then((m) => ({ default: m.Particles })));
@@ -97,7 +98,7 @@ export function Hero() {
           <ul className="mt-10 grid max-w-md grid-cols-3 gap-3 lg:hidden" aria-label="Cosa facciamo">
             {swatches.map((s) => (
               <li key={s.label} className="overflow-hidden rounded-2xl bg-surface shadow-soft ring-1 ring-line">
-                <img src={s.src} alt="" width={640} height={480} className="aspect-[4/3] w-full object-cover" />
+                <img src={withBase(s.src)} alt="" width={640} height={480} className="aspect-[4/3] w-full object-cover" />
                 <span className="block px-3 py-2 text-sm font-semibold">{s.label}</span>
               </li>
             ))}

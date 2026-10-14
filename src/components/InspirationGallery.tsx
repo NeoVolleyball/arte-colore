@@ -4,6 +4,7 @@ import { colourById } from '../data/palette';
 import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './InspirationGallery.module.css';
+import { withBase } from '../content/paths';
 
 /** Ispirazioni cromatiche: snap-scrolling gallery of three illustrative rooms. */
 export function InspirationGallery() {
@@ -79,8 +80,8 @@ export function InspirationGallery() {
             <figure className={styles.figure}>
               <div className={styles.media}>
                 <img
-                  src={`/images/insp-${c.id}-1100.webp`}
-                  srcSet={`/images/insp-${c.id}-640.webp 640w, /images/insp-${c.id}-1100.webp 1100w`}
+                  src={withBase(`/images/insp-${c.id}-1100.webp`)}
+                  srcSet={withBase(`/images/insp-${c.id}-640.webp 640w, /images/insp-${c.id}-1100.webp 1100w`)}
                   sizes="(min-width: 900px) 34vw, 80vw"
                   width={1100}
                   height={1375}

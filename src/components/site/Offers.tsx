@@ -6,6 +6,7 @@ import { contactLinks, site } from '@/data/site';
 import { useReducedMotion } from '@/hooks/useMediaQuery';
 import { Icon } from './icons';
 import { Container, Heading, Section } from './primitives';
+import { withBase } from '@/content/paths';
 
 const euro = (n: number) =>
   new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR', minimumFractionDigits: Number.isInteger(n) ? 0 : 2 }).format(n);
@@ -50,7 +51,7 @@ function OfferCard({ offer, onExpire }: { offer: Offer; onExpire: () => void }) 
       <ShineBorder borderWidth={2} duration={16} shineColor={['#a3432a', '#c58a2c', '#f5e1d7']} />
       <div className="relative">
         <img
-          src={offer.image}
+          src={withBase(offer.image)}
           width={800}
           height={600}
           loading="lazy"

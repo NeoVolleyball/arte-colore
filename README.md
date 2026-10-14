@@ -40,6 +40,22 @@ VITE_SITE_URL=https://www.your-domain.it npm run build
 
 (or write it once in `url` in `src/data/site.ts`).
 
+To serve from a subfolder, set `VITE_BASE` (e.g. `VITE_BASE=/arte-colore/`):
+all image and page links go through `withBase()` in `src/content/paths.ts`.
+
+## Publish on GitHub Pages
+
+`.github/workflows/deploy-pages.yml` runs lint, unit tests and the build on
+every push to the default branch (`claude/nifty-mendel-0o6v07`) or `main`,
+then publishes `dist/` at `https://<user>.github.io/arte-colore/`. The base
+path and site URL (also used by the QR code) come from the Pages settings
+automatically.
+
+One-time setup: **Settings → Pages → Build and deployment → Source: GitHub
+Actions**. Pages on a *private* repository needs a paid GitHub plan;
+otherwise make the repository public. You can also start a deploy by hand
+from **Actions → Deploy to GitHub Pages → Run workflow**.
+
 ## Deploy (any static host)
 
 `npm run build` produces a fully static `dist/` folder: every page is

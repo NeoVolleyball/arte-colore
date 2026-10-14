@@ -1,6 +1,7 @@
 import { business, nav } from '../content/business';
 import { Wordmark } from './Wordmark';
 import styles from './SiteFooter.module.css';
+import { withBase } from '../content/paths';
 
 export function SiteFooter() {
   const { address, phone } = business;
@@ -12,11 +13,11 @@ export function SiteFooter() {
         <nav aria-label="Pagine del sito" className={styles.nav}>
           <ul role="list">
             <li>
-              <a href="/">Home</a>
+              <a href={withBase('/')}>Home</a>
             </li>
             {nav.map((item) => (
               <li key={item.href}>
-                <a href={item.href}>{item.label}</a>
+                <a href={withBase(item.href)}>{item.label}</a>
               </li>
             ))}
           </ul>

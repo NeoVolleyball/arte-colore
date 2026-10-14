@@ -5,6 +5,7 @@ import { PageIntro } from '../components/PageIntro';
 import { business, maps } from '../content/business';
 import { colourById } from '../data/palette';
 import styles from './ShopPage.module.css';
+import { withBase } from '../content/paths';
 
 const steps = [
   {
@@ -42,8 +43,8 @@ export function ShopPage() {
         aside={
           <img
             className={styles.introImg}
-            src="/images/hero-still-720.webp"
-            srcSet="/images/hero-still-720.webp 720w, /images/hero-still-1200.webp 1200w"
+            src={withBase('/images/hero-still-720.webp')}
+            srcSet={withBase('/images/hero-still-720.webp 720w, /images/hero-still-1200.webp 1200w')}
             sizes="(min-width: 960px) 38vw, 86vw"
             width={1200}
             height={1500}

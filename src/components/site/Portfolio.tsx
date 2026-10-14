@@ -6,8 +6,9 @@ import { projects, type Project } from '@/data/projects';
 import { cn } from '@/lib/utils';
 import { Icon } from './icons';
 import { Container, Heading, Section } from './primitives';
+import { withBase } from '@/content/paths';
 
-const src = (p: Project, w: 640 | 1200) => `${p.image}-${w}.webp`;
+const src = (p: Project, w: 640 | 1200) => withBase(`${p.image}-${w}.webp`);
 
 export function Portfolio() {
   const [active, setActive] = useState<number | null>(null);
