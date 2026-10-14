@@ -13,6 +13,7 @@ import { createLiquidPour, type LiquidPour } from '../effects/liquidPour';
 import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './ColourExplorer.module.css';
+import { withBase } from '../content/paths';
 
 type Filter = 'tutti' | FamilyId;
 
@@ -182,8 +183,8 @@ export function ColourExplorer() {
           >
             <img
               className={styles.base}
-              src="/images/explorer-room-1600.webp"
-              srcSet="/images/explorer-room-960.webp 960w, /images/explorer-room-1600.webp 1600w"
+              src={withBase('/images/explorer-room-1600.webp')}
+              srcSet={withBase('/images/explorer-room-960.webp 960w, /images/explorer-room-1600.webp 1600w')}
               sizes="(min-width: 960px) 58vw, 100vw"
               width={1600}
               height={1000}

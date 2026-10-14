@@ -52,7 +52,18 @@ The canonical URL, `og:url`, absolute `og:image`, `robots.txt` and
 VITE_SITE_URL=https://www.example.it npm run build
 ```
 
-Deploy the contents of `dist/` to any static host.
+Deploy the contents of `dist/` to any static host. To serve from a
+subfolder, set `VITE_BASE` (e.g. `VITE_BASE=/arte-colore/`); all asset and
+page links go through `withBase()` in `src/content/paths.ts`.
+
+### GitHub Pages
+
+`.github/workflows/deploy-pages.yml` runs lint, unit tests and the build on
+every push to `main`, then publishes `dist/` to GitHub Pages at
+`https://<user>.github.io/arte-colore/`. The base path and canonical URL come
+from the Pages configuration automatically. One-time setup: **Settings → Pages
+→ Build and deployment → Source: GitHub Actions**. Pages on a *private*
+repository needs a paid GitHub plan; otherwise make the repository public.
 
 ## Editing content
 

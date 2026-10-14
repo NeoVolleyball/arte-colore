@@ -2,6 +2,7 @@ import { business, maps } from '../content/business';
 import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './VisitCard.module.css';
+import { withBase } from '../content/paths';
 
 /** Homepage "come and visit" card: address, phone, directions, San Marco. */
 export function VisitCard() {
@@ -40,7 +41,7 @@ export function VisitCard() {
               <span className="visually-hidden">(Google Maps, si apre in una nuova scheda)</span>
             </a>
           </div>
-          <a className="text-link" href="/negozio/#dove-siamo">
+          <a className="text-link" href={withBase('/negozio/#dove-siamo')}>
             Mappa e consigli per la visita <Icon name="arrow" />
           </a>
         </div>

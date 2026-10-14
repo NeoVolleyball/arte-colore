@@ -2,6 +2,7 @@ import { products } from '../content/catalogue';
 import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './ProductDeck.module.css';
+import { withBase } from '../content/paths';
 
 /** Homepage teaser: the three core categories as a fanned deck of cards. */
 export function ProductDeck() {
@@ -13,7 +14,7 @@ export function ProductDeck() {
           <h2 id="deck-title" className={styles.title}>
             Tre modi di <em>cominciare.</em>
           </h2>
-          <a className="text-link" href="/prodotti/">
+          <a className="text-link" href={withBase('/prodotti/')}>
             Tutti i prodotti <Icon name="arrow" />
           </a>
         </header>
@@ -23,8 +24,8 @@ export function ProductDeck() {
             <li key={p.id} className={`card tone-${p.tone} ${styles.item}`} style={{ '--i': i } as React.CSSProperties}>
               <div className={styles.media}>
                 <img
-                  src={`/images/product-${p.id}-540.webp`}
-                  srcSet={`/images/product-${p.id}-540.webp 540w, /images/product-${p.id}-900.webp 900w`}
+                  src={withBase(`/images/product-${p.id}-540.webp`)}
+                  srcSet={withBase(`/images/product-${p.id}-540.webp 540w, /images/product-${p.id}-900.webp 900w`)}
                   sizes="(min-width: 900px) 30vw, 88vw"
                   width={900}
                   height={1125}
@@ -37,7 +38,7 @@ export function ProductDeck() {
               <div className={styles.body}>
                 <p className={styles.kicker}>{p.kicker}</p>
                 <h3 className={styles.name}>
-                  <a href={`/prodotti/#${p.id}`} className={styles.stretch}>
+                  <a href={withBase(`/prodotti/#${p.id}`)} className={styles.stretch}>
                     {p.name}
                   </a>
                 </h3>

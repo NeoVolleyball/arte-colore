@@ -19,7 +19,7 @@ function pageFor(htmlPath: string): PageId {
  * URLs, og:url, og:image, robots.txt and sitemap.xml are only produced when
  * the real production origin is known (VITE_SITE_URL).
  */
-function seoPlugin(siteUrl: string): Plugin {
+function seoPlugin(siteUrl: string, base: string): Plugin {
   const origin = siteUrl.replace(/\/$/, '');
   return {
     name: 'arte-colore-seo',
@@ -38,7 +38,7 @@ function seoPlugin(siteUrl: string): Plugin {
         : '';
       const pageHead =
         id === 'home'
-          ? '<link rel="preload" as="image" href="/images/hero-still-720.webp" media="(max-width: 959px)" fetchpriority="high" />'
+          ? `<link rel="preload" as="image" href="${base}images/hero-still-720.webp" media="(max-width: 959px)" fetchpriority="high" />`
           : '';
       return html
         .replaceAll('%SEO_TITLE%', page.title)
@@ -67,8 +67,11 @@ function seoPlugin(siteUrl: string): Plugin {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), 'VITE_');
+  // "/" by default; "/arte-colore/" for GitHub Pages project sites (set in CI)
+  const base = env.VITE_BASE || '/';
   return {
-    plugins: [react(), seoPlugin(env.VITE_SITE_URL ?? '')],
+    base,
+    plugins: [react(), seoPlugin(env.VITE_SITE_URL ?? '', base)],
     build: {
       target: 'es2020',
       assetsInlineLimit: 2048,
