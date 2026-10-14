@@ -4,14 +4,22 @@ import { withBase } from '../content/paths';
 
 type Mode = 'still' | 'live';
 
-function canUse3D(): boolean {
+export function canUse3D(): boolean {
   if (typeof window === 'undefined') return false;
   if (!window.matchMedia('(min-width: 960px)').matches) return false;
   const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
   if (conn?.saveData) return false;
+  // Low-end hardware: keep the still image.
+  if ((navigator.hardwareConcurrency || 4) <= 2) return false;
   try {
     const c = document.createElement('canvas');
-    return !!(c.getContext('webgl2') || c.getContext('webgl'));
+    const gl = (c.getContext('webgl2') || c.getContext('webgl')) as WebGLRenderingContext | null;
+    if (!gl) return false;
+    // Software rasterisers (no GPU) make the scene block the main thread.
+    const info = gl.getExtension('WEBGL_debug_renderer_info');
+    const renderer = info ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL)) : '';
+    gl.getExtension('WEBGL_lose_context')?.loseContext();
+    return !/swiftshader|llvmpipe|software|basic render/i.test(renderer);
   } catch {
     return false;
   }

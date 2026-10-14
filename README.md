@@ -1,130 +1,148 @@
-# Arte Colore: sito web
+# Arte Colore: website
 
-Presentation website for **Arte Colore**, a paint and decorating supplies shop
-at Via Roma 175, Spinea (VE). Italian, three pages, built with React,
-TypeScript, Vite and Three.js. All 3D models and images are generated
-procedurally with Blender.
+Single-page website for **Arte Colore**, a renovation business in Italy
+(flooring, painting, wallpaper). Italian content; React 18 + TypeScript +
+Vite, Tailwind CSS v4, `motion`, Magic UI components and an optional
+Three.js hero scene. No backend, database or external accounts are needed.
 
-**Design concept: "Cartella colori".** The site behaves like a deck of
-paper colour cards. Every section is a full-colour card finished with a paper
-label strip carrying the colour's name and code. Type: Instrument Serif
-(display) and Hanken Grotesk (text), both OFL and self-hosted.
+> **TODO (ask the client):** do they provide **labour (manodopera)**,
+> **painting (pittura)** and **wallpaper installation (carta da parati)**?
+> The answer decides the copy and whether to add the "Servizi" section
+> (a commented placeholder is in `src/site/SiteApp.tsx`).
 
-| Page | File | Contents |
-| --- | --- | --- |
-| `/` | `src/pages/HomePage.tsx` | Hero (3D tin + opening fan of chips), colour explorer, product deck, Ispirazioni gallery, visit card with San Marco |
-| `/prodotti/` | `src/pages/ProductsPage.tsx` | Pitture, Smalti, Prodotti per la decorazione in depth, contact CTA |
-| `/negozio/` | `src/pages/ShopPage.tsx` | The shop, visit tips, San Marco, Dove siamo (address, directions, map on request) |
+Before publishing, go through **`PLACEHOLDERS.md`**. Design and technical
+choices are logged in **`DECISIONS.md`**.
 
-## Setup
+## Run it
+
+Requires Node 20+.
 
 ```bash
 npm install
-npm run dev          # http://localhost:5173
+npm run dev          # http://localhost:5173 (development, hot reload)
 ```
 
-Node 20+ is required.
-
-## Build and checks
+## Build and check
 
 ```bash
-npm run build        # typecheck → client build → SSR prerender of all three pages
+npm run build        # typecheck → client build → SSR build → prerender HTML into dist/
 npm run preview      # serve dist/ on http://localhost:4173
 npm run lint
-npm test             # Vitest unit tests (explorer, menu, business data)
-npm run check:browser   # Playwright checks against the running preview
-                        # (CHROMIUM=/path/to/chrome to use a local browser)
+npm test             # Vitest unit tests (offers service, legacy components)
 ```
 
-The build prerenders every page (`scripts/prerender.mjs`), so content, phone
-links and structured data are in the HTML before any JavaScript runs. React
-then hydrates it. To add a page: create `<name>/index.html` (copy an existing
-one, set `data-page`), add it to `pages` in `src/content/business.ts`, the
-registry in `src/pages/registry.tsx`, `entries` in `vite.config.ts` and
-`scripts/prerender.mjs`.
-
-### Production domain / SEO
-
-The canonical URL, `og:url`, absolute `og:image`, `robots.txt` and
-`sitemap.xml` are only generated once the real domain is known:
+Set the real domain at build time so canonical URLs, Open Graph tags,
+`sitemap.xml`, `robots.txt` and the footer QR code point to it:
 
 ```bash
-VITE_SITE_URL=https://www.example.it npm run build
+VITE_SITE_URL=https://www.your-domain.it npm run build
 ```
 
-Deploy the contents of `dist/` to any static host. To serve from a
-subfolder, set `VITE_BASE` (e.g. `VITE_BASE=/arte-colore/`); all asset and
-page links go through `withBase()` in `src/content/paths.ts`.
+(or write it once in `url` in `src/data/site.ts`).
 
-### GitHub Pages
+To serve from a subfolder, set `VITE_BASE` (e.g. `VITE_BASE=/arte-colore/`):
+all image and page links go through `withBase()` in `src/content/paths.ts`.
+
+## Publish on GitHub Pages
 
 `.github/workflows/deploy-pages.yml` runs lint, unit tests and the build on
-every push to `main`, then publishes `dist/` to GitHub Pages at
-`https://<user>.github.io/arte-colore/`. The base path and canonical URL come
-from the Pages configuration automatically. One-time setup: **Settings → Pages
-→ Build and deployment → Source: GitHub Actions**. Pages on a *private*
-repository needs a paid GitHub plan; otherwise make the repository public.
+every push to the default branch (`claude/nifty-mendel-0o6v07`) or `main`,
+then publishes `dist/` at `https://<user>.github.io/arte-colore/`. The base
+path and site URL (also used by the QR code) come from the Pages settings
+automatically.
 
-## Editing content
+One-time setup: **Settings → Pages → Build and deployment → Source: GitHub
+Actions**. Pages on a *private* repository needs a paid GitHub plan;
+otherwise make the repository public. You can also start a deploy by hand
+from **Actions → Deploy to GitHub Pages → Run workflow**.
+
+## Deploy (any static host)
+
+`npm run build` produces a fully static `dist/` folder: every page is
+prerendered HTML, so content is visible before JavaScript runs.
+Upload the **contents of `dist/`** to any static host:
+
+- **Netlify / Cloudflare Pages / Vercel:** build command `npm run build`, output directory `dist`, environment variable `VITE_SITE_URL`.
+- **Traditional hosting (FTP/cPanel):** run the build locally and upload `dist/` to the web root.
+
+No server-side code, cookies or analytics.
+
+## Where to edit things
 
 | What | Where |
 | --- | --- |
-| Name, address, phone, P. IVA, San Marco link, navigation, per-page SEO titles/descriptions, structured data | `src/content/business.ts` |
-| Product categories and Ispirazioni copy | `src/content/catalogue.ts` |
-| Opening hours (currently `null`, so hidden) | `business.openingHours` in `src/content/business.ts`, then render them in `src/pages/ShopPage.tsx` (Dove siamo) and `src/components/VisitCard.tsx` |
-| Explorer colours (names, HEX, families, notes, initial colour) | `src/data/palette.json` |
-| Section copy | the matching component in `src/components/` |
-| Design tokens (colours, card tones, type scale, spacing, motion) | `src/styles/global.css` |
+| Phone, WhatsApp, email, address, hours, Facebook, map link, site URL, SEO title/description, hero and SPC copy, zones | `src/data/site.ts` |
+| Portfolio ("Lavori fatti"): add one object per job | `src/data/projects.ts` + photos in `public/images/portfolio/` |
+| Wallpapers ("Decorativi") | `src/data/wallpapers.ts` + photos in `public/images/wallpapers/` |
+| Offers ("Sconti"): instructions in Italian at the top of the file | `src/data/offers.ts` + photos in `public/images/offers/` |
+| Colours, fonts, type scale, shadows, motion | `src/site/styles.css` (design tokens) |
+| Section layout and remaining copy | `src/components/site/*.tsx` |
+| Logo | `src/assets/logo.svg`, `src/assets/logo-mono.svg` (favicon/OG files in `public/`) |
 
-Before publishing anything new, check `CONTENT-CHECKLIST.md`. It lists what
-still needs confirmation (hours, logo, extra categories, services, legal
-pages) and what must never be added without evidence.
+Photos: WebP, two widths per image (see the comment at the top of each data
+file). Expired or inactive offers hide themselves. When no offer is active,
+the whole "Sconti" section and its menu link disappear.
 
-Palette colours are illustrative examples. They are not official
-manufacturer codes or confirmed stock.
+## Page structure
 
-## How it works
+`src/site/SiteApp.tsx` composes the page in this order:
 
-- **Hero:** `HeroVisual` always shows the Cycles still (`public/images/hero-still-*`). On desktop (≥960px, WebGL available, no Save-Data) it lazy-loads `src/three/heroScene.ts` during idle time and cross-fades to the live scene. The scene:
-  - uses the camera exported from Blender;
-  - renders at no more than 1.75× device pixel ratio;
-  - pauses when offscreen or when the tab is hidden;
-  - keeps the still image if WebGL fails or the context is lost.
-  
-  Under `prefers-reduced-motion` the scene is static and renders only on demand. Picking a colour in the explorer also tints the paint in the 3D tin.
-- **Colour explorer:** the room was rendered with a neutral back wall. The chosen colour is multiplied over it through a wall-only alpha mask (CSS `mask-image` + `mix-blend-mode: multiply`). This keeps the rendered light and shadow without needing WebGL. Picking a sample also pours the colour over the whole card. `src/effects/liquidPour.ts` is a small WebGL2 shader with:
-  - a noise-warped liquid edge;
-  - drips hanging from the blob;
-  - a glossy wet rim that dries to a flat colour, so the hand-off to the CSS background is seamless.
-  
-  It is created on the first pick and renders only while pouring. Without WebGL2 it falls back to a circular CSS clip-path pour. The text ink switches part-way through for contrast. A unit test guarantees every palette colour gets an AA-compliant ink. Swatches are an ARIA radio group with a roving tab stop: arrow keys, Home and End all work.
-- **Page transitions:** cross-document View Transitions crossfade between pages where supported. Under reduced motion, or in other browsers, navigation is normal.
-- **Motion (cinematic, never hijacks scrolling):**
-  - As the hero scrolls away, the 3D camera orbits and dollies in on the tin, and the chip fan spreads wider (a registered `@property` on a scroll timeline).
-  - The product deck "deals" itself from a stack into a fanned hand.
-  - Paint drips grow from each card's colour over its paper label strip.
-  - Large images drift in depth inside their frames.
-  - Reveals are entry-only, so content is never hidden in browsers without scroll-driven animation support.
-  
-  Everything is disabled under `prefers-reduced-motion`.
-- **Map:** the Google Maps iframe is created only after the visitor clicks "Mostra la mappa". There are no analytics, cookies or tracking.
+Header (sticky, mobile menu) → Hero → SPC flooring → Lavori fatti →
+Decorativi → Sconti → Zone servite → Contatti → Footer (Facebook badge, QR
+code), plus a fixed call/WhatsApp bar on phones.
 
-## 3D and image assets
+Building blocks:
 
-See `ASSETS.md` for the source of every asset and how to regenerate it
-(`npm run assets:blender`).
+- `src/components/site/primitives.tsx`: `Section`, `Container`, `Heading`, `Button`.
+- `src/components/ui/`: Magic UI components (copied source, edits marked `arte-colore:`).
+- `src/data/offersService.ts`: the **only** way components read offers (`getActiveOffers()`).
+- `scripts/prerender.mjs`: renders the HTML at build time and embeds the active offers.
 
-## Project layout
+### Magic UI
 
+Magic UI is not an npm package. Components are copied into the project with
+the shadcn CLI. `components.json` already defines the registry:
+
+```bash
+npx shadcn@latest add @magicui/<component-name>
 ```
-blender/             procedural Blender scenes + post-processing (asset sources)
-public/models/       hero.glb
-public/images/       rendered WebP images, OG image
-scripts/             prerender + browser checks
-src/data/            illustrative palette
-src/content/         verified business data, SEO, catalogue copy
-src/pages/           the three pages + registry
-src/components/      cards, header/footer, explorer, hero
-src/three/           Three.js hero scene (lazy chunk)
-src/styles/          global tokens and base styles
-```
+
+Used: `word-rotate` (hero), `particles` (hero background, desktop only),
+`border-beam` + `animated-shiny-text` (SPC), `bento-grid` + `glare-hover` +
+`marquee` (portfolio), `magic-card` (wallpapers), `number-ticker` +
+`shine-border` (offers).
+
+### Performance and accessibility notes
+
+- Particles and the Three.js scene are separate chunks. They load only on desktop, without Save-Data, and the particles also need motion to be allowed. Phones never download three.js.
+- Fonts (Fraunces, DM Sans) are self-hosted and preloaded.
+- Images use `loading="lazy"` with explicit width and height.
+- `prefers-reduced-motion` stops CSS animations, `motion` animations, the rotating headline, the price ticker and the particles.
+- Keyboard: skip link, visible focus, mobile menu (Esc closes it and returns focus), lightbox (native `<dialog>`: Esc, arrow keys, focus trap).
+
+### Legacy pages
+
+`/prodotti/` and `/negozio/` are the previous "Cartella colori" design, kept
+unchanged (`src/main.tsx`, `src/pages/`, `src/styles/global.css`). They
+still build but are no longer linked or listed in the sitemap. Delete them
+(and their entries in `vite.config.ts` and `scripts/prerender.mjs`) once the
+client approves the redesign. `ASSETS.md` and `CONTENT-CHECKLIST.md` refer to
+that old site.
+
+## PHASE 2 (plan only, not built)
+
+Goal: the owner manages offers without touching code.
+
+1. **Supabase project** (Postgres + Auth + Storage), free tier.
+2. **Table `offers`:** `id uuid pk`, `title text`, `image_path text`, `color text`, `old_price numeric`, `new_price numeric`, `unit text`, `ends_at timestamptz`, `active boolean`, `created_at`, `updated_at`.
+3. **Row Level Security:**
+   - Public (`anon`) may `select` only rows where `active` is true and `ends_at > now()`.
+   - Only the single owner account may `insert`, `update` and `delete`, checked against the owner's `auth.uid()`, or an `is_owner` claim stored in a one-row `admins` table.
+4. **Storage bucket `offers`:** public read; writes restricted to the owner by a storage policy. Images are resized client-side before upload.
+5. **`/admin` page** (a separate lazy-loaded route, `noindex`):
+   - login with email + password, or a magic link for the single owner;
+   - list of offers with add, edit and delete;
+   - form fields: photo upload, title, colour, prices, unit, end date (date picker, Europe/Rome), active toggle.
+6. **Only `src/data/offersService.ts` changes** on the public site. `fetchAllOffers()` becomes a Supabase query, and `getActiveOffers()` keeps its signature. Prerender still embeds offers at build time and the browser re-fetches fresh ones.
+   - Optional: a Supabase webhook triggers a host rebuild when offers change.
+7. **Env vars:** `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`. The anon key is safe in the browser thanks to RLS. The service-role key is never shipped.

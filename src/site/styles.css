@@ -1,0 +1,205 @@
+/*
+ * arte-colore design system: the single source of design tokens.
+ * CSS variables below feed Tailwind's theme (@theme), so `bg-accent`,
+ * `text-ink`, `font-display`, `ease-brand`… all come from here.
+ */
+@import "tailwindcss";
+@import "@fontsource-variable/fraunces/index.css";
+@import "@fontsource-variable/dm-sans/index.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---------------------------------------------------------------- tokens */
+:root {
+  /* Palette: warm neutrals + one terracotta accent. All text pairs ≥ WCAG AA. */
+  --bg: #faf7f2; /* off-white */
+  --surface: #ffffff;
+  --stone: #f1ebe3; /* soft stone band */
+  --stone-strong: #e4dbd0;
+  --line: #ddd2c5;
+  --ink: #1f1a17; /* 16.1:1 on --bg */
+  --ink-muted: #5c524a; /* 7.1:1 on --bg */
+  --accent: #a3432a; /* terracotta, 5.8:1 on --bg, white text 6.2:1 */
+  --accent-strong: #84351f;
+  --accent-soft: #f5e1d7;
+  --ochre: #c58a2c; /* decorative only (never small text) */
+  --sage: #8a9a7b; /* decorative only */
+
+  /* Dark band variant */
+  --night: #221c18;
+  --night-soft: #2e2621;
+  --on-night: #f6f0e9; /* 14.9:1 on --night */
+  --on-night-muted: #c8bcb0; /* 9.0:1 on --night */
+  --accent-on-night: #e9906b; /* 7.0:1 on --night */
+
+  /* Motion: one easing curve, short durations */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur: 320ms;
+  --dur-slow: 640ms;
+
+  /* Layout */
+  --header-h: 4.5rem;
+  --container: 76rem;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-stone: var(--stone);
+  --color-stone-strong: var(--stone-strong);
+  --color-line: var(--line);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-ochre: var(--ochre);
+  --color-sage: var(--sage);
+  --color-night: var(--night);
+  --color-night-soft: var(--night-soft);
+  --color-on-night: var(--on-night);
+  --color-on-night-muted: var(--on-night-muted);
+  --color-accent-on-night: var(--accent-on-night);
+
+  /* names expected by Magic UI / shadcn components */
+  --color-background: var(--surface);
+  --color-foreground: var(--ink);
+  --color-border: var(--line);
+  --color-primary: var(--accent);
+
+  --font-display: "Fraunces Variable", "Iowan Old Style", Georgia, serif;
+  --font-sans: "DM Sans Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Fluid type scale */
+  --text-display: clamp(2.5rem, 1.55rem + 4.1vw, 5rem);
+  --text-display--line-height: 1.02;
+  --text-h2: clamp(2rem, 1.45rem + 2.3vw, 3.5rem);
+  --text-h2--line-height: 1.06;
+  --text-h3: clamp(1.25rem, 1.12rem + 0.55vw, 1.625rem);
+  --text-h3--line-height: 1.2;
+  --text-lead: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-lead--line-height: 1.6;
+
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.75rem;
+
+  --shadow-soft: 0 1px 2px rgb(31 26 23 / 0.05), 0 10px 30px -12px rgb(31 26 23 / 0.16);
+  --shadow-lift: 0 2px 4px rgb(31 26 23 / 0.06), 0 22px 44px -18px rgb(31 26 23 / 0.28);
+
+  --ease-brand: var(--ease-out);
+
+  --animate-shiny-text: shiny-text 8s infinite;
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --animate-shine: shine var(--duration) infinite linear;
+
+  @keyframes shiny-text {
+    0%,
+    90%,
+    100% {
+      background-position: calc(-100% - var(--shiny-width)) 0;
+    }
+    30%,
+    60% {
+      background-position: calc(100% + var(--shiny-width)) 0;
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    to {
+      background-position: 0% 0%;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ base */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: calc(var(--header-h) + 1rem);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  .tone-dark :focus-visible {
+    outline-color: var(--accent-on-night);
+  }
+}
+
+@utility sr-only-focusable {
+  position: absolute;
+  left: 1rem;
+  top: -10rem;
+  &:focus {
+    top: 1rem;
+  }
+}
+
+/* --------------------------------------------------------- motion rules */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Used by the legacy HeroVisual figcaption. */
+@utility visually-hidden {
+  @apply sr-only;
+}
