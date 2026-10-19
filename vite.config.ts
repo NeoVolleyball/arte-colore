@@ -5,8 +5,6 @@ import { pages, seo, type PageId } from './src/content/business';
 
 const entries: Record<PageId, string> = {
   home: 'index.html',
-  prodotti: 'prodotti/index.html',
-  negozio: 'negozio/index.html',
 };
 
 function pageFor(htmlPath: string): PageId {
@@ -38,7 +36,8 @@ function seoPlugin(siteUrl: string, base: string): Plugin {
         : '';
       const pageHead =
         id === 'home'
-          ? `<link rel="preload" as="image" href="${base}images/hero-still-720.webp" media="(max-width: 959px)" fetchpriority="high" />`
+          ? // same srcset/sizes as the <img> in HeroVisual.tsx, so the browser preloads the candidate it will use
+            `<link rel="preload" as="image" href="${base}images/hero-still-1200.webp" imagesrcset="${base}images/hero-still-720.webp 720w, ${base}images/hero-still-1200.webp 1200w" imagesizes="(min-width: 960px) 44vw, 90vw" media="(max-width: 959px)" fetchpriority="high" />`
           : '';
       return html
         .replaceAll('%SEO_TITLE%', page.title)

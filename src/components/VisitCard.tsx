@@ -49,11 +49,18 @@ export function VisitCard() {
 
       <div className={styles.sanmarco}>
         <p>{business.sanMarco.statement}</p>
-        <a className="text-link" href={business.sanMarco.directoryUrl} target="_blank" rel="noopener noreferrer">
-          Localizzatore rivenditori San Marco
-          <Icon name="external" />
-          <span className="visually-hidden">(si apre in una nuova scheda)</span>
-        </a>
+        <div className={styles.smLinks}>
+          <a className="text-link" href={business.sanMarco.siteUrl} target="_blank" rel="noopener noreferrer">
+            San Marco
+            <Icon name="external" />
+            <span className="visually-hidden">(sito ufficiale, si apre in una nuova scheda)</span>
+          </a>
+          <a className="text-link" href={business.sanMarco.belleArtiUrl} target="_blank" rel="noopener noreferrer">
+            Linea Belle Arti
+            <Icon name="external" />
+            <span className="visually-hidden">(si apre in una nuova scheda)</span>
+          </a>
+        </div>
       </div>
 
       <div className="chip-label">

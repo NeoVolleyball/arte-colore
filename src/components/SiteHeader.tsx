@@ -1,13 +1,15 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { business, nav, type PageId } from '../content/business';
+import { business, maps, nav } from '../content/business';
 import { Icon } from './Icon';
 import { Wordmark } from './Wordmark';
 import styles from './SiteHeader.module.css';
 import { withBase } from '../content/paths';
 
-const chipColours = ['var(--terracotta)', 'var(--sage)', 'var(--ochre)', 'var(--ivory)'];
+const chipColours = ['var(--ochre)', 'var(--terracotta)', 'var(--sage)', 'var(--ivory)', '#c9d6b8', '#f2c3a9'];
+/** Width where the full menu fits in the bar; below it the burger menu is used. */
+const DESKTOP_MQ = '(min-width: 1100px)';
 
-export function SiteHeader({ page }: { page: PageId }) {
+export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
@@ -29,7 +31,7 @@ export function SiteHeader({ page }: { page: PageId }) {
     if (!open) return;
     panelRef.current?.querySelector<HTMLElement>('a, button')?.focus();
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && close(true);
-    const mq = window.matchMedia('(min-width: 960px)');
+    const mq = window.matchMedia(DESKTOP_MQ);
     const onMq = () => mq.matches && close(false);
     document.addEventListener('keydown', onKey);
     mq.addEventListener('change', onMq);
@@ -65,7 +67,7 @@ export function SiteHeader({ page }: { page: PageId }) {
       onKeyDown={onKeyDown}
     >
       <div className={styles.bar}>
-        <a href={withBase('/')} className={styles.brand} aria-label="Arte Colore, pagina iniziale">
+        <a href={withBase('/')} className={styles.brand} aria-label="Arte Colore, torna all’inizio">
           <Wordmark />
         </a>
 
@@ -73,7 +75,8 @@ export function SiteHeader({ page }: { page: PageId }) {
           <ul role="list">
             {nav.map((item) => (
               <li key={item.href}>
-                <a href={withBase(item.href)} aria-current={item.page === page ? 'page' : undefined}>
+                <a href={item.href} className={item.highlight ? styles.hot : undefined}>
+                  {item.highlight ? <Icon name="tag" /> : null}
                   {item.label}
                 </a>
               </li>
@@ -113,11 +116,7 @@ export function SiteHeader({ page }: { page: PageId }) {
           <ul role="list" className={styles.mobileList}>
             {nav.map((item, i) => (
               <li key={item.href} style={{ '--i': i, '--chip': chipColours[i] } as React.CSSProperties}>
-                <a
-                  href={withBase(item.href)}
-                  aria-current={item.page === page ? 'page' : undefined}
-                  onClick={() => close(false)}
-                >
+                <a href={item.href} onClick={() => close(false)}>
                   <span className={styles.chip} aria-hidden="true" />
                   {item.label}
                 </a>
@@ -126,7 +125,11 @@ export function SiteHeader({ page }: { page: PageId }) {
           </ul>
           <div className={styles.panelFoot}>
             <a className="btn btn--ivory" href={business.phone.href}>
-              <Icon name="phone" /> Chiama {business.phone.local}
+              <Icon name="phone" /> Chiamaci: {business.phone.local}
+            </a>
+            <a className="btn btn--outline" href={maps.directionsUrl} target="_blank" rel="noopener noreferrer">
+              <Icon name="route" /> Come arrivare
+              <span className="visually-hidden">(Google Maps, si apre in una nuova scheda)</span>
             </a>
             <p>
               {business.address.street} · {business.address.postalCode} {business.address.city} (

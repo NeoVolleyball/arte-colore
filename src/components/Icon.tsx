@@ -1,6 +1,35 @@
-type IconName = 'phone' | 'route' | 'arrow' | 'arrow-down' | 'reset' | 'external' | 'menu' | 'close' | 'map';
+type IconName =
+  | 'phone'
+  | 'route'
+  | 'arrow'
+  | 'arrow-down'
+  | 'reset'
+  | 'external'
+  | 'menu'
+  | 'close'
+  | 'map'
+  | 'tag'
+  | 'brush'
+  | 'facebook'
+  | 'check';
 
 const paths: Record<IconName, JSX.Element> = {
+  tag: (
+    <>
+      <path d="M3.5 12.6V4.5a1 1 0 0 1 1-1h8.1l7.9 7.9a1.4 1.4 0 0 1 0 2l-6.1 6.1a1.4 1.4 0 0 1-2 0Z" />
+      <circle cx="8.2" cy="8.2" r="1.6" />
+    </>
+  ),
+  brush: (
+    <>
+      <path d="M14.5 4.5 19.5 9.5 11 18l-5-5Z" />
+      <path d="M6 13c-2 0-2.5 2-2.5 3.5S3 20.5 3 20.5s3 .5 4.5-1S9 16 8.5 15.5" />
+    </>
+  ),
+  facebook: (
+    <path d="M14.5 3.5H13A3.5 3.5 0 0 0 9.5 7v3H7v3.5h2.5v7h3.5v-7h2.5l.5-3.5h-3V7.5a1 1 0 0 1 1-1h1.5Z" />
+  ),
+  check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
   phone: (
     <path d="M6.6 3.5h2.6l1.3 4-1.9 1.3a12 12 0 0 0 6.6 6.6l1.3-1.9 4 1.3v2.6a2 2 0 0 1-2.1 2A16.6 16.6 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1Z" />
   ),

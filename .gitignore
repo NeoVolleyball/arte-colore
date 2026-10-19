@@ -5,3 +5,5 @@ blender/out
 *.log
 .DS_Store
 __pycache__
+
+.playwright-mcp/

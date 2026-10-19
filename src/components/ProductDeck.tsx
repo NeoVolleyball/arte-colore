@@ -1,22 +1,21 @@
+import { business } from '../content/business';
 import { products } from '../content/catalogue';
 import { Drips } from './Drips';
 import { Icon } from './Icon';
 import styles from './ProductDeck.module.css';
 import { withBase } from '../content/paths';
 
-/** Homepage teaser: the three core categories as a fanned deck of cards. */
+/** "Prodotti": the three core categories as a fanned deck of cards; each card
+ *  opens in place to show what the products are for (no separate page). */
 export function ProductDeck() {
   return (
-    <section className={styles.section} aria-labelledby="deck-title">
+    <section id="prodotti" className={styles.section} aria-labelledby="deck-title">
       <div className="wrap">
         <header className={`${styles.head} reveal`}>
           <p className="kicker">Prodotti</p>
           <h2 id="deck-title" className={styles.title}>
             Tre modi di <em>cominciare.</em>
           </h2>
-          <a className="text-link" href={withBase('/prodotti/')}>
-            Tutti i prodotti <Icon name="arrow" />
-          </a>
         </header>
 
         <ul role="list" className={styles.deck}>
@@ -37,12 +36,18 @@ export function ProductDeck() {
               </div>
               <div className={styles.body}>
                 <p className={styles.kicker}>{p.kicker}</p>
-                <h3 className={styles.name}>
-                  <a href={withBase(`/prodotti/#${p.id}`)} className={styles.stretch}>
-                    {p.name}
-                  </a>
-                </h3>
+                <h3 className={styles.name}>{p.name}</h3>
                 <p className={styles.short}>{p.short}</p>
+                <details className={styles.more}>
+                  <summary>
+                    A cosa servono <Icon name="arrow-down" />
+                  </summary>
+                  <ul role="list" className={styles.uses}>
+                    {p.uses.map((u) => (
+                      <li key={u}>{u}</li>
+                    ))}
+                  </ul>
+                </details>
               </div>
               <div className="chip-label">
                 <Drips seed={i * 13 + 2} count={5} />
@@ -53,7 +58,14 @@ export function ProductDeck() {
             </li>
           ))}
         </ul>
-        <p className={styles.note}>Immagini illustrative create digitalmente.</p>
+        <p className={styles.note}>
+          Per sapere cosa trovi oggi in negozio:{' '}
+          <a className="text-link" href={business.phone.href}>
+            <Icon name="phone" /> Chiamaci al {business.phone.local}
+          </a>
+          <br />
+          <span>Immagini illustrative create digitalmente.</span>
+        </p>
       </div>
     </section>
   );

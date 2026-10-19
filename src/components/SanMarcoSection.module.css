@@ -1,0 +1,67 @@
+.inner {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(3rem, 6vw, 5rem) var(--gutter);
+}
+
+@media (min-width: 820px) {
+  .inner {
+    grid-template-columns: minmax(180px, 0.5fr) minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+/* logo slot: official logo when provided, typographic badge until then */
+.logo {
+  display: grid;
+  place-items: center;
+  justify-self: start;
+  width: min(100%, 260px);
+  aspect-ratio: 2 / 1;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  background: var(--ivory-deep);
+  text-decoration: none;
+  transition: transform var(--dur) var(--ease-spring);
+}
+
+.logo:hover {
+  transform: rotate(-1.5deg) scale(1.02);
+}
+
+.logo span {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1;
+}
+
+.logo em {
+  color: var(--terra-deep);
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.copy {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.title {
+  max-width: 20ch;
+  font-size: var(--step-3);
+}
+
+.title em {
+  color: var(--terra-deep);
+}
+
+.inner .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+}

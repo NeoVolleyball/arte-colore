@@ -58,7 +58,7 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 1rem;
+  padding: 0 0.85rem;
   border-radius: 999px;
   font-size: 0.95rem;
   font-weight: 580;
@@ -70,9 +70,21 @@
   background: rgb(34 36 32 / 0.07);
 }
 
-.desktopNav a[aria-current='page'] {
-  background: var(--charcoal);
-  color: var(--ivory);
+/* Offerte: the one highlighted menu item */
+.desktopNav a.hot {
+  gap: 0.4rem;
+  padding-left: 0.8rem;
+  background: var(--ochre);
+  font-weight: 700;
+}
+
+.desktopNav a.hot:hover {
+  background: #d4b274;
+}
+
+.hot svg {
+  width: 17px;
+  height: 17px;
 }
 
 .actions {
@@ -195,7 +207,7 @@
   transform: rotate(-45deg);
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1100px) {
   .desktopNav {
     display: block;
   }
@@ -223,10 +235,13 @@
   .call {
     padding: 4px;
   }
+
 }
 
 /* -------------------------------------------------- full-screen mobile menu */
 .panel {
+  --ink: var(--ivory);
+  --card-bg: var(--terra-deep);
   position: fixed;
   inset: 80px var(--edge) var(--edge);
   z-index: -1;
@@ -283,15 +298,11 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 0;
+  padding: 0.75rem 0;
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 11vw, 3.4rem);
+  font-size: clamp(1.9rem, 8.5vw, 2.8rem);
   line-height: 1;
   text-decoration: none;
-}
-
-.mobileList a[aria-current='page'] {
-  font-style: italic;
 }
 
 .chip {
