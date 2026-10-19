@@ -60,6 +60,8 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   scroll-padding-top: calc(var(--header-h) + 12px);
+  /* keep the scrollbar's space while the mobile menu locks scrolling, so the page doesn't reflow and jump */
+  scrollbar-gutter: stable;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -159,6 +161,11 @@ button {
   outline: 2px solid currentColor;
   outline-offset: 3px;
   border-radius: 4px;
+}
+
+/* sections focused by the menu (tabindex=-1) aren't controls: no ring */
+section[tabindex='-1']:focus {
+  outline: none;
 }
 
 ::selection {

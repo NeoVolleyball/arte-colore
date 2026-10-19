@@ -4,16 +4,68 @@ import { Icon } from './Icon';
 import { Wordmark } from './Wordmark';
 import styles from './SiteHeader.module.css';
 import { withBase } from '../content/paths';
+import { useActiveSection } from './useActiveSection';
 
 const chipColours = ['var(--ochre)', 'var(--terracotta)', 'var(--sage)', 'var(--ivory)', '#c9d6b8', '#f2c3a9'];
 /** Width where the full menu fits in the bar; below it the burger menu is used. */
 const DESKTOP_MQ = '(min-width: 1100px)';
+const sectionIds = nav.map((item) => item.href.slice(1));
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const pillRef = useRef<HTMLSpanElement>(null);
+  const { active, goTo } = useActiveSection(sectionIds);
+
+  // one shared pill slides under the active desktop item
+  useEffect(() => {
+    const navEl = navRef.current;
+    const pill = pillRef.current;
+    if (!navEl || !pill) return;
+    const place = () => {
+      const link = active ? navEl.querySelector<HTMLElement>(`a[href="#${active}"]`) : null;
+      if (!link) {
+        pill.style.opacity = '0';
+        return;
+      }
+      const appearing = pill.style.opacity !== '1';
+      if (appearing) pill.style.transition = 'none'; // first show: appear in place, don't slide in
+      const navBox = navEl.getBoundingClientRect();
+      const box = link.getBoundingClientRect();
+      pill.style.width = `${box.width}px`;
+      pill.style.transform = `translateX(${box.left - navBox.left}px)`;
+      pill.style.opacity = '1';
+      if (appearing) {
+        void pill.offsetWidth;
+        pill.style.transition = '';
+      }
+    };
+    place();
+    // fonts loading or resizing change item widths
+    const ro = typeof ResizeObserver === 'undefined' ? null : new ResizeObserver(place);
+    ro?.observe(navEl);
+    return () => ro?.disconnect();
+  }, [active]);
+
+  const onNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const id = href.slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    e.preventDefault();
+    goTo(id);
+    setOpen(false);
+    history.pushState(null, '', href);
+    // after the menu closes (and the page unlocks), scroll; scroll-padding-top keeps the title clear of the header
+    requestAnimationFrame(() => {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+      if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+      target.focus({ preventScroll: true });
+    });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -24,12 +76,13 @@ export function SiteHeader() {
 
   const close = useCallback((restoreFocus: boolean) => {
     setOpen(false);
-    if (restoreFocus) toggleRef.current?.focus();
+    if (restoreFocus) toggleRef.current?.focus({ preventScroll: true });
   }, []);
 
   useEffect(() => {
     if (!open) return;
-    panelRef.current?.querySelector<HTMLElement>('a, button')?.focus();
+    // preventScroll: focusing inside the sticky header would otherwise nudge the page by scroll-padding-top
+    panelRef.current?.querySelector<HTMLElement>('a, button')?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && close(true);
     const mq = window.matchMedia(DESKTOP_MQ);
     const onMq = () => mq.matches && close(false);
@@ -71,16 +124,25 @@ export function SiteHeader() {
           <Wordmark />
         </a>
 
-        <nav className={styles.desktopNav} aria-label="Principale">
+        <nav ref={navRef} className={styles.desktopNav} aria-label="Principale">
+          <span ref={pillRef} className={styles.pill} aria-hidden="true" />
           <ul role="list">
-            {nav.map((item) => (
-              <li key={item.href}>
-                <a href={item.href} className={item.highlight ? styles.hot : undefined}>
-                  {item.highlight ? <Icon name="tag" /> : null}
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {nav.map((item) => {
+              const current = active === item.href.slice(1);
+              return (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className={[item.highlight && styles.hot, current && styles.current].filter(Boolean).join(' ') || undefined}
+                    aria-current={current ? 'location' : undefined}
+                    onClick={(e) => onNavClick(e, item.href)}
+                  >
+                    {item.highlight ? <Icon name="tag" /> : null}
+                    {item.label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
@@ -116,7 +178,12 @@ export function SiteHeader() {
           <ul role="list" className={styles.mobileList}>
             {nav.map((item, i) => (
               <li key={item.href} style={{ '--i': i, '--chip': chipColours[i] } as React.CSSProperties}>
-                <a href={item.href} onClick={() => close(false)}>
+                <a
+                  href={item.href}
+                  className={active === item.href.slice(1) ? styles.current : undefined}
+                  aria-current={active === item.href.slice(1) ? 'location' : undefined}
+                  onClick={(e) => onNavClick(e, item.href)}
+                >
                   <span className={styles.chip} aria-hidden="true" />
                   {item.label}
                 </a>
