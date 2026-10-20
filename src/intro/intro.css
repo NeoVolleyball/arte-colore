@@ -1,0 +1,229 @@
+﻿/* First-visit intro (injected into <head> by vite.config.ts, active only with html.intro) */
+#ac-intro {
+  display: none;
+}
+
+html.intro #ac-intro {
+  --step: 11deg; /* angle between fanned cards; read by intro-player.js */
+  --h: clamp(190px, min(46svh, 68vw), 480px);
+  /* fan + wordmark sit optically centred */
+  --pivot: calc(50svh + var(--h) * 0.2);
+  --w: calc(var(--h) * 0.3);
+  position: fixed;
+  inset: 0;
+  z-index: 89; /* under the paper-tooth overlay (body::after, z 90), above the header */
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+  font-family: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  color: #222420;
+  /* CSS failsafe: gone even if the script never runs */
+  animation: aci-failsafe 0s linear 4.5s forwards;
+}
+
+@media (min-width: 700px) {
+  html.intro #ac-intro {
+    --step: 12.5deg;
+  }
+}
+
+html.intro.aci-blocking #ac-intro {
+  pointer-events: auto;
+}
+
+@keyframes aci-failsafe {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.aci-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 50% var(--pivot), #fbf8f2, transparent 70%),
+    #f5f1e9;
+}
+
+/* ------------------------------------------------------------ the deck */
+.aci-deck {
+  position: absolute;
+  left: 50%;
+  top: var(--pivot);
+  width: 0;
+  height: 0;
+}
+
+.aci-card,
+.aci-morph {
+  --c: #8e4a31;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border-radius: 6px;
+  background: var(--c);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.25),
+    0 26px 36px -30px rgb(40 24 14 / 0.45);
+  overflow: hidden;
+}
+
+.aci-card {
+  position: absolute;
+  left: calc(var(--w) / -2);
+  bottom: calc(var(--h) * -0.08);
+  width: var(--w);
+  height: var(--h);
+  transform-origin: 50% 92%;
+  /* resting (fanned) angle; the player animates into it */
+  transform: rotate(calc(var(--d) * var(--step)));
+}
+
+.aci-card::before,
+.aci-morph::before {
+  /* the same soft pigment sheen as the site's cards */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 60% at 15% 0%, rgb(255 255 255 / 0.18), transparent 60%);
+  pointer-events: none;
+}
+
+.aci-label {
+  position: relative;
+  display: grid;
+  gap: 0.15em;
+  height: 20%;
+  align-content: start; /* text above the rivet */
+  padding: calc(var(--w) * 0.08) 9% 0;
+  background: #fbf8f2;
+  color: #222420;
+  line-height: 1.05;
+}
+
+.aci-label b {
+  font-weight: 400;
+  font-size: max(0.6rem, calc(var(--w) * 0.12));
+}
+
+.aci-label i {
+  font-family: 'Hanken Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: max(0.45rem, calc(var(--w) * 0.062));
+  letter-spacing: 0.12em;
+  opacity: 0.7;
+}
+
+.aci-morph {
+  position: fixed;
+  z-index: 1;
+  margin: 0;
+}
+
+.aci-morph .aci-label {
+  height: auto;
+}
+
+/* brass rivet holding the fan together */
+.aci-rivet {
+  position: absolute;
+  left: calc(var(--w) * -0.09);
+  top: calc(var(--w) * -0.09);
+  width: calc(var(--w) * 0.18);
+  height: calc(var(--w) * 0.18);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #f3e2b8, #c7a35d 45%, #7d6232 100%);
+  box-shadow: 0 2px 4px rgb(40 24 14 / 0.35), inset 0 -1px 1px rgb(0 0 0 / 0.25);
+}
+
+/* ----------------------------------------------------------- wordmark */
+.aci-brand {
+  position: absolute;
+  z-index: 2; /* above the card growing into the hero */
+  left: 0;
+  right: 0;
+  top: calc(var(--pivot) + var(--h) * 0.08 + clamp(1rem, 4svh, 2.4rem));
+  display: grid;
+  justify-items: center;
+}
+
+/* proportions mirror Wordmark.module.css so the mark can land exactly on the header logo */
+.aci-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.344em; /* 0.55rem at the header's 1.6rem */
+  font-size: clamp(2.4rem, 9.5vw, 5.4rem);
+  line-height: 1;
+  white-space: nowrap;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+
+.aci-fan {
+  display: block;
+  width: 0.9em;
+  height: 0.9em;
+  overflow: visible;
+}
+
+.aci-s {
+  transform-origin: 44px 82.8px;
+}
+
+.aci-s1 {
+  transform: rotate(-26deg);
+}
+
+.aci-s3 {
+  transform: rotate(26deg);
+}
+
+.aci-text em {
+  font-style: italic;
+}
+
+.aci-word {
+  display: inline-block;
+}
+
+.aci-ch {
+  display: inline-block;
+}
+
+.aci-stroke {
+  display: block;
+  width: min(62vw, 22rem);
+  height: clamp(10px, 1.6vw, 18px);
+  margin-top: 0.3rem;
+  overflow: visible;
+}
+
+.aci-stroke path {
+  fill: none;
+  stroke: #c7a35d;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+}
+
+.aci-tag {
+  margin: 0.9rem 0 0;
+  font-family: 'Hanken Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #5d5f57;
+}
+
+/* the header logo is revealed when the intro mark lands on it */
+html.intro:not(.aci-landed) header a[aria-label^='Arte Colore'] > span {
+  opacity: 0;
+}
+
+/* hold page entrance animations until the intro leaves */
+html.intro-hold #root * {
+  animation-play-state: paused !important;
+}
