@@ -87,6 +87,12 @@
   }
 }
 
+.smLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+}
+
 .sanmarco p {
   font-family: var(--font-display);
   font-size: var(--step-1);

@@ -1,7 +1,7 @@
 import { business, nav } from '../content/business';
+import { Icon } from './Icon';
 import { Wordmark } from './Wordmark';
 import styles from './SiteFooter.module.css';
-import { withBase } from '../content/paths';
 
 export function SiteFooter() {
   const { address, phone } = business;
@@ -12,14 +12,14 @@ export function SiteFooter() {
 
         <nav aria-label="Pagine del sito" className={styles.nav}>
           <ul role="list">
-            <li>
-              <a href={withBase('/')}>Home</a>
-            </li>
             {nav.map((item) => (
               <li key={item.href}>
-                <a href={withBase(item.href)}>{item.label}</a>
+                <a href={item.href}>{item.label}</a>
               </li>
             ))}
+            <li>
+              <a href="#san-marco">San Marco</a>
+            </li>
           </ul>
         </nav>
 
@@ -34,6 +34,13 @@ export function SiteFooter() {
             Tel. <a href={phone.href}>{phone.display}</a>
           </p>
           <p>P. IVA {business.vatNumber}</p>
+          <a className={styles.social} href={business.social.facebook} target="_blank" rel="noopener noreferrer">
+            <span className={styles.socialIcon}>
+              <Icon name="facebook" />
+            </span>
+            Seguici su Facebook
+            <span className="visually-hidden">(si apre in una nuova scheda)</span>
+          </a>
         </div>
       </div>
 

@@ -60,3 +60,34 @@ export const inspirations = [
     alt: 'Interno illustrativo: parete chiara con un grande arco dipinto color terracotta, panca in legno con cuscino ocra, vasi e una pianta d’ulivo.',
   },
 ] as const;
+
+/** Pavimenti in laminato SPC: highlighted product on the homepage.
+ *  Headline alternatives: "Un pavimento nuovo, sopra quello di prima." ·
+ *  "Nuovo pavimento, zero demolizioni." · "Posalo sopra, vivilo subito." */
+export const spcFloor = {
+  kicker: 'Pavimenti in laminato SPC',
+  title: ['Cambia pavimento', 'senza cambiare nulla.'],
+  text: 'L’SPC è un laminato con anima rigida in polvere di pietra e PVC: sottile, stabile e pensato per rinnovare casa in pochi giorni, senza calcinacci.',
+  benefits: [
+    {
+      title: 'Si posa sopra il vecchio pavimento',
+      text: 'Doghe a incastro, senza colla: su piastrelle o massetto esistenti, se piani e stabili.',
+    },
+    {
+      title: 'Resistente all’acqua',
+      text: 'Il nucleo rigido non teme l’umidità: adatto anche a cucina e bagno.',
+    },
+    {
+      title: 'Stabile e resistente',
+      text: 'Non si deforma con caldo e freddo e regge il passaggio di tutti i giorni.',
+    },
+  ],
+  note: 'Ti aiutiamo a capire se il tuo pavimento è adatto alla posa.',
+} as const;
+
+/** Decorativi → Carta da parati (/prodotti/). */
+export const wallpaper = {
+  kicker: 'Decorativi',
+  title: 'Carta da parati',
+  text: 'Per abbellire o dare carattere a una stanza: una parete d’accento dietro il letto, un corridoio che cambia volto, un angolo con una trama tutta sua.',
+} as const;

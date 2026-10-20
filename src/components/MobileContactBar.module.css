@@ -11,24 +11,11 @@
   border-radius: 999px;
   background: rgb(34 36 32 / 0.94);
   box-shadow: 0 20px 40px -20px rgb(0 0 0 / 0.7);
-  transform: translateY(calc(100% + 30px));
-  visibility: hidden;
-  transition:
-    transform 520ms var(--ease-spring),
-    visibility 0s linear 520ms;
 }
 
 .bar :global(.btn) {
   min-height: 48px;
   padding-inline: 0.75rem;
-}
-
-.shown {
-  transform: none;
-  visibility: visible;
-  transition:
-    transform 520ms var(--ease-spring),
-    visibility 0s;
 }
 
 @media (min-width: 720px) {

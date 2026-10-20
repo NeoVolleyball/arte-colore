@@ -27,12 +27,13 @@ export function HeroCard() {
             l’ispirazione per il tuo prossimo progetto.
           </p>
           <div className={styles.actions}>
-            <a className="btn btn--ivory" href="#colori">
-              Esplora i colori
+            <a className="btn btn--ivory" href="#offerte">
+              Vedi le offerte
               <Icon name="arrow-down" />
             </a>
-            <a className="btn btn--outline" href="#visita">
-              Vieni in negozio
+            <a className="btn btn--outline" href={business.phone.href}>
+              <Icon name="phone" />
+              Chiamaci
             </a>
           </div>
         </div>

@@ -1,113 +1,28 @@
-.steps {
-  padding-block: var(--section);
-}
-
-.stepsTitle {
-  font-size: var(--step-3);
-}
-
-.stepsTitle em {
-  color: var(--terra-deep);
-}
-
-.stepList {
-  display: grid;
-  gap: 1.25rem;
-  margin-top: clamp(2rem, 5vw, 3.5rem);
-}
-
-@media (min-width: 820px) {
-  .stepList {
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1rem, 2vw, 2rem);
-  }
-
-  .step:nth-child(2) {
-    margin-top: 3rem;
-  }
-
-  .step:nth-child(3) {
-    margin-top: 1.5rem;
-  }
-}
-
-/* each tip is a paper chip: colour block on top, text on the paper */
-.step {
-  display: grid;
-  gap: 0.6rem;
-  padding: 0 0 1.6rem;
-  border-radius: 12px;
-  background: var(--paper);
-  overflow: hidden;
-  box-shadow: 0 30px 50px -40px rgb(34 36 32 / 0.7);
-  transition: transform 600ms var(--ease-spring);
-}
-
-.step:hover {
-  transform: translateY(-6px) rotate(-1deg);
-}
-
-.stepNum {
-  display: block;
-  padding: 1.4rem 1.5rem 0.8rem;
-  margin-bottom: 0.6rem;
-  background: var(--c);
-  font-family: var(--font-display);
-  font-size: clamp(4rem, 7vw, 6rem);
-  line-height: 1;
-  color: var(--charcoal);
-}
-
-.step h3,
-.step p {
-  padding-inline: 1.5rem;
-}
-
-.step h3 {
-  font-size: var(--step-2);
-}
-
-.step p {
-  color: var(--charcoal-soft);
-}
-
-.smInner {
-  display: grid;
-  gap: 1.25rem;
-  justify-items: start;
-  padding: var(--section) var(--gutter);
-}
-
-.smTitle {
-  max-width: 20ch;
-  font-size: var(--step-3);
-}
-
-.whereGrid {
+.grid {
   display: grid;
   gap: clamp(2rem, 4vw, 3.5rem);
-  padding: var(--section) var(--gutter) clamp(2.5rem, 5vw, 4rem);
+  padding: var(--section) var(--gutter) clamp(2rem, 4vw, 3rem);
 }
 
 @media (min-width: 960px) {
-  .whereGrid {
+  .grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
     align-items: stretch;
   }
 }
 
-.whereInfo {
+.info {
   display: grid;
-  gap: 1.4rem;
+  gap: 1.3rem;
   align-content: start;
   justify-items: start;
 }
 
-.whereTitle {
+.title {
   font-size: var(--step-3);
 }
 
-.whereTitle em {
+.title em {
   color: #f2c3a9;
 }
 
@@ -149,14 +64,12 @@
 
 .mapWrap {
   display: grid;
-  grid-template-rows: 1fr auto;
-  gap: 0.6rem;
 }
 
 .map,
 .mapPlaceholder {
   width: 100%;
-  min-height: 380px;
+  min-height: 340px;
   height: 100%;
   border: 0;
   border-radius: 14px;
@@ -222,9 +135,44 @@
   font-size: var(--step--1);
 }
 
-.introImg {
-  width: 100%;
-  max-width: 480px;
-  margin-inline: auto;
-  filter: drop-shadow(0 40px 40px rgb(0 0 0 / 0.18));
+/* visit tips: three small paper chips */
+.tipsWrap {
+  padding: 0 var(--gutter) clamp(2.5rem, 5vw, 4rem);
+}
+
+.tipsTitle {
+  font-size: var(--step-2);
+}
+
+.tipsWrap .tips {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 820px) {
+  .tipsWrap .tips {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tips li {
+  display: grid;
+  gap: 0.25rem;
+  padding: 1rem 1.2rem 1.1rem;
+  border-top: 10px solid var(--c);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--charcoal);
+}
+
+.tips strong {
+  font-family: var(--font-display);
+  font-size: var(--step-1);
+  font-weight: 400;
+}
+
+.tips span {
+  font-size: var(--step--1);
+  color: var(--charcoal-soft);
 }

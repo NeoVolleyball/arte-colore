@@ -31,6 +31,18 @@ export const business = {
   sanMarco: {
     statement: 'Arte Colore è presente nella rete di rivenditori San Marco.',
     directoryUrl: 'https://san-marco.com/store-locator',
+    siteUrl: 'https://www.san-marco.com',
+    /** TODO: link to the "Belle Arti" line page once confirmed (no such page found on san-marco.com). */
+    belleArtiUrl: 'https://www.san-marco.com',
+    /** Official logo file (e.g. '/images/san-marco/logo.svg' in public/), only with San Marco's permission.
+     *  While `null` a typographic badge is shown instead. */
+    logo: null as null | string,
+  },
+  /** Service confirmed by the shop owner. */
+  labour: 'Forniamo anche manodopera per pittura e posa carta da parati',
+  social: {
+    /** TODO: placeholder, replace with the shop's real Facebook page URL. */
+    facebook: 'https://www.facebook.com/',
   },
 } as const;
 
@@ -45,26 +57,15 @@ export const maps = {
   embedUrl: `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&output=embed`,
 };
 
-export type PageId = 'home' | 'prodotti' | 'negozio';
+/** The site is a single page; /prodotti/ and /negozio/ are static redirects in public/. */
+export type PageId = 'home';
 
 export const pages: Record<PageId, { path: string; title: string; description: string }> = {
   home: {
     path: '/',
-    title: 'Arte Colore Spinea | Pitture, Smalti e Decorazione',
+    title: 'Arte Colore Spinea | Pitture, Smalti, Pavimenti SPC e Carta da parati',
     description:
-      'Scopri Arte Colore a Spinea: pitture, smalti e prodotti per la decorazione. Ci trovi in Via Roma 175. Chiama il negozio al 041 990950.',
-  },
-  prodotti: {
-    path: '/prodotti/',
-    title: 'Prodotti | Arte Colore Spinea: pitture, smalti e decorazione',
-    description:
-      'Pitture per pareti e soffitti, smalti per superfici e dettagli, prodotti e accessori per la decorazione. Arte Colore, Via Roma 175, Spinea.',
-  },
-  negozio: {
-    path: '/negozio/',
-    title: 'Il negozio e dove siamo | Arte Colore, Via Roma 175 Spinea',
-    description:
-      'Arte Colore, negozio di colori a Spinea in Via Roma 175. Indicazioni stradali, telefono 041 990950 e consigli per preparare la tua visita.',
+      'Arte Colore a Spinea: offerte, pitture, smalti, pavimenti in laminato SPC e carta da parati, con posa. Via Roma 175. Chiamaci al 041 990950.',
   },
 };
 
@@ -78,13 +79,15 @@ export const seo = {
   ogImage: '/images/og-arte-colore.jpg',
 };
 
-/** Main navigation. "Esplora i colori" lives on the homepage, the full
- *  location details (map included) on the shop page. */
+/** Main menu (header, mobile menu, footer). Every item scrolls to the section
+ *  with the same name on the single page, in page order. */
 export const nav = [
-  { label: 'Il negozio', href: '/negozio/', page: 'negozio' },
-  { label: 'Prodotti', href: '/prodotti/', page: 'prodotti' },
-  { label: 'Esplora i colori', href: '/#colori', page: null },
-  { label: 'Dove siamo', href: '/negozio/#dove-siamo', page: null },
+  { label: 'Offerte', href: '#offerte', highlight: true },
+  { label: 'Prodotti', href: '#prodotti', highlight: false },
+  { label: 'Pavimenti SPC', href: '#pavimenti', highlight: false },
+  { label: 'Carta da parati', href: '#carta-da-parati', highlight: false },
+  { label: 'Lavori', href: '#lavori', highlight: false },
+  { label: 'Contatti', href: '#contatti', highlight: false },
 ] as const;
 
 /** schema.org structured data — verified facts only (no hours, geo, ratings). */

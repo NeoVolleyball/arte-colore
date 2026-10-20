@@ -3,7 +3,7 @@ import { SiteHeader } from '../components/SiteHeader';
 
 describe('SiteHeader', () => {
   it('toggles the mobile menu, moves focus in, closes on Escape and restores focus', () => {
-    render(<SiteHeader page="home" />);
+    render(<SiteHeader />);
     const toggle = screen.getByRole('button', { name: 'Apri il menu' });
     expect(toggle.getAttribute('aria-expanded')).toBe('false');
     fireEvent.click(toggle);
@@ -17,10 +17,11 @@ describe('SiteHeader', () => {
     expect(document.activeElement).toBe(toggle);
   });
 
-  it('marks the current page and links the phone', () => {
-    render(<SiteHeader page="prodotti" />);
-    const current = screen.getAllByRole('link', { name: 'Prodotti' }).filter((a) => a.getAttribute('aria-current') === 'page');
-    expect(current.length).toBeGreaterThan(0);
+  it('menu items point to same-page sections and the phone is linked', () => {
+    render(<SiteHeader />);
+    const desktop = screen.getByRole('navigation', { name: 'Principale' });
+    const hrefs = [...desktop.querySelectorAll('a')].map((a) => a.getAttribute('href'));
+    expect(hrefs).toEqual(['#offerte', '#prodotti', '#pavimenti', '#carta-da-parati', '#lavori', '#contatti']);
     expect(screen.getByRole('link', { name: /Chiamaci/ }).getAttribute('href')).toBe('tel:+39041990950');
   });
 });

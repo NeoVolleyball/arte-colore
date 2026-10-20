@@ -49,6 +49,7 @@
 }
 
 .desktopNav ul {
+  position: relative; /* above the pill */
   display: flex;
   gap: 0.25rem;
   margin: 0;
@@ -58,21 +59,80 @@
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 1rem;
+  padding: 0 0.85rem;
   border-radius: 999px;
   font-size: 0.95rem;
   font-weight: 580;
   text-decoration: none;
-  transition: background-color var(--dur) var(--ease-out);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    color 300ms var(--ease-out),
+    box-shadow 300ms var(--ease-out);
 }
 
-.desktopNav a:hover {
+/* hover: a faint wash, clearly lighter than the active pill */
+.desktopNav a:not(.current):hover {
   background: rgb(34 36 32 / 0.07);
 }
 
-.desktopNav a[aria-current='page'] {
-  background: var(--charcoal);
+/* the active section: ivory text over the shared sliding pill */
+.desktopNav a.current {
   color: var(--ivory);
+}
+
+/* one dark pill, moved under the active item by SiteHeader */
+.desktopNav {
+  position: relative;
+}
+
+.pill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 44px;
+  margin-top: -22px;
+  border-radius: 999px;
+  background: var(--terra-deep);
+  box-shadow: 0 8px 18px -10px rgb(60 28 16 / 0.7);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 300ms var(--ease-out),
+    width 300ms var(--ease-out),
+    opacity 200ms var(--ease-out);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pill,
+  .desktopNav a {
+    transition: none !important;
+  }
+}
+
+/* Offerte stays recognisable (gold outline + tag) without looking active */
+.desktopNav a.hot {
+  gap: 0.4rem;
+  padding-left: 0.8rem;
+  box-shadow: inset 0 0 0 1.5px var(--ochre);
+  font-weight: 700;
+}
+
+.desktopNav a.hot:not(.current):hover {
+  background: rgb(199 163 93 / 0.16);
+}
+
+.desktopNav a.hot.current {
+  box-shadow: inset 0 0 0 1.5px transparent;
+}
+
+.hot svg {
+  width: 17px;
+  height: 17px;
+  color: #9a7426; /* ochre deepened for contrast on the paper bar */
+}
+
+.hot.current svg {
+  color: var(--ochre);
 }
 
 .actions {
@@ -195,7 +255,7 @@
   transform: rotate(-45deg);
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1100px) {
   .desktopNav {
     display: block;
   }
@@ -223,10 +283,13 @@
   .call {
     padding: 4px;
   }
+
 }
 
 /* -------------------------------------------------- full-screen mobile menu */
 .panel {
+  --ink: var(--ivory);
+  --card-bg: var(--terra-deep);
   position: fixed;
   inset: 80px var(--edge) var(--edge);
   z-index: -1;
@@ -283,15 +346,18 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1rem 0;
+  margin-inline: -0.75rem;
+  padding: 0.75rem;
+  border-radius: 12px;
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 11vw, 3.4rem);
+  font-size: clamp(1.9rem, 8.5vw, 2.8rem);
   line-height: 1;
   text-decoration: none;
 }
 
-.mobileList a[aria-current='page'] {
-  font-style: italic;
+/* current section: a darker band on the terracotta panel */
+.mobileList a.current {
+  background: rgb(34 18 10 / 0.42);
 }
 
 .chip {

@@ -1,0 +1,70 @@
+.frame {
+  container-type: inline-size;
+  position: relative;
+  overflow: hidden;
+  border-radius: calc(var(--radius) * 0.7);
+  background: var(--ivory-deep);
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  border: 1.5px dashed rgb(34 36 32 / 0.28);
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient(-45deg, rgb(34 36 32 / 0.05) 0 10px, transparent 10px 20px),
+    var(--ivory-deep);
+}
+
+/* pattern hints, so placeholders still read as the right subject */
+.planks {
+  background:
+    repeating-linear-gradient(90deg, rgb(34 36 32 / 0.12) 0 1px, transparent 1px 25%),
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 0.18) 0 1px, transparent 1px 2.5rem),
+    linear-gradient(160deg, #d9c3a0, #b99a6e);
+}
+
+.wallpaper {
+  background:
+    radial-gradient(circle at 25% 25%, rgb(255 255 255 / 0.35) 0 9%, transparent 10%) 0 0 / 3.2rem 3.2rem,
+    radial-gradient(circle at 75% 75%, rgb(34 36 32 / 0.12) 0 9%, transparent 10%) 0 0 / 3.2rem 3.2rem,
+    linear-gradient(160deg, #c9d6b8, #8fa286);
+}
+
+.tin {
+  background:
+    radial-gradient(60% 50% at 50% 60%, rgb(255 255 255 / 0.28), transparent 70%),
+    var(--ivory-deep);
+}
+
+.tag {
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--charcoal);
+  font-size: var(--step--2);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 6px 16px -10px rgb(34 36 32 / 0.6);
+}
+
+/* small thumbnails: compact two-line tag */
+@container (max-width: 150px) {
+  .tag {
+    max-width: 80%;
+    padding: 0.3rem 0.45rem;
+    border-radius: 6px;
+    font-size: 0.58rem;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+}

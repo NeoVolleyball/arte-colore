@@ -1,0 +1,86 @@
+.section {
+  padding-top: clamp(3rem, 6vw, 5.5rem);
+}
+
+.grid {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  padding: 0 var(--gutter) clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (min-width: 960px) {
+  .grid {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+  }
+}
+
+.copy {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+  max-width: 36rem;
+}
+
+.eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.flag {
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 999px;
+  background: var(--charcoal);
+  color: var(--ivory);
+  letter-spacing: 0.1em;
+}
+
+.title {
+  font-size: var(--step-3);
+}
+
+.title em {
+  color: #5c3a1c; /* deep umber, 5.3:1 on ochre */
+}
+
+.text {
+  font-size: var(--step-1);
+  line-height: 1.5;
+}
+
+.benefits {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.benefits li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.benefits svg {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 0.15em;
+  padding: 3px;
+  border-radius: 50%;
+  background: var(--charcoal);
+  color: var(--ochre);
+  stroke-width: 2.4;
+}
+
+.benefits strong {
+  font-weight: 700;
+}
+
+.media {
+  box-shadow: 0 30px 60px -40px rgb(34 36 32 / 0.7);
+}

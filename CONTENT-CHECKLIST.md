@@ -19,6 +19,16 @@ Reference sources: san-marco.com/store-locator ·
 aziende.virgilio.it/vernici/spinea-ve/artecolore-spinea ·
 ecoattivi.eu/doc/Spinea_Elenco_Negozi.pdf
 
+## Added at the owner's request (October 2026): fill in before launch
+
+- [ ] **Facebook URL**: `business.social.facebook` is a placeholder (`https://www.facebook.com/`). Once real, also add it to `sameAs` in `structuredData()`.
+- [ ] **San Marco "Belle Arti" link**: no Belle Arti page was found on san-marco.com; `business.sanMarco.belleArtiUrl` points to the home page for now.
+- [ ] **San Marco logo**: set `business.sanMarco.logo` only with an official retailer asset / permission (a typographic badge is shown until then).
+- [ ] **Photos** for I nostri lavori, Carta da parati and Pavimenti SPC: `src/content/gallery.ts` (placeholders say "Foto in arrivo"; replace "Località" too).
+- [ ] **Offerte**: only `demo` examples exist, so the live site shows "nessuna offerta attiva". Real prices go in `src/content/offerte.ts`.
+- [x] Labour for painting and wallpaper hanging: confirmed by the owner, shown as a badge.
+- [x] Wallpaper (carta da parati) and SPC laminate floors: confirmed by the owner.
+
 ## Needs confirmation before publishing
 
 ### Opening hours

@@ -1,7 +1,7 @@
 # Arte Colore: sito web
 
 Presentation website for **Arte Colore**, a paint and decorating supplies shop
-at Via Roma 175, Spinea (VE). Italian, three pages, built with React,
+at Via Roma 175, Spinea (VE). Italian, one page, built with React,
 TypeScript, Vite and Three.js. All 3D models and images are generated
 procedurally with Blender.
 
@@ -12,9 +12,8 @@ label strip carrying the colour's name and code. Type: Instrument Serif
 
 | Page | File | Contents |
 | --- | --- | --- |
-| `/` | `src/pages/HomePage.tsx` | Hero (3D tin + opening fan of chips), colour explorer, product deck, Ispirazioni gallery, visit card with San Marco |
-| `/prodotti/` | `src/pages/ProductsPage.tsx` | Pitture, Smalti, Prodotti per la decorazione in depth, contact CTA |
-| `/negozio/` | `src/pages/ShopPage.tsx` | The shop, visit tips, San Marco, Dove siamo (address, directions, map on request) |
+| `/` | `src/pages/HomePage.tsx` | Hero, Offerte, product deck, Pavimenti SPC, Carta da parati, I nostri lavori, colour explorer, Ispirazioni, San Marco, Contatti (address, directions, map on request, visit tips) |
+| `/prodotti/`, `/negozio/` | `public/prodotti/`, `public/negozio/` | Old pages, now `noindex` redirects to the matching home section so existing links keep working |
 
 ## Setup
 
@@ -70,8 +69,11 @@ repository needs a paid GitHub plan; otherwise make the repository public.
 | What | Where |
 | --- | --- |
 | Name, address, phone, P. IVA, San Marco link, navigation, per-page SEO titles/descriptions, structured data | `src/content/business.ts` |
-| Product categories and Ispirazioni copy | `src/content/catalogue.ts` |
-| Opening hours (currently `null`, so hidden) | `business.openingHours` in `src/content/business.ts`, then render them in `src/pages/ShopPage.tsx` (Dove siamo) and `src/components/VisitCard.tsx` |
+| Product categories, Ispirazioni, Pavimenti SPC and Carta da parati copy | `src/content/catalogue.ts` |
+| **Offerte** (name, photo, old/new price, end date; expired ones hide, `demo` ones only show in `npm run dev`) | `src/content/offerte.ts` |
+| **Photos**: I nostri lavori, Carta da parati, Pavimenti SPC (files in `public/images/...`) | `src/content/gallery.ts` |
+| Quick-access chips under the header, Facebook URL, San Marco links/logo, labour line | `src/content/business.ts` |
+| Opening hours (currently `null`, so hidden) | `business.openingHours` in `src/content/business.ts`, then render them in `src/components/ContactSection.tsx` and `src/components/VisitCard.tsx` |
 | Explorer colours (names, HEX, families, notes, initial colour) | `src/data/palette.json` |
 | Section copy | the matching component in `src/components/` |
 | Design tokens (colours, card tones, type scale, spacing, motion) | `src/styles/global.css` |

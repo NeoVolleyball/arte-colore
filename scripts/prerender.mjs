@@ -1,12 +1,13 @@
 // Prerenders every page into dist/ so content, contact details and
 // structured data are present before any JavaScript runs.
 import { readFile, rm, writeFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import path from 'node:path';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const { render } = await import(path.join(root, 'dist-ssr', 'entry-server.js'));
-const pages = { home: 'index.html', prodotti: 'prodotti/index.html', negozio: 'negozio/index.html' };
+// file:// URL so the dynamic import also works with Windows drive paths
+const { render } = await import(pathToFileURL(path.join(root, 'dist-ssr', 'entry-server.js')).href);
+const pages = { home: 'index.html' };
 
 for (const [id, rel] of Object.entries(pages)) {
   const file = path.join(root, 'dist', rel);

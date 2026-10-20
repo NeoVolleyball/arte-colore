@@ -15,7 +15,7 @@ No third-party photos, models, textures or logos are used.
 | Typographic wordmark | `src/components/Wordmark.tsx` | CSS/HTML | New design, not an existing logo |
 | Paper / plaster textures | inline SVG `feTurbulence` in CSS | Code | |
 | Fonts | `@fontsource/instrument-serif`, `@fontsource-variable/hanken-grotesk` | SIL Open Font License 1.1, self-hosted by the build | `blender/fonts/*.ttf` are TTF conversions of the same OFL fonts, used by Blender for the tin label and by `postprocess.py` for the OG image |
-| Decorative map placeholder | inline SVG in `src/pages/ShopPage.tsx` | Code | Abstract lines, not a real street map |
+| Decorative map placeholder | inline SVG in `src/components/ContactSection.tsx` | Code | Abstract lines, not a real street map |
 
 The "Arte Colore" label on the hero tin is an invented, illustrative design.
 No San Marco or other manufacturer branding appears on any modelled object.

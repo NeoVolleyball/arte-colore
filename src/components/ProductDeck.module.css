@@ -8,17 +8,6 @@
   justify-items: start;
 }
 
-@media (min-width: 900px) {
-  .head {
-    grid-template-columns: 1fr auto;
-    align-items: end;
-  }
-
-  .head > :first-child {
-    grid-column: 1 / -1;
-  }
-}
-
 .title {
   font-size: var(--step-3);
 }
@@ -120,32 +109,72 @@
   font-size: var(--step-2);
 }
 
-.stretch {
-  text-decoration: none;
-}
-
-.stretch::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-.stretch:focus-visible {
-  outline: none;
-}
-
-.item:has(.stretch:focus-visible) {
-  outline: 3px solid var(--charcoal);
-  outline-offset: 4px;
-}
-
 .short {
   color: var(--ink-soft);
 }
 
+/* "A cosa servono": opens in place, no page change */
+.more {
+  margin-top: 0.4rem;
+}
+
+.more summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 40%, transparent);
+  text-underline-offset: 0.22em;
+}
+
+.more summary::-webkit-details-marker {
+  display: none;
+}
+
+.more summary svg {
+  width: 1em;
+  height: 1em;
+  transition: transform var(--dur) var(--ease-out);
+}
+
+.more[open] summary svg {
+  transform: rotate(180deg);
+}
+
+.uses {
+  display: grid;
+  margin: 0.2rem 0 0;
+}
+
+.uses li {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.uses li::before {
+  content: '';
+  flex: none;
+  width: 0.5em;
+  height: 0.7em;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
 .note {
   margin-top: 2.5rem;
+}
+
+.note span {
   font-size: var(--step--1);
   color: var(--muted);
 }

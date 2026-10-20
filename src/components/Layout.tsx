@@ -1,15 +1,15 @@
-import { structuredData, type PageId } from '../content/business';
+import { structuredData } from '../content/business';
 import { MobileContactBar } from './MobileContactBar';
 import { SiteFooter } from './SiteFooter';
 import { SiteHeader } from './SiteHeader';
 
-export function Layout({ page, children }: { page: PageId; children: React.ReactNode }) {
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <a className="skip-link" href="#contenuto">
         Vai al contenuto
       </a>
-      <SiteHeader page={page} />
+      <SiteHeader />
       <main id="contenuto" tabIndex={-1}>
         {children}
       </main>
