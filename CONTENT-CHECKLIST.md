@@ -27,6 +27,7 @@ ecoattivi.eu/doc/Spinea_Elenco_Negozi.pdf
 - [ ] **Photos** for I nostri lavori, Carta da parati and Pavimenti SPC: `src/content/gallery.ts` (placeholders say "Foto in arrivo"; replace "Località" too).
 - [ ] **Offerte**: only `demo` examples exist, so the live site shows "nessuna offerta attiva". Real prices go in `src/content/offerte.ts`.
 - [x] Labour for painting and wallpaper hanging: confirmed by the owner, shown as a badge.
+- [ ] **Cornici su misura**: 3 photos (`framePhotos` in `src/content/gallery.ts`, files in `public/images/cornici/`) and the details that replace `[DETTAGLI CORNICI]` in `src/content/catalogue.ts` (materials, sizes, times: only what the owner confirms).
 - [x] Wallpaper (carta da parati) and SPC laminate floors: confirmed by the owner.
 
 ## Needs confirmation before publishing

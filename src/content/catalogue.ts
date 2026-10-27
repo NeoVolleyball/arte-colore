@@ -86,6 +86,18 @@ export const spcFloor = {
 } as const;
 
 /** Decorativi → Carta da parati (/prodotti/). */
+/**
+ * "Cornici su misura". Only what the owner has confirmed; [DETTAGLI CORNICI]
+ * marks where materials, sizes or times can go once the owner gives them.
+ */
+export const frames = {
+  kicker: 'Su misura',
+  title: 'Cornici su misura per i tuoi quadri',
+  text: 'Eseguiamo cornici per quadri su misura.',
+  details: '[DETTAGLI CORNICI]',
+  cta: 'Richiedi un preventivo',
+} as const;
+
 export const wallpaper = {
   kicker: 'Decorativi',
   title: 'Carta da parati',

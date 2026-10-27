@@ -21,7 +21,7 @@ describe('SiteHeader', () => {
     render(<SiteHeader />);
     const desktop = screen.getByRole('navigation', { name: 'Principale' });
     const hrefs = [...desktop.querySelectorAll('a')].map((a) => a.getAttribute('href'));
-    expect(hrefs).toEqual(['#offerte', '#prodotti', '#pavimenti', '#carta-da-parati', '#lavori', '#contatti']);
+    expect(hrefs).toEqual(['#offerte', '#prodotti', '#pavimenti', '#carta-da-parati', '#cornici', '#lavori', '#contatti']);
     expect(screen.getByRole('link', { name: /Chiamaci/ }).getAttribute('href')).toBe('tel:+39041990950');
   });
 });

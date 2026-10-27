@@ -6,7 +6,7 @@ import styles from './SiteHeader.module.css';
 import { withBase } from '../content/paths';
 import { useActiveSection } from './useActiveSection';
 
-const chipColours = ['var(--ochre)', 'var(--terracotta)', 'var(--sage)', 'var(--ivory)', '#c9d6b8', '#f2c3a9'];
+const chipColours = ['var(--ochre)', 'var(--terracotta)', 'var(--sage)', 'var(--ivory)', '#c9d6b8', '#f2c3a9', 'var(--ochre)'];
 /** Width where the full menu fits in the bar; below it the burger menu is used. */
 const DESKTOP_MQ = '(min-width: 1100px)';
 const sectionIds = nav.map((item) => item.href.slice(1));

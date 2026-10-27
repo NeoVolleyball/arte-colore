@@ -12,7 +12,7 @@ label strip carrying the colour's name and code. Type: Instrument Serif
 
 | Page | File | Contents |
 | --- | --- | --- |
-| `/` | `src/pages/HomePage.tsx` | Hero, Offerte, product deck, Pavimenti SPC, Carta da parati, I nostri lavori, colour explorer, Ispirazioni, San Marco, Contatti (address, directions, map on request, visit tips) |
+| `/` | `src/pages/HomePage.tsx` | Hero, Offerte, product deck, Pavimenti SPC, Carta da parati, Cornici su misura, I nostri lavori, colour explorer, Ispirazioni, San Marco, Contatti (address, directions, map on request, visit tips) |
 | `/prodotti/`, `/negozio/` | `public/prodotti/`, `public/negozio/` | Old pages, now `noindex` redirects to the matching home section so existing links keep working |
 
 ## Setup
@@ -69,9 +69,9 @@ repository needs a paid GitHub plan; otherwise make the repository public.
 | What | Where |
 | --- | --- |
 | Name, address, phone, P. IVA, San Marco link, navigation, per-page SEO titles/descriptions, structured data | `src/content/business.ts` |
-| Product categories, Ispirazioni, Pavimenti SPC and Carta da parati copy | `src/content/catalogue.ts` |
+| Product categories, Ispirazioni, Pavimenti SPC, Carta da parati and Cornici copy | `src/content/catalogue.ts` |
 | **Offerte** (name, photo, old/new price, end date; expired ones hide, `demo` ones only show in `npm run dev`) | `src/content/offerte.ts` |
-| **Photos**: I nostri lavori, Carta da parati, Pavimenti SPC (files in `public/images/...`) | `src/content/gallery.ts` |
+| **Photos**: I nostri lavori, Carta da parati, Cornici, Pavimenti SPC (files in `public/images/...`) | `src/content/gallery.ts` |
 | Quick-access chips under the header, Facebook URL, San Marco links/logo, labour line | `src/content/business.ts` |
 | Opening hours (currently `null`, so hidden) | `business.openingHours` in `src/content/business.ts`, then render them in `src/components/ContactSection.tsx` and `src/components/VisitCard.tsx` |
 | Explorer colours (names, HEX, families, notes, initial colour) | `src/data/palette.json` |

@@ -86,6 +86,7 @@ export const nav = [
   { label: 'Prodotti', href: '#prodotti', highlight: false },
   { label: 'Pavimenti SPC', href: '#pavimenti', highlight: false },
   { label: 'Carta da parati', href: '#carta-da-parati', highlight: false },
+  { label: 'Cornici', href: '#cornici', highlight: false },
   { label: 'Lavori', href: '#lavori', highlight: false },
   { label: 'Contatti', href: '#contatti', highlight: false },
 ] as const;

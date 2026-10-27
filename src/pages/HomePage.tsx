@@ -1,5 +1,6 @@
 import { ColourExplorer } from '../components/ColourExplorer';
 import { ContactSection } from '../components/ContactSection';
+import { FramesSection } from '../components/FramesSection';
 import { HeroCard } from '../components/HeroCard';
 import { InspirationGallery } from '../components/InspirationGallery';
 import { Layout } from '../components/Layout';
@@ -19,6 +20,7 @@ export function HomePage() {
       <ProductDeck />
       <SpcFloorCard />
       <WallpaperSection />
+      <FramesSection />
       <WorksGallery />
       <ColourExplorer />
       <InspirationGallery />

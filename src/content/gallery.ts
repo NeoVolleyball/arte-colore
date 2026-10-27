@@ -29,6 +29,13 @@ export const works: Photo[] = [
 /** Photo next to the "Pavimenti in laminato SPC" highlight on the homepage. */
 export const spcPhoto: Photo = { id: 'spc', title: 'Pavimento in laminato SPC', alt: '' };
 
+/** "Cornici su misura": PLACEHOLDERS — put photos in public/images/cornici/ and set `image` + `alt`. */
+export const framePhotos: Photo[] = [
+  { id: 'cornice-1', title: 'Cornice su misura', alt: '' },
+  { id: 'cornice-2', title: 'Cornice su misura', alt: '' },
+  { id: 'cornice-3', title: 'Cornice su misura', alt: '' },
+];
+
 export const wallpapers: Photo[] = [
   { id: 'carta-1', title: 'Parete d’accento', alt: '' },
   { id: 'carta-2', title: 'Motivo floreale', alt: '' },
