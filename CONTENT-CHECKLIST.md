@@ -21,7 +21,7 @@ ecoattivi.eu/doc/Spinea_Elenco_Negozi.pdf
 
 ## Added at the owner's request (October 2026): fill in before launch
 
-- [ ] **Facebook URL**: `business.social.facebook` is a placeholder (`https://www.facebook.com/`). Once real, also add it to `sameAs` in `structuredData()`.
+- [x] **Facebook URL**: `business.social.facebook` updated with the shop's Facebook link (`https://www.facebook.com/groups/877516193200198/posts/1842790300006111/`).
 - [ ] **San Marco "Belle Arti" link**: no Belle Arti page was found on san-marco.com; `business.sanMarco.belleArtiUrl` points to the home page for now.
 - [ ] **San Marco logo**: set `business.sanMarco.logo` only with an official retailer asset / permission (a typographic badge is shown until then).
 - [ ] **Photos** for I nostri lavori, Carta da parati and Pavimenti SPC: `src/content/gallery.ts` (placeholders say "Foto in arrivo"; replace "Località" too).

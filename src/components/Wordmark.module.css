@@ -16,6 +16,8 @@
   position: relative;
   width: 0.9em;
   height: 0.9em;
+  margin-inline: 0.14em 0.04em;
+  flex: none;
 }
 
 .fan i {
@@ -24,7 +26,7 @@
   bottom: 0;
   width: 0.28em;
   height: 0.9em;
-  border-radius: 1px;
+  border-radius: clamp(1.5px, 0.04em, 6px);
   transform-origin: 50% 92%;
   transition: transform var(--dur) var(--ease-spring);
 }
@@ -53,8 +55,8 @@ a:hover .fan i:nth-child(3) {
 }
 
 .xl {
-  /* fills the footer width: wordmark ≈ 4.7em wide */
-  font-size: min(calc((100vw - 2 * var(--edge) - 2 * var(--gutter)) / 4.7), 23rem);
+  /* fills the footer width: wordmark ≈ 4.9em wide */
+  font-size: min(calc((100vw - 2 * var(--edge) - 2 * var(--gutter)) / 4.9), 23rem);
   gap: 0.12em;
   letter-spacing: -0.02em;
 }

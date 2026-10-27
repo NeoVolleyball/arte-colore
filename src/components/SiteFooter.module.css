@@ -97,8 +97,11 @@
 .giant {
   margin: clamp(2.5rem, 6vw, 5rem) 0 0;
   white-space: nowrap;
-  line-height: 0.8;
-  overflow: hidden;
+  line-height: 1.15;
+  padding-block: 0.18em;
+  padding-inline: 0.15em;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .bottom {

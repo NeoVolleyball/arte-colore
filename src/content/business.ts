@@ -41,8 +41,7 @@ export const business = {
   /** Service confirmed by the shop owner. */
   labour: 'Forniamo anche manodopera per pittura e posa carta da parati',
   social: {
-    /** TODO: placeholder, replace with the shop's real Facebook page URL. */
-    facebook: 'https://www.facebook.com/',
+    facebook: 'https://www.facebook.com/groups/877516193200198/posts/1842790300006111/',
   },
 } as const;
 
