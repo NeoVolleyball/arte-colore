@@ -83,6 +83,7 @@ export const seo = {
 export const nav = [
   { label: 'Offerte', href: '#offerte', highlight: true },
   { label: 'Prodotti', href: '#prodotti', highlight: false },
+  { label: 'Reparti', href: '#reparti', highlight: false },
   { label: 'Pavimenti SPC', href: '#pavimenti', highlight: false },
   { label: 'Carta da parati', href: '#carta-da-parati', highlight: false },
   { label: 'Cornici', href: '#cornici', highlight: false },

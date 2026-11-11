@@ -34,7 +34,7 @@ export function SpcFloorCard() {
             <Icon name="phone" /> Chiamaci per informazioni
           </a>
         </div>
-        <PhotoSlot src={spcPhoto.image} alt={spcPhoto.alt} ratio="4 / 3" pattern="planks" className={styles.media} />
+        <PhotoSlot src={spcPhoto.image} alt={spcPhoto.alt} ratio="4 / 5" pattern="planks" className={styles.media} />
       </div>
       <div className="chip-label">
         <Drips seed={23} count={8} />

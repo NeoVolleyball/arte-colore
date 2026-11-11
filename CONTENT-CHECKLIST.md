@@ -24,7 +24,9 @@ ecoattivi.eu/doc/Spinea_Elenco_Negozi.pdf
 - [x] **Facebook URL**: `business.social.facebook` updated with the shop's Facebook link (`https://www.facebook.com/groups/877516193200198/posts/1842790300006111/`).
 - [ ] **San Marco "Belle Arti" link**: no Belle Arti page was found on san-marco.com; `business.sanMarco.belleArtiUrl` points to the home page for now.
 - [ ] **San Marco logo**: set `business.sanMarco.logo` only with an official retailer asset / permission (a typographic badge is shown until then).
-- [ ] **Photos** for I nostri lavori, Carta da parati and Pavimenti SPC: `src/content/gallery.ts` (placeholders say "Foto in arrivo"; replace "Località" too).
+- [x] **Shop photos** (owner, WhatsApp, 11 Nov 2026): 19 photos in the new "Reparti" gallery (`departments` in `src/content/gallery.ts`, files in `public/images/negozio/`), also used for the product deck, Pavimenti SPC and Carta da parati. Originals in `foto/`.
+- [ ] **Better Carta da parati photos**: the owner said he will send more detailed ones. Replace the crops in `public/images/carta-da-parati/` and the two `carta-da-parati-*` photos in `departments`.
+- [ ] **Photos for I nostri lavori** (jobs at customers' homes): still placeholders ("Foto in arrivo"; replace "Località" too).
 - [ ] **Offerte**: only `demo` examples exist, so the live site shows "nessuna offerta attiva". Real prices go in `src/content/offerte.ts`.
 - [x] Labour for painting and wallpaper hanging: confirmed by the owner, shown as a badge.
 - [ ] **Cornici su misura**: 3 photos (`framePhotos` in `src/content/gallery.ts`, files in `public/images/cornici/`) and the details that replace `[DETTAGLI CORNICI]` in `src/content/catalogue.ts` (materials, sizes, times: only what the owner confirms).
@@ -50,9 +52,10 @@ ecoattivi.eu/doc/Spinea_Elenco_Negozi.pdf
 - [x] Pitture (published)
 - [x] Smalti (published)
 - [x] Prodotti per la decorazione / painting supplies (published)
-- [ ] Fine-art materials (belle arti). Mentioned in older public descriptions; current availability unconfirmed.
+- [x] Belle arti (confirmed by the owner with photos, Nov 2026)
+- [x] Accessori (pennelli, nastri ecc.), Abrasivi, Duplicazione chiavi, Idropitture/smalti/impregnanti, Pavimenti laminati e SPC (owner, Nov 2026)
 - [ ] Frames / cornici. Same as above.
-- [ ] Wallpaper / carta da parati. Same as above.
+- [x] Wallpaper / carta da parati. Confirmed.
 - [ ] Specific brands stocked, other than the San Marco directory listing.
 
 ### Services (none are published)

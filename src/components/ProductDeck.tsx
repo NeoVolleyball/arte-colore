@@ -64,7 +64,7 @@ export function ProductDeck() {
             <Icon name="phone" /> Chiamaci al {business.phone.local}
           </a>
           <br />
-          <span>Immagini illustrative create digitalmente.</span>
+          <span>Foto scattate nel nostro negozio.</span>
         </p>
       </div>
     </section>

@@ -29,9 +29,9 @@ describe('business data', () => {
 });
 
 describe('navigation', () => {
-  it('has seven items, each pointing to the section with its name', async () => {
+  it('has eight items, each pointing to the section with its name', async () => {
     const { nav } = await import('../content/business');
-    expect(nav.map((n) => n.label)).toEqual(['Offerte', 'Prodotti', 'Pavimenti SPC', 'Carta da parati', 'Cornici', 'Lavori', 'Contatti']);
-    expect(nav.map((n) => n.href)).toEqual(['#offerte', '#prodotti', '#pavimenti', '#carta-da-parati', '#cornici', '#lavori', '#contatti']);
+    expect(nav.map((n) => n.label)).toEqual(['Offerte', 'Prodotti', 'Reparti', 'Pavimenti SPC', 'Carta da parati', 'Cornici', 'Lavori', 'Contatti']);
+    expect(nav.map((n) => n.href)).toEqual(['#offerte', '#prodotti', '#reparti', '#pavimenti', '#carta-da-parati', '#cornici', '#lavori', '#contatti']);
   });
 });

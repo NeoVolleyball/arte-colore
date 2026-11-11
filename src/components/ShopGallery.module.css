@@ -1,0 +1,244 @@
+.section {
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+}
+
+.head {
+  display: grid;
+  gap: 1rem;
+  justify-items: start;
+}
+
+.title {
+  font-size: var(--step-3);
+}
+
+.title em {
+  color: var(--terra-deep);
+}
+
+.lead {
+  max-width: 38rem;
+  font-size: var(--step-1);
+  line-height: 1.5;
+  color: var(--charcoal-soft);
+}
+
+/* department chips: scroll sideways on phones, wrap on wider screens */
+.filters {
+  display: flex;
+  gap: 0.5rem;
+  margin: clamp(1.75rem, 4vw, 2.5rem) calc(var(--gutter) * -1) 0;
+  padding: 0.25rem var(--gutter);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.filters::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 820px) {
+  .filters {
+    flex-wrap: wrap;
+    margin-inline: 0;
+    padding-inline: 0;
+    overflow: visible;
+  }
+}
+
+.filters button {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  background: var(--paper);
+  color: var(--charcoal);
+  font: inherit;
+  font-size: var(--step--1);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease-out),
+    color var(--dur-fast) var(--ease-out);
+}
+
+.filters button span {
+  font-weight: 500;
+  opacity: 0.6;
+}
+
+.filters button:hover {
+  border-color: var(--charcoal);
+}
+
+.filters button[aria-pressed='true'] {
+  background: var(--charcoal);
+  border-color: var(--charcoal);
+  color: var(--ivory);
+}
+
+.deptText {
+  margin-top: 1.25rem;
+  max-width: 40rem;
+  color: var(--charcoal-soft);
+}
+
+.deptText strong {
+  color: var(--charcoal);
+}
+
+.grid {
+  columns: 2;
+  column-gap: clamp(0.6rem, 1.6vw, 1.1rem);
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+}
+
+@media (min-width: 700px) {
+  .grid {
+    columns: 3;
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    columns: 4;
+  }
+}
+
+.grid li {
+  break-inside: avoid;
+  margin-bottom: clamp(0.6rem, 1.6vw, 1.1rem);
+}
+
+.item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: calc(var(--radius) * 0.7);
+  overflow: hidden;
+  background: var(--ivory-deep);
+  cursor: zoom-in;
+}
+
+.item img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.item:hover img {
+  transform: scale(1.04);
+}
+
+.caption {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  max-width: calc(100% - 1rem);
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  background: rgb(251 248 242 / 0.92);
+  color: var(--charcoal);
+  font-size: var(--step--2);
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: left;
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.75rem;
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* lightbox */
+.lightbox {
+  width: min(100vw - 1rem, 1200px);
+  max-width: none;
+  max-height: calc(100dvh - 1rem);
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--charcoal);
+  color: var(--ivory);
+  overflow: hidden;
+}
+
+.lightbox::backdrop {
+  background: rgb(20 21 19 / 0.82);
+}
+
+.lightbox figure {
+  display: grid;
+  margin: 0;
+}
+
+.lightbox img {
+  width: 100%;
+  height: auto;
+  max-height: calc(100dvh - 4.5rem);
+  object-fit: contain;
+  background: #141513;
+}
+
+.lightbox figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1.1rem;
+  font-size: var(--step--1);
+}
+
+.close,
+.nav {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 999px;
+  background: rgb(251 248 242 / 0.92);
+  color: var(--charcoal);
+  cursor: pointer;
+}
+
+.close {
+  top: 0.6rem;
+  right: 0.6rem;
+}
+
+.nav {
+  top: calc(50% - 2rem);
+}
+
+.prev {
+  left: 0.6rem;
+}
+
+.prev svg {
+  transform: scaleX(-1);
+}
+
+.next {
+  right: 0.6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item img {
+    transition: none;
+  }
+  .item:hover img {
+    transform: none;
+  }
+}

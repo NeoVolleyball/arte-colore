@@ -6,6 +6,7 @@ import { InspirationGallery } from '../components/InspirationGallery';
 import { Layout } from '../components/Layout';
 import { OffersSection } from '../components/OffersSection';
 import { ProductDeck } from '../components/ProductDeck';
+import { ShopGallery } from '../components/ShopGallery';
 import { SanMarcoSection } from '../components/SanMarcoSection';
 import { SpcFloorCard } from '../components/SpcFloorCard';
 import { WallpaperSection } from '../components/WallpaperSection';
@@ -18,6 +19,7 @@ export function HomePage() {
       <HeroCard />
       <OffersSection />
       <ProductDeck />
+      <ShopGallery />
       <SpcFloorCard />
       <WallpaperSection />
       <FramesSection />

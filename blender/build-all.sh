@@ -9,9 +9,11 @@ blender -b --python blender/hero.py -- $EXTRA
 for s in explorer living studio terracotta; do
   blender -b --python blender/rooms.py -- "$s" $EXTRA
 done
-for s in pitture smalti decorazione; do
-  blender -b --python blender/products.py -- "$s" $EXTRA
-done
+# Product deck images are now real shop photos (see ASSETS.md); the old
+# Blender vignettes are no longer rendered so they can't overwrite them.
+# for s in pitture smalti decorazione; do
+#   blender -b --python blender/products.py -- "$s" $EXTRA
+# done
 python3 blender/postprocess.py
 # compress the hero model (meshopt + quantisation, keep node/material names)
 npx -y gltfpack@0.22 -i public/models/hero.glb -o public/models/hero.glb -cc -kn -km

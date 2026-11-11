@@ -1,7 +1,8 @@
 # Asset source record
 
 Every visual asset is original and generated from code in this repository.
-No third-party photos, models, textures or logos are used.
+No third-party models, textures or logos are used. The only photos are the
+shop's own, supplied by the owner (see the last rows of the table).
 
 | Asset | Path | Source | Notes |
 | --- | --- | --- | --- |
@@ -9,7 +10,9 @@ No third-party photos, models, textures or logos are used.
 | Hero still (mobile / no-WebGL / loading state) | `public/images/hero-still-{720,1200}.webp` | Same scene, Cycles render | Transparent background |
 | Colour explorer room + wall mask | `public/images/explorer-room-*.webp`, `explorer-mask-*.webp` | `blender/rooms.py explorer` (Cycles) | The wall is rendered neutral; the mask is a separate holdout render |
 | Ispirazioni cromatiche (3 interiors) | `public/images/insp-{living,studio,terracotta}-*.webp` | `blender/rooms.py <scene>` | Illustrative concepts, not real projects or customer work |
-| Product vignettes | `public/images/product-{pitture,smalti,decorazione}-*.webp` | `blender/products.py <scene>` | Blank-label tins: illustrate categories, not specific products |
+| Product deck photos | `public/images/product-{pitture,smalti,decorazione}-*.webp` | 4:5 crops of the owner's shop photos (Nov 2026) | Replaced the earlier Blender vignettes (`blender/products.py` can still regenerate those; don't run it over these files) |
+| Shop photos ("Reparti", Pavimenti SPC) | `public/images/negozio/*-{640,1280}.webp` | Owner's WhatsApp photos, originals in `foto/` | Resized, auto-contrast, WebP |
+| Carta da parati crops | `public/images/carta-da-parati/*.webp` | Crops of the owner's wallpaper sample-book photos | Temporary until the owner sends better photos |
 | Social sharing image | `public/images/og-arte-colore.jpg` | `blender/postprocess.py` (terracotta card + hero render + typeset wordmark) | 1200×630 |
 | Favicon | `public/favicon.svg` | Hand-written SVG | Fan of three colour chips |
 | Typographic wordmark | `src/components/Wordmark.tsx` | CSS/HTML | New design, not an existing logo |
