@@ -9,7 +9,6 @@ export function SanMarcoSection() {
   const links = [
     { label: 'Sito San Marco', href: sanMarco.siteUrl },
     { label: 'Linea Belle Arti', href: sanMarco.belleArtiUrl },
-    { label: 'Trova i rivenditori San Marco', href: sanMarco.directoryUrl },
   ];
   return (
     <section id="san-marco" className={`card tone-paper card-rise ${styles.section}`} aria-labelledby="sm-title">

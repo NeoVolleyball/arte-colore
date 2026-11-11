@@ -15,12 +15,12 @@
   --charcoal: #222420;
   --charcoal-soft: #4a4c45; /* 7.7:1 on ivory */
   --muted: #5d5f57; /* 5.7:1 on ivory */
-  --sage: #879480;
-  --sage-deep: #56614f;
-  --terracotta: #be7156;
-  --terra-deep: #8e4a31; /* card colour; ivory text 5.9:1 */
-  --ochre: #c7a35d;
-  --green-deep: #2f4a3e;
+  --sage: #6fa562;
+  --sage-deep: #3d6b37;
+  --terracotta: #da5a28;
+  --terra-deep: #a63e1c; /* card colour; ivory text 5.6:1 */
+  --ochre: #e8a92a;
+  --green-deep: #17604a;
   --line: rgb(34 36 32 / 0.14);
 
   --font-display: 'Instrument Serif', 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
@@ -270,6 +270,12 @@ section[tabindex='-1']:focus {
   --card-bg: var(--terra-deep);
   --ink: var(--ivory);
   --ink-soft: rgb(245 241 233 / 0.86);
+}
+
+.tone-slate {
+  --card-bg: #3b3d39; /* dark warm grey (hero) */
+  --ink: var(--ivory);
+  --ink-soft: rgb(245 241 233 / 0.84);
 }
 
 .tone-sage {

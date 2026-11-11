@@ -11,7 +11,7 @@ export function HeroCard() {
   const fan = fanIds.map((id) => colourById(id)!).filter(Boolean);
   const ticker = colours.map((c) => c.name);
   return (
-    <section className={`card tone-terra ${styles.hero}`} aria-labelledby="hero-title">
+    <section className={`card tone-slate ${styles.hero}`} aria-labelledby="hero-title">
       <div className={styles.grid}>
         <div className={styles.copy}>
           <p className={`kicker ${styles.kicker}`}>Negozio di colori a {business.address.city}</p>

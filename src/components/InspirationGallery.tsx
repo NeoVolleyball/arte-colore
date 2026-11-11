@@ -122,7 +122,7 @@ export function InspirationGallery() {
         <span className="chip-label__meta">
           Ambienti illustrativi creati digitalmente per suggerire abbinamenti di colore.
         </span>
-        <span className="chip-label__code">#2F4A3E</span>
+        <span className="chip-label__code">#17604A</span>
       </div>
     </section>
   );

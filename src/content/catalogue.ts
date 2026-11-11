@@ -10,7 +10,7 @@ export const products = [
     uses: ['Rinfrescare le pareti di casa', 'Cambiare l’atmosfera di una stanza', 'Ritoccare soffitti e superfici murali'],
     alt: 'Secchi di idropittura San Marco impilati in negozio.',
     tone: 'sage',
-    code: '#879480',
+    code: '#6FA562',
   },
   {
     id: 'smalti',
@@ -21,7 +21,7 @@ export const products = [
     uses: ['Rinnovare porte e infissi', 'Dare colore a ringhiere e cancelli', 'Proteggere il legno con gli impregnanti'],
     alt: 'Scaffali del negozio con barattoli di smalti e vernici.',
     tone: 'terracotta',
-    code: '#BE7156',
+    code: '#DA5A28',
   },
   {
     id: 'decorazione',
@@ -32,7 +32,7 @@ export const products = [
     uses: ['Preparare le superfici', 'Stendere il colore con gli strumenti adatti', 'Rifinire bordi e dettagli'],
     alt: 'Parete del negozio con pennelli, plafoncini e rulli per pittura.',
     tone: 'ochre',
-    code: '#C7A35D',
+    code: '#E8A92A',
   },
 ] as const;
 

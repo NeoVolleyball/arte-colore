@@ -40,7 +40,7 @@ export function SpcFloorCard() {
         <Drips seed={23} count={8} />
         <span className="chip-label__name">Laminato SPC</span>
         <span className="chip-label__meta">{spcFloor.note}</span>
-        <span className="chip-label__code">#C7A35D</span>
+        <span className="chip-label__code">#E8A92A</span>
       </div>
     </section>
   );

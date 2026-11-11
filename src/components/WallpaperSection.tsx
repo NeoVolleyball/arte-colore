@@ -31,7 +31,7 @@ export function WallpaperSection() {
           ))}
         </ul>
       </div>
-      <ChipLabel name="Carta da parati" meta="Per abbellire o dare carattere a una stanza" code="#2F4A3E" seed={31} />
+      <ChipLabel name="Carta da parati" meta="Per abbellire o dare carattere a una stanza" code="#17604A" seed={31} />
     </section>
   );
 }

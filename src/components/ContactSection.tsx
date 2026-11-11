@@ -103,7 +103,7 @@ export function ContactSection() {
         <span className="chip-label__meta">
           {address.street} · {address.postalCode} {address.city} ({address.province})
         </span>
-        <span className="chip-label__code">#8E4A31</span>
+        <span className="chip-label__code">#A63E1C</span>
       </div>
     </section>
   );
