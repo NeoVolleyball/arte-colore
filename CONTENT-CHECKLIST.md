@@ -25,7 +25,7 @@ ecoattivi.eu/doc/Spinea_Elenco_Negozi.pdf
 - [ ] **San Marco "Belle Arti" link**: no Belle Arti page was found on san-marco.com; `business.sanMarco.belleArtiUrl` points to the home page for now.
 - [ ] **San Marco logo**: set `business.sanMarco.logo` only with an official retailer asset / permission (a typographic badge is shown until then).
 - [x] **Shop photos** (owner, WhatsApp, 11 Nov 2026): 19 photos in the new "Reparti" gallery (`departments` in `src/content/gallery.ts`, files in `public/images/negozio/`), also used for the product deck, Pavimenti SPC and Carta da parati. Originals in `foto/`.
-- [ ] **Better Carta da parati photos**: the owner said he will send more detailed ones. Replace the crops in `public/images/carta-da-parati/` and the two `carta-da-parati-*` photos in `departments`.
+- [x] **Carta da parati photos**: 3 room photos from the owner (Nov 2026) in `wallpapers` (`src/content/gallery.ts`). They look like supplier/catalogue images: confirm the owner is allowed to publish them.
 - [ ] **Photos for I nostri lavori** (jobs at customers' homes): still placeholders ("Foto in arrivo"; replace "Località" too).
 - [ ] **Offerte**: only `demo` examples exist, so the live site shows "nessuna offerta attiva". Real prices go in `src/content/offerte.ts`.
 - [x] Labour for painting and wallpaper hanging: confirmed by the owner, shown as a badge.

@@ -12,7 +12,7 @@ shop's own, supplied by the owner (see the last rows of the table).
 | Ispirazioni cromatiche (3 interiors) | `public/images/insp-{living,studio,terracotta}-*.webp` | `blender/rooms.py <scene>` | Illustrative concepts, not real projects or customer work |
 | Product deck photos | `public/images/product-{pitture,smalti,decorazione}-*.webp` | 4:5 crops of the owner's shop photos (Nov 2026) | Replaced the earlier Blender vignettes (`blender/products.py` can still regenerate those; don't run it over these files) |
 | Shop photos ("Reparti", Pavimenti SPC) | `public/images/negozio/*-{640,1280}.webp` | Owner's WhatsApp photos, originals in `foto/` | Resized, auto-contrast, WebP |
-| Carta da parati crops | `public/images/carta-da-parati/*.webp` | Crops of the owner's wallpaper sample-book photos | Temporary until the owner sends better photos |
+| Carta da parati photos | `public/images/carta-da-parati/*.webp` | Room photos sent by the owner (Nov 2026), cropped 3:4 | Look like supplier/catalogue images: confirm the owner may use them |
 | Social sharing image | `public/images/og-arte-colore.jpg` | `blender/postprocess.py` (terracotta card + hero render + typeset wordmark) | 1200×630 |
 | Favicon | `public/favicon.svg` | Hand-written SVG | Fan of three colour chips |
 | Typographic wordmark | `src/components/Wordmark.tsx` | CSS/HTML | New design, not an existing logo |

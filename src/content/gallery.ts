@@ -41,26 +41,26 @@ export const framePhotos: Photo[] = [
   { id: 'cornice-3', title: 'Cornice su misura', alt: '' },
 ];
 
-/** Carta da parati: crops of the owner's sample-book photos (Nov 2026).
- *  The owner said he will send more detailed photos: swap them in here. */
+/** Carta da parati: 3 room photos sent by the owner (Nov 2026), cropped to 3:4.
+ *  Files: public/images/carta-da-parati/. */
 export const wallpapers: Photo[] = [
   {
     id: 'carta-1',
-    title: 'Motivo floreale',
-    image: '/images/carta-da-parati/carta-floreale.webp',
-    alt: 'Campionario di carta da parati aperto su un motivo a grandi fiori nei toni del rosa.',
+    title: 'Camera in toni caldi',
+    image: '/images/carta-da-parati/carta-camera-beige.webp',
+    alt: 'Camera da letto con parete dietro il letto in carta da parati beige a grandi petali, letto in legno con cuscini grigi, comodino e lampada a sfera.',
   },
   {
     id: 'carta-2',
-    title: 'Parete d’accento',
-    image: '/images/carta-da-parati/carta-ambientata.webp',
-    alt: 'Pagina di catalogo con una parete in carta da parati floreale dietro un mobile bianco, una lampada e uno specchio rotondo.',
+    title: 'Zig zag azzurro',
+    image: '/images/carta-da-parati/carta-zigzag-azzurro.webp',
+    alt: 'Parete in carta da parati azzurra con motivo a zig zag, davanti a una panca bianca morbida e a un tavolino in rattan.',
   },
   {
     id: 'carta-3',
-    title: 'Effetto materico',
-    image: '/images/carta-da-parati/carta-campionari.webp',
-    alt: 'Campionari di carta da parati in negozio: effetto lino, foglie verdi su fondo chiaro e tinta grigia.',
+    title: 'Rami fioriti su verde salvia',
+    image: '/images/carta-da-parati/carta-rami-fioriti.webp',
+    alt: 'Carta da parati verde salvia con rami fioriti, accanto a una scala in legno, una panca e un vaso con fiori arancioni.',
   },
 ];
 
