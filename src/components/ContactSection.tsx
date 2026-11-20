@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { business, maps } from '../content/business';
+import { withBase } from '../content/paths';
 import { colourById } from '../data/palette';
 import { Icon } from './Icon';
 import { LabourBadge } from './LabourBadge';
@@ -88,7 +89,9 @@ export function ContactSection() {
                 <button type="button" className="btn btn--ivory" onClick={() => setShowMap(true)}>
                   <Icon name="map" /> Mostra la mappa
                 </button>
-                <p>La mappa viene caricata da Google Maps solo se la richiedi.</p>
+                <p>
+                  La mappa viene caricata da Google Maps solo se la richiedi. <a href={withBase('/cookie/')}>Cookie</a>
+                </p>
               </div>
             </div>
           )}

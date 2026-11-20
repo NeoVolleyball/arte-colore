@@ -7,6 +7,8 @@ import { colours } from './src/data/palette';
 
 const entries: Record<PageId, string> = {
   home: 'index.html',
+  cookie: 'cookie/index.html',
+  privacy: 'privacy/index.html',
 };
 
 function pageFor(htmlPath: string): PageId {
@@ -93,7 +95,9 @@ function introPlugin(): Plugin {
   };
   return {
     name: 'arte-colore-intro',
-    transformIndexHtml(html) {
+    transformIndexHtml(html, ctx) {
+      // the first-visit intro belongs to the home page only
+      if (pageFor(ctx.path) !== 'home') return html.replace('<!--intro-head-->', '').replace('<!--intro-body-->', '');
       return html
         .replace('<!--intro-head-->', `<style>${read('intro.css')}</style>\n    <script>${read('intro-gate.js')}</script>`)
         .replace(

@@ -202,3 +202,9 @@
   font-size: var(--step--1);
   color: var(--charcoal-soft);
 }
+
+.mapCta p a {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}

@@ -1,0 +1,131 @@
+.page {
+  min-height: 100dvh;
+  background: var(--ivory);
+  color: var(--charcoal);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  max-width: 62rem;
+  margin-inline: auto;
+  padding: 1.25rem var(--gutter);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 650;
+}
+
+.article {
+  max-width: 46rem;
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vw, 3rem) var(--gutter) clamp(3rem, 6vw, 5rem);
+  font-size: var(--step-0);
+  line-height: 1.65;
+}
+
+.article h1 {
+  margin: 0.4rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: var(--step-3);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.updated {
+  margin: 0 0 2rem;
+  font-size: var(--step--1);
+  color: var(--charcoal-soft);
+}
+
+.article h2 {
+  margin: 2.25rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: var(--step-2);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.article p,
+.article ul {
+  margin: 0 0 1rem;
+}
+
+.article ul {
+  padding-left: 1.25rem;
+}
+
+.article li + li {
+  margin-top: 0.4rem;
+}
+
+.article a {
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  margin: 0 0 1.25rem;
+}
+
+.table {
+  width: 100%;
+  min-width: 34rem;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+  line-height: 1.5;
+}
+
+.table th,
+.table td {
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.table th {
+  background: var(--paper);
+  font-weight: 700;
+}
+
+.foot {
+  align-items: center;
+  max-width: 62rem;
+  margin-inline: auto;
+  padding: 1.25rem var(--gutter) 2rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-size: var(--step--1);
+  color: var(--charcoal-soft);
+}
+
+.foot > span {
+  flex-basis: 100%;
+}
+
+.foot a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 650;
+  color: var(--charcoal);
+}

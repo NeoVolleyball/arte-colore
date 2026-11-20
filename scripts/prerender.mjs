@@ -7,7 +7,7 @@ import path from 'node:path';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 // file:// URL so the dynamic import also works with Windows drive paths
 const { render } = await import(pathToFileURL(path.join(root, 'dist-ssr', 'entry-server.js')).href);
-const pages = { home: 'index.html' };
+const pages = { home: 'index.html', cookie: 'cookie/index.html', privacy: 'privacy/index.html' };
 
 for (const [id, rel] of Object.entries(pages)) {
   const file = path.join(root, 'dist', rel);

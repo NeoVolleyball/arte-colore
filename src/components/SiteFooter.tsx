@@ -1,4 +1,5 @@
 import { business, nav } from '../content/business';
+import { withBase } from '../content/paths';
 import { Icon } from './Icon';
 import { Wordmark } from './Wordmark';
 import styles from './SiteFooter.module.css';
@@ -63,7 +64,9 @@ export function SiteFooter() {
         <p>
           © <span suppressHydrationWarning>{new Date().getFullYear()}</span> {business.legalName}
         </p>
-        <p>Immagini e modelli 3D originali, creati per questo sito.</p>
+        <p>
+          <a href={withBase('/privacy/')}>Privacy</a> · <a href={withBase('/cookie/')}>Cookie</a>
+        </p>
       </div>
     </footer>
   );

@@ -93,3 +93,9 @@ Prices, promotions, testimonials, review counts or ratings, awards, certificatio
 - [x] Miscelazione colori: non indicata sul sito (servizio dato per scontato).
 - [ ] Foto cornici: Luca le prepara. Quando arrivano, mettere `image` in `framePhotos` (src/content/gallery.ts).
 - [ ] Foto lavori: non ce ne sono ancora. Sezione "I nostri lavori" nascosta finche `works` non ha foto.
+
+## Pagine legali (20 nov 2026)
+- [x] `/cookie/` e `/privacy/` create (src/pages/CookiePage.tsx, PrivacyPage.tsx), linkate nel footer e sotto la mappa. Nessun banner: il sito non usa cookie di profilazione/statistica e la mappa Google si carica solo dopo il clic.
+- [ ] Far rivedere i testi a un consulente/commercialista prima di andare online.
+- [ ] Quando il sito è su Cloudflare: nominare il fornitore di hosting in Privacy ("A chi comunichiamo i dati").
+- [ ] Se si aggiungono moduli di contatto, statistiche (es. Google Analytics), WhatsApp widget o altri script: aggiornare Privacy e Cookie e aggiungere un banner di consenso.

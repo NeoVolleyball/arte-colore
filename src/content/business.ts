@@ -70,8 +70,8 @@ export const maps = {
   embedUrl: `https://www.google.com/maps?q=${encodeURIComponent(mapsQuery)}&output=embed`,
 };
 
-/** The site is a single page; /prodotti/ and /negozio/ are static redirects in public/. */
-export type PageId = 'home';
+/** The site is one home page plus two legal pages; /prodotti/ and /negozio/ are static redirects in public/. */
+export type PageId = 'home' | 'cookie' | 'privacy';
 
 export const pages: Record<PageId, { path: string; title: string; description: string }> = {
   home: {
@@ -79,6 +79,16 @@ export const pages: Record<PageId, { path: string; title: string; description: s
     title: 'Arte Colore Spinea | Pitture, Smalti, Pavimenti SPC e Carta da parati',
     description:
       'Arte Colore a Spinea: offerte, pitture, smalti, pavimenti in laminato SPC e carta da parati, con posa. Via Roma 175. Chiamaci al 041 990950.',
+  },
+  cookie: {
+    path: '/cookie/',
+    title: 'Cookie | Arte Colore Spinea',
+    description: 'Informativa sui cookie del sito di Arte Colore: cosa usa il sito e cosa succede se apri la mappa di Google.',
+  },
+  privacy: {
+    path: '/privacy/',
+    title: 'Privacy | Arte Colore Spinea',
+    description: 'Informativa sulla privacy del sito di Arte Colore S.r.l.: titolare, dati trattati, finalità e diritti.',
   },
 };
 
