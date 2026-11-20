@@ -34,6 +34,16 @@ export function SanMarcoSection() {
             Colorificio San Marco <em>e linea Belle Arti</em>
           </h2>
           <p>{sanMarco.statement} Chiedi in negozio i prodotti San Marco e la linea Belle Arti.</p>
+          <p>
+            In negozio trovi anche i prodotti di{' '}
+            {business.otherBrands.map((b, i) => (
+              <span key={b}>
+                {i > 0 ? (i === business.otherBrands.length - 1 ? ' e ' : ', ') : ''}
+                <strong>{b}</strong>
+              </span>
+            ))}
+            .
+          </p>
           <ul role="list" className={styles.links}>
             {links.map((l) => (
               <li key={l.label}>

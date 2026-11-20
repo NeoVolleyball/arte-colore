@@ -1,3 +1,4 @@
+import { hasWorks } from '../content/business';
 import { ColourExplorer } from '../components/ColourExplorer';
 import { ContactSection } from '../components/ContactSection';
 import { FramesSection } from '../components/FramesSection';
@@ -23,7 +24,7 @@ export function HomePage() {
       <SpcFloorCard />
       <WallpaperSection />
       <FramesSection />
-      <WorksGallery />
+      {hasWorks ? <WorksGallery /> : null}
       <ColourExplorer />
       <InspirationGallery />
       <SanMarcoSection />

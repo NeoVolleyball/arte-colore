@@ -1,4 +1,4 @@
-import { business } from '../content/business';
+import { business, hasOffers } from '../content/business';
 import { colourById, colours } from '../data/palette';
 import { Drips } from './Drips';
 import { HeroVisual } from './HeroVisual';
@@ -27,8 +27,8 @@ export function HeroCard() {
             l’ispirazione per il tuo prossimo progetto.
           </p>
           <div className={styles.actions}>
-            <a className="btn btn--ivory" href="#offerte">
-              Vedi le offerte
+            <a className="btn btn--ivory" href={hasOffers ? '#offerte' : '#prodotti'}>
+              {hasOffers ? 'Vedi le offerte' : 'Scopri i prodotti'}
               <Icon name="arrow-down" />
             </a>
             <a className="btn btn--outline" href={business.phone.href}>

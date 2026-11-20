@@ -1,10 +1,17 @@
 /**
  * Single source of truth for verified business facts and page copy.
  *
- * Only VERIFIED details belong here. Anything unconfirmed (hours, email,
- * social accounts, extra categories, services) is tracked in
+ * Only VERIFIED details belong here. Anything unconfirmed (social accounts,
+ * extra categories, services) is tracked in
  * CONTENT-CHECKLIST.md and must not be added until the business approves it.
  */
+
+import { publishedOffers } from './offerte';
+import { works } from './gallery';
+
+/** Sections without real content stay hidden (menu, page and hero button). */
+export const hasOffers = publishedOffers().length > 0;
+export const hasWorks = works.some((w) => w.image);
 
 export const business = {
   brand: 'Arte Colore',
@@ -26,8 +33,15 @@ export const business = {
     href: 'tel:+39041990950',
     e164: '+39041990950',
   },
-  /** Opening hours are NOT verified yet. Keep `null` until confirmed. */
-  openingHours: null as null | ReadonlyArray<{ days: string; hours: string }>,
+  /** Public e-mail, confirmed by the owner (Nov 2026). */
+  email: 'info@artecolorearl.it',
+  /** Opening hours, confirmed by the owner (Nov 2026). `days` uses schema.org day names. */
+  openingHours: [
+    { label: 'Lunedì – Venerdì', hours: '8.00–12.30 · 15.00–19.00', days: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], slots: [['08:00', '12:30'], ['15:00', '19:00']] },
+    { label: 'Sabato', hours: '8.00–12.00', days: ['Saturday'], slots: [['08:00', '12:00']] },
+  ] as const,
+  /** Other brands sold in the shop, besides San Marco (confirmed by the owner). */
+  otherBrands: ['Colorificio San Marinese', 'Impa'] as const,
   sanMarco: {
     statement: 'Arte Colore è presente nella rete di rivenditori San Marco.',
     directoryUrl: 'https://san-marco.com/store-locator',
@@ -81,17 +95,17 @@ export const seo = {
 /** Main menu (header, mobile menu, footer). Every item scrolls to the section
  *  with the same name on the single page, in page order. */
 export const nav = [
-  { label: 'Offerte', href: '#offerte', highlight: true },
+  ...(hasOffers ? [{ label: 'Offerte', href: '#offerte', highlight: true }] : []),
   { label: 'Prodotti', href: '#prodotti', highlight: false },
   { label: 'Reparti', href: '#reparti', highlight: false },
   { label: 'Pavimenti SPC', href: '#pavimenti', highlight: false },
   { label: 'Carta da parati', href: '#carta-da-parati', highlight: false },
   { label: 'Cornici', href: '#cornici', highlight: false },
-  { label: 'Lavori', href: '#lavori', highlight: false },
+  ...(hasWorks ? [{ label: 'Lavori', href: '#lavori', highlight: false }] : []),
   { label: 'Contatti', href: '#contatti', highlight: false },
-] as const;
+];
 
-/** schema.org structured data — verified facts only (no hours, geo, ratings). */
+/** schema.org structured data — verified facts only (no geo, ratings). */
 export function structuredData(siteUrl = seo.siteUrl) {
   return {
     '@context': 'https://schema.org',
@@ -100,6 +114,15 @@ export function structuredData(siteUrl = seo.siteUrl) {
     legalName: business.legalName,
     description: business.description,
     telephone: business.phone.e164,
+    email: business.email,
+    openingHoursSpecification: business.openingHours.flatMap((o) =>
+      o.slots.map(([opens, closes]) => ({
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: [...o.days],
+        opens,
+        closes,
+      })),
+    ),
     address: {
       '@type': 'PostalAddress',
       streetAddress: business.address.street,

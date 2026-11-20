@@ -82,3 +82,14 @@ ecoattivi.eu/doc/Spinea_Elenco_Negozi.pdf
 
 ### Never add without evidence
 Prices, promotions, testimonials, review counts or ratings, awards, certifications (including San Marco's own), staff biographies, completed projects, years of experience, or claims such as "leader" or "specialisti".
+
+
+## Risposta di Luca (20 nov 2026)
+- [x] Offerte: per ora nessuna. Sezione e voce di menu nascoste (`SHOW_DEMO_OFFERS = false` in `src/content/offerte.ts`). Per riattivarle basta aggiungere offerte reali (senza `demo: true`).
+- [x] Orari: lun-ven 8.00-12.30 / 15.00-19.00, sabato 8.00-12.00 (contatti, footer, dati strutturati).
+- [x] Email pubblica: info@artecolorearl.it. Esistono anche commerciale@ e amministrazione@ (non pubblicate).
+- [x] Marchi: San Marco, Colorificio San Marinese, Impa.
+- [x] Logo: il ventaglio di campioni con i colori piu brillanti (favicon aggiornata).
+- [x] Miscelazione colori: non indicata sul sito (servizio dato per scontato).
+- [ ] Foto cornici: Luca le prepara. Quando arrivano, mettere `image` in `framePhotos` (src/content/gallery.ts).
+- [ ] Foto lavori: non ce ne sono ancora. Sezione "I nostri lavori" nascosta finche `works` non ha foto.

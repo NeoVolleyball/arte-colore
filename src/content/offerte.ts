@@ -12,11 +12,11 @@
  * shows a short message instead.
  *
  * `demo: true` entries are layout examples, shown with a "Demo di esempio" badge.
- * They appear in the published site only while SHOW_DEMO_OFFERS is true.
+ * They appear only while SHOW_DEMO_OFFERS is true (now false: no real offers yet, so the section is hidden).
  */
 
 /** Set to false (or delete the demo entries) once the real offers are in. */
-export const SHOW_DEMO_OFFERS = true;
+export const SHOW_DEMO_OFFERS = false;
 
 export type Offer = {
   id: string;
@@ -118,10 +118,10 @@ export function isActive(offer: Offer, now: number): boolean {
   return offerEnd(offer.ends) > now;
 }
 
-/** Offers that may be published (demo entries only in development or while SHOW_DEMO_OFFERS is on). */
+/** Offers that may be published (demo entries only while SHOW_DEMO_OFFERS is on). */
 export function publishedOffers(
   list: Offer[] = offers,
-  showDemo = SHOW_DEMO_OFFERS || Boolean(import.meta.env?.DEV),
+  showDemo = SHOW_DEMO_OFFERS,
 ): Offer[] {
   return list.filter((o) => showDemo || !o.demo);
 }

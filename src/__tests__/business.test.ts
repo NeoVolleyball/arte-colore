@@ -7,7 +7,8 @@ describe('business data', () => {
     expect(business.address.postalCode).toBe('30038');
     expect(business.phone.href).toBe('tel:+39041990950');
     expect(business.vatNumber).toBe('04463040271');
-    expect(business.openingHours).toBeNull();
+    expect(business.email).toBe('info@artecolorearl.it');
+    expect(business.openingHours.map((o) => o.hours)).toEqual(['8.00–12.30 · 15.00–19.00', '8.00–12.00']);
   });
 
   it('builds a directions URL for the shop address without a place id', () => {
@@ -21,7 +22,9 @@ describe('business data', () => {
     const sd = structuredData('') as Record<string, unknown>;
     expect(sd.name).toBe('Arte Colore');
     expect(sd.telephone).toBe('+39041990950');
-    for (const k of ['openingHours', 'openingHoursSpecification', 'geo', 'aggregateRating', 'review', 'sameAs', 'email', 'url']) {
+    expect(sd.email).toBe('info@artecolorearl.it');
+    expect(sd.openingHoursSpecification).toHaveLength(3);
+    for (const k of ['geo', 'aggregateRating', 'review', 'sameAs', 'url']) {
       expect(sd).not.toHaveProperty(k);
     }
     expect(structuredData('https://example.it')).toHaveProperty('url', 'https://example.it/');
@@ -29,9 +32,9 @@ describe('business data', () => {
 });
 
 describe('navigation', () => {
-  it('has eight items, each pointing to the section with its name', async () => {
+  it('lists only sections with real content (no offers or job photos yet)', async () => {
     const { nav } = await import('../content/business');
-    expect(nav.map((n) => n.label)).toEqual(['Offerte', 'Prodotti', 'Reparti', 'Pavimenti SPC', 'Carta da parati', 'Cornici', 'Lavori', 'Contatti']);
-    expect(nav.map((n) => n.href)).toEqual(['#offerte', '#prodotti', '#reparti', '#pavimenti', '#carta-da-parati', '#cornici', '#lavori', '#contatti']);
+    expect(nav.map((n) => n.label)).toEqual(['Prodotti', 'Reparti', 'Pavimenti SPC', 'Carta da parati', 'Cornici', 'Contatti']);
+    expect(nav.map((n) => n.href)).toEqual(['#prodotti', '#reparti', '#pavimenti', '#carta-da-parati', '#cornici', '#contatti']);
   });
 });

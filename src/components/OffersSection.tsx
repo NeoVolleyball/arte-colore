@@ -55,6 +55,8 @@ export function OffersSection() {
   const list = publishedOffers();
   const now = useNow(list.length > 0);
   const visible = now === null ? list : list.filter((o) => isActive(o, now));
+  // No offers published yet: the whole section stays hidden (also from the menu).
+  if (list.length === 0) return null;
 
   return (
     <section id="offerte" className={styles.section} aria-labelledby="offerte-title">

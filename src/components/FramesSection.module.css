@@ -9,7 +9,11 @@
 }
 
 @media (min-width: 960px) {
-  .grid {
+  .grid.solo {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .grid:not(.solo) {
     grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     align-items: center;
   }

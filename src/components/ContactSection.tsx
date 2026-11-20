@@ -43,7 +43,16 @@ export function ContactSection() {
               {address.postalCode} {address.city} ({address.province})
             </span>
             <a href={phone.href}>Tel. {phone.display}</a>
+            <a href={`mailto:${business.email}`}>{business.email}</a>
           </address>
+          <dl className={styles.hours} aria-label="Orari di apertura">
+            {business.openingHours.map((o) => (
+              <div key={o.label}>
+                <dt>{o.label}</dt>
+                <dd>{o.hours}</dd>
+              </div>
+            ))}
+          </dl>
           <div className={styles.actions}>
             <a className="btn btn--ivory" href={phone.href}>
               <Icon name="phone" /> Chiamaci
@@ -54,7 +63,7 @@ export function ContactSection() {
             </a>
           </div>
           <LabourBadge light />
-          <p className={styles.hint}>Per informazioni su orari e disponibilità, chiamaci.</p>
+          <p className={styles.hint}>Per informazioni sulla disponibilità dei prodotti, chiamaci.</p>
         </div>
 
         <div className={styles.mapWrap}>

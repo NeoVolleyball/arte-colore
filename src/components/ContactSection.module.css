@@ -58,6 +58,32 @@
   gap: 0.7rem;
 }
 
+.hours {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 1.1rem 1.75rem;
+  border-radius: 12px;
+  background: rgb(255 255 255 / 0.14);
+  font-size: var(--step-0);
+}
+
+.hours div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.2rem 1.25rem;
+}
+
+.hours dt {
+  font-weight: 700;
+}
+
+.hours dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
 .hint {
   font-size: var(--step--1);
 }

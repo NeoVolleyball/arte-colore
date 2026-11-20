@@ -33,6 +33,17 @@ export function SiteFooter() {
           <p>
             Tel. <a href={phone.href}>{phone.display}</a>
           </p>
+          <p>
+            <a href={`mailto:${business.email}`}>{business.email}</a>
+          </p>
+          <p>
+            {business.openingHours.map((o) => (
+              <span key={o.label}>
+                {o.label}: {o.hours}
+                <br />
+              </span>
+            ))}
+          </p>
           <p>P. IVA {business.vatNumber}</p>
           <a className={styles.social} href={business.social.facebook} target="_blank" rel="noopener noreferrer">
             <span className={styles.socialIcon}>
