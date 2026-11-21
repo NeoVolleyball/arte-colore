@@ -149,73 +149,17 @@ html.intro.aci-blocking #ac-intro {
   justify-items: center;
 }
 
-/* proportions mirror Wordmark.module.css so the mark can land exactly on the header logo */
 .aci-mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.344em; /* 0.55rem at the header's 1.6rem */
-  font-size: clamp(2.4rem, 9.5vw, 5.4rem);
-  line-height: 1;
-  white-space: nowrap;
+  display: block;
   transform-origin: 0 0;
   will-change: transform;
+  line-height: 0;
 }
 
-.aci-fan {
+.aci-logo {
   display: block;
-  width: 0.9em;
-  height: 0.9em;
-  overflow: visible;
-}
-
-.aci-s {
-  transform-origin: 44px 82.8px;
-}
-
-.aci-s1 {
-  transform: rotate(-26deg);
-}
-
-.aci-s3 {
-  transform: rotate(26deg);
-}
-
-.aci-text em {
-  font-style: italic;
-}
-
-.aci-word {
-  display: inline-block;
-}
-
-.aci-ch {
-  display: inline-block;
-}
-
-.aci-stroke {
-  display: block;
-  width: min(62vw, 22rem);
-  height: clamp(10px, 1.6vw, 18px);
-  margin-top: 0.3rem;
-  overflow: visible;
-}
-
-.aci-stroke path {
-  fill: none;
-  stroke: #e8a92a;
-  stroke-width: 5;
-  stroke-linecap: round;
-  stroke-dasharray: 1;
-}
-
-.aci-tag {
-  margin: 0.9rem 0 0;
-  font-family: 'Hanken Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #5d5f57;
+  width: clamp(190px, 34vw, 340px);
+  height: auto;
 }
 
 /* the header logo is revealed when the intro mark lands on it */

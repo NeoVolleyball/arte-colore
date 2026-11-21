@@ -1,6 +1,6 @@
 import { business } from '../content/business';
 import { withBase } from '../content/paths';
-import { Wordmark } from '../components/Wordmark';
+import { Logo } from '../components/Logo';
 import styles from './LegalPage.module.css';
 
 /** Last edit of the legal texts (shown on both pages). */
@@ -12,7 +12,7 @@ export function LegalPage({ title, children }: { title: string; children: React.
     <div className={styles.page}>
       <header className={styles.bar}>
         <a className={styles.brand} href={withBase('/')} aria-label="Arte Colore, torna alla home">
-          <Wordmark />
+          <Logo />
         </a>
         <a className={styles.back} href={withBase('/')}>
           ← Torna al sito

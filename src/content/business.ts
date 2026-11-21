@@ -141,6 +141,6 @@ export function structuredData(siteUrl = seo.siteUrl) {
       addressRegion: business.address.province,
       addressCountry: business.address.country,
     },
-    ...(siteUrl ? { url: `${siteUrl}/`, image: `${siteUrl}${seo.ogImage}` } : {}),
+    ...(siteUrl ? { url: `${siteUrl}/`, image: `${siteUrl}${seo.ogImage}`, logo: `${siteUrl}/images/logo/arte-colore-logo-960.webp` } : {}),
   };
 }

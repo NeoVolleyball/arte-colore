@@ -72,7 +72,7 @@ function seoPlugin(siteUrl: string, base: string): Plugin {
  * Inlines the first-visit intro (src/intro) so it paints before the bundle
  * loads and hydration starts; it lives outside #root, so React never sees it.
  */
-function introPlugin(): Plugin {
+function introPlugin(base: string): Plugin {
   const read = (f: string) => readFileSync(resolve(__dirname, 'src/intro', f), 'utf8').trim();
   // fan of the intro: cool colours on the left, warm on the right (offset from the centre card)
   const fan: [string, number][] = [
@@ -102,7 +102,7 @@ function introPlugin(): Plugin {
         .replace('<!--intro-head-->', `<style>${read('intro.css')}</style>\n    <script>${read('intro-gate.js')}</script>`)
         .replace(
           '<!--intro-body-->',
-          `${read('intro.html').replace('<!--intro-cards-->', cards())}\n    <script>${read('intro-player.js')}</script>`,
+          `${read('intro.html').replace('<!--intro-cards-->', cards()).replace('%LOGO_SRC%', `${base}images/logo/arte-colore-logo-960.webp`)}\n    <script>${read('intro-player.js')}</script>`,
         );
     },
   };
@@ -114,7 +114,7 @@ export default defineConfig(({ mode }) => {
   const base = env.VITE_BASE || '/';
   return {
     base,
-    plugins: [react(), seoPlugin(env.VITE_SITE_URL ?? '', base), introPlugin()],
+    plugins: [react(), seoPlugin(env.VITE_SITE_URL ?? '', base), introPlugin(base)],
     build: {
       target: 'es2020',
       assetsInlineLimit: 2048,

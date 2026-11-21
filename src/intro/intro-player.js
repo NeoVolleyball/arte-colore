@@ -21,7 +21,7 @@
   var cards = Array.prototype.slice.call(root.querySelectorAll('.aci-card'));
   var heroCard = $('.aci-hero');
   var mark = $('.aci-mark');
-  var extras = [$('.aci-stroke'), $('.aci-tag')];
+  var extras = [];
   var step = parseFloat(getComputedStyle(root).getPropertyValue('--step')) || 12;
   var start = performance.now();
   var MIN = reduce ? 450 : 1050; // the intro always plays at least this long
@@ -68,52 +68,13 @@
       { duration: 420, delay: 160, easing: out, fill: 'both' },
     );
 
-    // small logo: its own mini fan opens in echo
-    $('.aci-fan').animate(
+    // the official logo fades and scales in under the open fan
+    mark.animate(
       [
-        { opacity: 0, transform: 'scale(0.4) rotate(-20deg)' },
+        { opacity: 0, transform: 'translateY(14px) scale(0.92)' },
         { opacity: 1, transform: 'none' },
       ],
-      { duration: 520, delay: 330, easing: spring, fill: 'both' },
-    );
-    [['.aci-s1', -26, -33], ['.aci-s3', 26, 33]].forEach(function (s, i) {
-      $(s[0]).animate(
-        [{ transform: 'rotate(0deg)' }, { transform: 'rotate(' + s[2] + 'deg)', offset: 0.6 }, { transform: 'rotate(' + s[1] + 'deg)' }],
-        { duration: 620, delay: 420 + i * 80, easing: spring, fill: 'both' },
-      );
-    });
-
-    // wordmark: letters rise out of a blur, one after the other
-    var k = 0;
-    Array.prototype.forEach.call(root.querySelectorAll('.aci-word'), function (word) {
-      var chars = word.textContent.split('');
-      word.textContent = '';
-      chars.forEach(function (ch) {
-        var span = document.createElement('span');
-        span.className = 'aci-ch';
-        span.textContent = ch;
-        word.appendChild(span);
-        span.animate(
-          [
-            { opacity: 0, transform: 'translateY(0.55em) rotate(7deg)', filter: 'blur(6px)' },
-            { opacity: 1, transform: 'none', filter: 'blur(0)' },
-          ],
-          { duration: 480, delay: 400 + k++ * 26, easing: out, fill: 'both' },
-        );
-      });
-    });
-    $('.aci-stroke path').animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], {
-      duration: 560,
-      delay: 640,
-      easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
-      fill: 'both',
-    });
-    $('.aci-tag').animate(
-      [
-        { opacity: 0, letterSpacing: '0.6em' },
-        { opacity: 1, letterSpacing: '0.24em' },
-      ],
-      { duration: 700, delay: 640, easing: out, fill: 'both' },
+      { duration: 620, delay: 420, easing: out, fill: 'both' },
     );
   }
 

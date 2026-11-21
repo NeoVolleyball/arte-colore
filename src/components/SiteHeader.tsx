@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { business, maps, nav } from '../content/business';
 import { Icon } from './Icon';
-import { Wordmark } from './Wordmark';
+import { Logo } from './Logo';
 import styles from './SiteHeader.module.css';
 import { withBase } from '../content/paths';
 import { useActiveSection } from './useActiveSection';
@@ -121,7 +121,7 @@ export function SiteHeader() {
     >
       <div className={styles.bar}>
         <a href={withBase('/')} className={styles.brand} aria-label="Arte Colore, torna all’inizio">
-          <Wordmark />
+          <Logo />
         </a>
 
         <nav ref={navRef} className={styles.desktopNav} aria-label="Principale">

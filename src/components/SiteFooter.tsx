@@ -1,7 +1,7 @@
 import { business, nav } from '../content/business';
 import { withBase } from '../content/paths';
 import { Icon } from './Icon';
-import { Wordmark } from './Wordmark';
+import { Logo } from './Logo';
 import styles from './SiteFooter.module.css';
 
 export function SiteFooter() {
@@ -57,7 +57,7 @@ export function SiteFooter() {
       </div>
 
       <div className={styles.giant} aria-hidden="true">
-        <Wordmark size="xl" />
+        <Logo size="xl" />
       </div>
 
       <div className={styles.bottom}>

@@ -95,13 +95,9 @@
 }
 
 .giant {
-  margin: clamp(2.5rem, 6vw, 5rem) 0 0;
-  white-space: nowrap;
-  line-height: 1.15;
-  padding-block: 0.18em;
-  padding-inline: 0.15em;
-  overflow-x: clip;
-  overflow-y: visible;
+  display: flex;
+  justify-content: center;
+  margin: clamp(2.5rem, 6vw, 4.5rem) 0 clamp(1rem, 3vw, 2rem);
 }
 
 .bottom {
