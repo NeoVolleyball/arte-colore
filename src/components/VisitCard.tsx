@@ -55,6 +55,11 @@ export function VisitCard() {
             <Icon name="external" />
             <span className="visually-hidden">(sito ufficiale, si apre in una nuova scheda)</span>
           </a>
+          <a className="text-link" href={business.belleArti.siteUrl} target="_blank" rel="noopener noreferrer">
+            Belle Arti {business.belleArti.brand}
+            <Icon name="external" />
+            <span className="visually-hidden">(sito ufficiale, si apre in una nuova scheda)</span>
+          </a>
         </div>
       </div>
 

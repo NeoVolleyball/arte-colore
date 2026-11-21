@@ -50,6 +50,11 @@ export const business = {
      *  While `null` a typographic badge is shown instead. */
     logo: null as null | string,
   },
+  /** Fine-art colours seen in the shop photos (Maimeri shelf). Separate brand from San Marco. */
+  belleArti: {
+    brand: 'Maimeri',
+    siteUrl: 'https://www.maimeri.it/',
+  },
   /** Service confirmed by the shop owner. */
   labour: 'Forniamo anche manodopera per pittura e posa carta da parati',
   social: {
