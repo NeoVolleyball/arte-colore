@@ -99,3 +99,8 @@ Prices, promotions, testimonials, review counts or ratings, awards, certificatio
 - [ ] Far rivedere i testi a un consulente/commercialista prima di andare online.
 - [ ] Quando il sito è su Cloudflare: nominare il fornitore di hosting in Privacy ("A chi comunichiamo i dati").
 - [ ] Se si aggiungono moduli di contatto, statistiche (es. Google Analytics), WhatsApp widget o altri script: aggiornare Privacy e Cookie e aggiungere un banner di consenso.
+
+## Segnalazioni di Luca (21 nov 2026)
+- [x] Link "Sito San Marco" e logo non si aprivano: indirizzo cambiato in https://en.san-marco.com/ (www.san-marco.com non si apriva). Da riprovare dal suo PC.
+- [x] "Linea Belle Arti" rimosso: Belle Arti è un marchio/reparto diverso da San Marco e il link portava al sito San Marco.
+- [ ] Altre segnalazioni di Luca ("questi due", "e questo"): screenshot ancora da vedere.

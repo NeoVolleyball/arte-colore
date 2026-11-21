@@ -3,13 +3,10 @@ import { withBase } from '../content/paths';
 import { Icon } from './Icon';
 import styles from './SanMarcoSection.module.css';
 
-/** San Marco dealer network + Belle Arti line, with links to the official site. */
+/** San Marco dealer network, with a link to the official site. (Belle Arti is a separate department, not a San Marco line.) */
 export function SanMarcoSection() {
   const { sanMarco } = business;
-  const links = [
-    { label: 'Sito San Marco', href: sanMarco.siteUrl },
-    { label: 'Linea Belle Arti', href: sanMarco.belleArtiUrl },
-  ];
+  const links = [{ label: 'Sito San Marco', href: sanMarco.siteUrl }];
   return (
     <section id="san-marco" className={`card tone-paper card-rise ${styles.section}`} aria-labelledby="sm-title">
       <div className={styles.inner}>
@@ -31,9 +28,9 @@ export function SanMarcoSection() {
         <div className={styles.copy}>
           <p className="kicker">Rete rivenditori</p>
           <h2 id="sm-title" className={styles.title}>
-            Colorificio San Marco <em>e linea Belle Arti</em>
+            Colorificio <em>San Marco</em>
           </h2>
-          <p>{sanMarco.statement} Chiedi in negozio i prodotti San Marco e la linea Belle Arti.</p>
+          <p>{sanMarco.statement} Chiedi in negozio i prodotti San Marco.</p>
           <p>
             In negozio trovi anche i prodotti di{' '}
             {business.otherBrands.map((b, i) => (

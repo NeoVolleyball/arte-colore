@@ -55,11 +55,6 @@ export function VisitCard() {
             <Icon name="external" />
             <span className="visually-hidden">(sito ufficiale, si apre in una nuova scheda)</span>
           </a>
-          <a className="text-link" href={business.sanMarco.belleArtiUrl} target="_blank" rel="noopener noreferrer">
-            Linea Belle Arti
-            <Icon name="external" />
-            <span className="visually-hidden">(si apre in una nuova scheda)</span>
-          </a>
         </div>
       </div>
 

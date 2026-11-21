@@ -44,10 +44,8 @@ export const business = {
   otherBrands: ['Colorificio San Marinese', 'Impa'] as const,
   sanMarco: {
     statement: 'Arte Colore è presente nella rete di rivenditori San Marco.',
-    directoryUrl: 'https://san-marco.com/store-locator',
-    siteUrl: 'https://www.san-marco.com',
-    /** TODO: link to the "Belle Arti" line page once confirmed (no such page found on san-marco.com). */
-    belleArtiUrl: 'https://www.san-marco.com',
+    /** Official site; en.san-marco.com is the address that is live (www.san-marco.com did not open for the owner, Nov 2026). */
+    siteUrl: 'https://en.san-marco.com/',
     /** Official logo file (e.g. '/images/san-marco/logo.svg' in public/), only with San Marco's permission.
      *  While `null` a typographic badge is shown instead. */
     logo: null as null | string,
