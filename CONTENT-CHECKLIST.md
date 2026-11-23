@@ -91,7 +91,8 @@ Prices, promotions, testimonials, review counts or ratings, awards, certificatio
 - [x] Marchi: San Marco, Colorificio San Marinese, Impa.
 - [x] Logo: logo ufficiale inviato dal titolare (21 nov 2026), in `public/images/logo/`; usato in header, footer, intro, pagine legali, anteprima social e favicon. Il vecchio wordmark provvisorio è stato rimosso.
 - [x] Miscelazione colori: non indicata sul sito (servizio dato per scontato).
-- [ ] Foto cornici: Luca le prepara. Quando arrivano, mettere `image` in `framePhotos` (src/content/gallery.ts).
+- [x] Foto cornici (23 nov): Luca ha detto di metterne 3 provvisorie (profili, specchio, campionario), messe in `public/images/cornici/`. Le foto di cornici finite arrivano più tardi.
+- [ ] (vecchio) Foto cornici: Luca le prepara. Quando arrivano, mettere `image` in `framePhotos` (src/content/gallery.ts).
 - [ ] Foto lavori: non ce ne sono ancora. Sezione "I nostri lavori" nascosta finche `works` non ha foto.
 
 ## Pagine legali (20 nov 2026)

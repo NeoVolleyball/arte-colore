@@ -34,11 +34,27 @@ export const spcPhoto: Photo = {
   alt: 'Espositori Skema in negozio con doghe di pavimento laminato e SPC in diverse essenze di legno e un campione a spina di pesce.',
 };
 
-/** "Cornici su misura": PLACEHOLDERS — put photos in public/images/cornici/ and set `image` + `alt`. */
+/** "Cornici su misura": photos sent by the owner (23 Nov 2026), temporary until he sends finished frames.
+ *  Files: public/images/cornici/. */
 export const framePhotos: Photo[] = [
-  { id: 'cornice-1', title: 'Cornice su misura', alt: '' },
-  { id: 'cornice-2', title: 'Cornice su misura', alt: '' },
-  { id: 'cornice-3', title: 'Cornice su misura', alt: '' },
+  {
+    id: 'cornice-1',
+    title: 'Profili decorati',
+    image: '/images/cornici/cornici-profili-decorati-900.webp',
+    alt: 'Campioni di profili per cornici decorati in oro, argento e bianco, esposti su un pannello blu.',
+  },
+  {
+    id: 'cornice-2',
+    title: 'Specchio con cornice dorata',
+    image: '/images/cornici/cornici-specchio-dorato-900.webp',
+    alt: 'Specchio con cornice dorata intagliata su un cavalletto di legno, in negozio.',
+  },
+  {
+    id: 'cornice-3',
+    title: 'Campionario colori',
+    image: '/images/cornici/cornici-campionario-colori-900.webp',
+    alt: 'Campionario di profili per cornici lisci e colorati, bianchi, gialli, rossi, blu e verdi, e profili dorati.',
+  },
 ];
 
 /** Carta da parati: 3 room photos sent by the owner (Nov 2026), cropped to 3:4.
